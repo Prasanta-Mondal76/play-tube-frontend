@@ -1,16 +1,26 @@
 import { useState } from "react";
 import { Navbar } from "../components/layout/Navbar";
 import { Sidebar } from "../components/layout/Sidebar";
+import { Profile } from "../components/layout/Profile"
 
 export function MainLayout({ children }) {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
+  // Sidebar Toggle
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   function toggleSidebar() {
     setIsSidebarOpen((prev) => !prev);
   }
-
   function closeSidebar() {
     setIsSidebarOpen(false);
+  }
+
+  // Profile Toggle
+  const[isProfileOpen, seIsProfileOpen] = useState(false)
+  function toggleProfile (){
+    seIsProfileOpen((prev) => !prev)
+  }
+  function closeProfile(){
+    seIsProfileOpen(false)
   }
 
   return (
@@ -19,7 +29,7 @@ export function MainLayout({ children }) {
       {/* NAVBAR */}
       <Navbar 
         toggleSidebar={toggleSidebar} 
-
+        toggleProfile = {toggleProfile}
       />
 
       {/* SIDEBAR — overlay, controlled by isOpen */}
@@ -29,6 +39,9 @@ export function MainLayout({ children }) {
       <main className="pt-16">
         {children}
       </main>
+
+      {/* Profile Toggle Content */}
+      <Profile isProfileOpen = {isProfileOpen} closeProfile = {closeProfile} />
     </div>
   );
 }

@@ -1,18 +1,7 @@
 import { Bell, Menu, Sun, Search, UserCircle2Icon } from "lucide-react";
-import { useEffect, useState } from "react";
 
-export function Navbar({ toggleSidebar }) {
-  const [isLogIn, setIsLogIn] = useState(false)
+export function Navbar({ toggleSidebar, toggleProfile }) {
 
-  useEffect(()=> {
-    axios.get("/api/v1/users/current-user")
-    .then((res) => {
-      setIsLogIn(res.data.data.loggedIn)
-    })
-    .catch((error) => {
-      console.error("Request failed for '/api/v1/users/current-user'. \nError: ", error);
-    })
-  }, [])
   return (
     <header
       className="
@@ -54,8 +43,8 @@ export function Navbar({ toggleSidebar }) {
               placeholder="Search creators, topics, categories..."
               className="flex-1 bg-transparent px-5 text-white outline-none placeholder:text-zinc-500"
             />
-            <button className="flex w-20 items-center justify-center border-l border-zinc-800 bg-zinc-900 hover:bg-zinc-800">
-              <Search className="h-5 w-5 text-zinc-300 cursor-pointer" />
+            <button className="flex w-20 items-center justify-center border-l border-zinc-800 bg-zinc-900 hover:bg-zinc-800 cursor-pointer">
+              <Search className="h-5 w-5 text-zinc-300" />
             </button>
           </div>
         </div>
@@ -84,6 +73,7 @@ export function Navbar({ toggleSidebar }) {
             <UserCircle2Icon 
               className="h-10 w-10 rounded-full text-blue-300 object-cover cursor-pointer" 
               strokeWidth={0.9}
+              onClick={toggleProfile}
             />
           </button>
         </div>
