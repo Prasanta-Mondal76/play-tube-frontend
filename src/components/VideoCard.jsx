@@ -7,13 +7,14 @@ export function VideoCard({
   views,
   published,
   duration,
+  owner
 }) {
 
   // Publish Video Time Formating
   function timeAgo(seconds) {
 
     if (seconds < 60) {
-      return `${seconds} seconds ago`;
+      return `${Math.floor(seconds)} seconds ago`;
     }
 
     if (seconds < 3600) {
@@ -84,7 +85,14 @@ export function VideoCard({
   views = formatViews(views)
 
   return (
-    <div className="w-full cursor-pointer">
+    <div className="w-full cursor-pointer  
+    border-transparent
+    transition-all duration-300
+    hover:bg-blue-800/20
+    hover:border-blue-900 
+    hover:rounded-xl
+    p-1"
+    >
 
       {/* Thumbnail */}
       <div className="relative w-full aspect-video overflow-hidden rounded-2xl bg-zinc-800">
@@ -105,8 +113,8 @@ export function VideoCard({
 
         {/* Channel Avatar */}
         <img
-          src={avatar}
-          alt={channelName}
+          src={owner.avatar}
+          alt={owner.username}
           className="h-10 w-10 rounded-full object-cover"
         />
 
@@ -120,7 +128,7 @@ export function VideoCard({
 
           {/* Channel Name */}
           <p className="mt-1 text-sm text-zinc-400">
-            {channelName}
+            {owner.fullName}
           </p>
 
           {/* Views + Published */}

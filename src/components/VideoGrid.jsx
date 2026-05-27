@@ -41,6 +41,7 @@ export function VideoGrid() {
             views={video.views}
             published={video.createdAt}
             duration={video.duration}
+            owner = {video.owner}
           />
         ))}
       </div>

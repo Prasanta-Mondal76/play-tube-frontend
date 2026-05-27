@@ -1,9 +1,10 @@
 import { useState } from 'react'
-import { Home } from './Pages/Home'
+import { MainLayout } from './layouts/MainLayout'
+import {VideoGrid} from "./components/VideoGrid"
 function App() {
   return (
     <>
-      <Home />
+      <MainLayout children={<VideoGrid />}/>
     </>
   )
 }
