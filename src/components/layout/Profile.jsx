@@ -2,13 +2,37 @@ import { useState, useEffect, useContext } from "react"
 import { LogIn, LogOut, User, Settings, HelpCircle } from "lucide-react"
 import { LoginContext } from "../../context/LoginContextProvider"
 import { AuthContext } from "../../context/AuthContextProvider"
+import axios from "axios"
 
 export function Profile({ isProfileOpen, closeProfile }) {
-  const { user, isLogIn } = useContext(LoginContext)
+  const { user, setUser, isLogIn, setIsLogIn } = useContext(LoginContext)
   const { setIsAuthOpen } = useContext(AuthContext)
 
   function openSignIn() {
     setIsAuthOpen(true)
+  }
+
+  async function handleLogout() {
+    try {
+      await axios.post(
+        "/api/v1/users/logout",
+        {},
+        {
+          withCredentials: true
+        }
+      )
+      // Local state clear
+      setUser(null)
+      setIsLogIn(false)
+
+      // Profile dropdown close
+      closeProfile()
+    } catch (error) {
+      console.error(
+        "Logout failed:",
+        error.response?.data || error.message
+      )
+    }
   }
 
   return (
@@ -75,7 +99,9 @@ export function Profile({ isProfileOpen, closeProfile }) {
 
             {/* Logout */}
             <div className="px-2 pb-2 border-t border-zinc-800 pt-2">
-              <button className="flex items-center gap-3 w-full px-3 py-2.5 rounded-xl text-sm text-red-400 hover:bg-red-500/10 hover:text-red-300 transition-all duration-150 cursor-pointer">
+              <button className="flex items-center gap-3 w-full px-3 py-2.5 rounded-xl text-sm text-red-400 hover:bg-red-500/10 hover:text-red-300 transition-all duration-150 cursor-pointer"
+                onClick={handleLogout}
+              >
                 <LogOut className="h-4 w-4 shrink-0" />
                 Log Out
               </button>

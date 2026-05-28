@@ -19,9 +19,9 @@ export function Navbar({ toggleSidebar, toggleProfile }) {
           {/* MENU BUTTON */}
           <button
             onClick={toggleSidebar}
-            className="rounded-full p-2 hover:bg-zinc-800 transition"
+            className="rounded-full p-2 hover:bg-zinc-800 transition cursor-pointer"
           >
-            <Menu className="h-6 w-6 text-white  cursor-pointer" />
+            <Menu className="h-6 w-6 text-white " />
           </button>
 
           {/* LOGO */}
@@ -53,25 +53,25 @@ export function Navbar({ toggleSidebar, toggleProfile }) {
         <div className="flex items-center gap-2 md:gap-4">
 
           {/* MOBILE SEARCH */}
-          <button className="rounded-full p-2 hover:bg-zinc-800 md:hidden">
-            <Search className="h-5 w-5 text-white cursor-pointer" />
+          <button className="rounded-full p-2 hover:bg-zinc-800 md:hidden cursor-pointer">
+            <Search className="h-5 w-5 text-white " />
           </button>
 
           {/* THEME — Sun icon */}
-          <button className="rounded-full p-2 hover:bg-zinc-800">
-            <Sun className="h-5 w-5 text-white cursor-pointer" />
+          <button className="rounded-full p-2 hover:bg-zinc-800 cursor-pointer">
+            <Sun className="h-5 w-5 text-white " />
           </button>
 
           {/* NOTIFICATION */}
-          <button className="relative rounded-full p-2 hover:bg-zinc-800">
-            <Bell className="h-5 w-5 text-white cursor-pointer" />
+          <button className="relative rounded-full p-2 hover:bg-zinc-800 cursor-pointer">
+            <Bell className="h-5 w-5 text-white " />
             <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-violet-500" />
           </button>
 
           {/* PROFILE */}
-          <button>
+          <button className="cursor-pointer">
             <UserCircle2Icon 
-              className="h-10 w-10 rounded-full text-blue-300 object-cover cursor-pointer" 
+              className="h-10 w-10 rounded-full text-blue-300 object-cover " 
               strokeWidth={0.9}
               onClick={toggleProfile}
             />
