@@ -1,10 +1,13 @@
 import { Home, History, Users, ListVideo, X, Zap } from "lucide-react";
-import { useState, } from "react"
+import { useState, useContext } from "react"
+import { LoginContext } from "../../context/LoginContextProvider";
+import { AuthContext } from "../../context/AuthContextProvider";
+
 const navItems = [
-  { icon: Home, label: "Home"},
-  { icon: History, label: "History" },
-  { icon: Users, label: "Subscriptions" },
-  { icon: ListVideo, label: "Playlists" },
+  { icon: Home, label: "Home", isProtected: false },
+  { icon: History, label: "History", isProtected: true },
+  { icon: Users, label: "Subscriptions", isProtected: true },
+  { icon: ListVideo, label: "Playlists", isProtected: true },
 ];
 
 // Subscribed Channel lists of user. 
@@ -16,6 +19,20 @@ const favoriteChannels = [
 
 export function Sidebar({ isOpen, onClose }) {
   const [activeLabel, setActiveLabel] = useState("Home");
+  const { isLogIn } = useContext(LoginContext);
+  const { setIsAuthOpen } = useContext(AuthContext)
+
+  function handleNavClick(label, isProtected) {
+    // if protected and not logged in
+    if (isProtected && !isLogIn) {
+      onClose();          // sidebar close
+      setIsAuthOpen(true)   // open auth popup
+      return;
+    }
+
+    // user logged in OR route public
+    setActiveLabel(label);
+  }
 
   return (
     <>
@@ -61,19 +78,18 @@ export function Sidebar({ isOpen, onClose }) {
         <div className="flex-1 overflow-y-auto py-4 px-3 flex flex-col gap-1">
 
           {/* Nav Items */}
-          {navItems.map(({ icon: Icon, label, active }) => (
+          {navItems.map(({ icon: Icon, label, active, isProtected }) => (
             <button
               key={label}
               className={`
                 flex items-center gap-4 w-full px-4 py-3 rounded-xl
                 text-sm font-medium transition-all duration-200 cursor-pointer
-                ${
-                  activeLabel === label
-                    ? "bg-violet-600/20 text-white border-l-4 border-violet-500 pl-3"
-                    : "text-zinc-400 hover:bg-zinc-800 hover:text-white"
+                ${activeLabel === label
+                  ? "bg-violet-600/20 text-white border-l-4 border-violet-500 pl-3"
+                  : "text-zinc-400 hover:bg-zinc-800 hover:text-white"
                 }
               `}
-              onClick={() => setActiveLabel(label)}
+              onClick={() => handleNavClick(label, isProtected)}
             >
               <Icon className={`h-5 w-5 shrink-0 ${active ? "text-violet-400" : ""}`} />
               {label}

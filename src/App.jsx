@@ -1,17 +1,17 @@
 import { useState } from 'react'
 import { MainLayout } from './layouts/MainLayout'
-import {VideoGrid} from "./components/VideoGrid"
-import { LoginProvider } from "./context/LoginProvider"
-
+import { VideoGrid } from "./components/VideoGrid"
+import { LoginProvider } from "./context/LoginContextProvider"
+import { AuthProvider } from './context/AuthContextProvider'
 function App() {
   return (
-    <>
-      <LoginProvider>
+    <LoginProvider>
+      <AuthProvider>
 
-        <MainLayout children={<VideoGrid />}/>
-        
-      </LoginProvider>
-    </>
+        <MainLayout children={<VideoGrid />} />
+
+      </AuthProvider>
+    </LoginProvider>
   )
 }
 

@@ -1,14 +1,21 @@
-import { LoginContext } from "./LoginContext"
 import { useEffect, useState } from "react"
 import axios from "axios"
 
-export function LoginProvider({children}){
+import { createContext } from "react"
+
+export const LoginContext = createContext()
+
+export function LoginProvider({ children }) {
   const [isLogIn, setIsLogIn] = useState(false)
   const [user, setUser] = useState(null)
 
   useEffect(() => {
-    axios.get("/api/v1/users/login-stats")
-      .then((res) => {
+    axios.get(
+      "/api/v1/users/login-stats",
+      {
+        withCredentials: true
+      }
+    ) .then((res) => {
         setIsLogIn(res.data.data.loggedIn)
         setUser(res.data.data?.user)
 
@@ -21,12 +28,14 @@ export function LoginProvider({children}){
   }, [])
 
   return (
-    <LoginContext.Provider 
+    <LoginContext.Provider
       value={{
         user,
-        isLogIn
+        isLogIn,
+        setUser,
+        setIsLogIn
       }}
-    
+
     >
       {children}
     </LoginContext.Provider>

@@ -1,9 +1,16 @@
 import { useState, useEffect, useContext } from "react"
 import { LogIn, LogOut, User, Settings, HelpCircle } from "lucide-react"
-import { LoginContext } from "../../context/LoginContext"
+import { LoginContext } from "../../context/LoginContextProvider"
+import { AuthContext } from "../../context/AuthContextProvider"
 
 export function Profile({ isProfileOpen, closeProfile }) {
   const { user, isLogIn } = useContext(LoginContext)
+  const { setIsAuthOpen } = useContext(AuthContext)
+
+  function openSignIn() {
+    setIsAuthOpen(true)
+  }
+
   return (
     <>
       {/* Blur backdrop */}
@@ -85,7 +92,12 @@ export function Profile({ isProfileOpen, closeProfile }) {
                 <p className="text-white font-semibold text-sm">Welcome to PlayTube</p>
                 <p className="text-zinc-400 text-xs mt-1">Sign in to access your profile, history, and playlists.</p>
               </div>
-              <button className="mt-1 w-full flex items-center justify-center gap-2 rounded-xl bg-blue-700 hover:bg-blue-500 text-white text-sm font-semibold py-2.5 transition-all duration-150 cursor-pointer">
+              <button className="mt-1 w-full flex items-center justify-center gap-2 rounded-xl bg-blue-700 hover:bg-blue-500 text-white text-sm font-semibold py-2.5 transition-all duration-150 cursor-pointer"
+                onClick={() => {
+                  closeProfile()
+                  openSignIn()
+                }}
+              >
                 <LogIn className="h-4 w-4" />
                 Sign In
               </button>
