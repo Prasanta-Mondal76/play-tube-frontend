@@ -3,6 +3,7 @@ import { LogIn } from "lucide-react"
 import axios from "axios"
 import { LoginContext } from "../../context/LoginContextProvider"
 import { AuthContext } from "../../context/AuthContextProvider"
+import logo from "../../assets/Logo.svg"
 
 export function LoginForm({ onSwitchToSignup }) {
   const [fields, setFields] = useState({ email: "", pass: "" })
@@ -61,7 +62,9 @@ export function LoginForm({ onSwitchToSignup }) {
   return (
     <div className="bg-zinc-950 border border-zinc-800 rounded-2xl p-8 w-full min-w-sm mx-auto">
       <div className="flex items-center gap-3 mb-6">
-        <div className="h-9 w-9 rounded-full bg-gradient-to-br from-violet-600 to-blue-500 flex items-center justify-center text-white text-sm">▶</div>
+        <div className="h-9 w-9 flex items-center justify-center">
+          <img src={logo} alt="Logo" className="rounded-full"/>
+        </div>
         <span className="text-white font-bold text-lg">PlayTube</span>
       </div>
 

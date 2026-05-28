@@ -1,5 +1,5 @@
 import { Bell, Menu, Sun, Search, UserCircle2Icon } from "lucide-react";
-
+import logo from "../../assets/Logo.svg"
 export function Navbar({ toggleSidebar, toggleProfile }) {
 
   return (
@@ -26,8 +26,8 @@ export function Navbar({ toggleSidebar, toggleProfile }) {
 
           {/* LOGO */}
           <div className="flex items-center gap-3 cursor-pointer">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-violet-600 to-blue-500">
-              <span className="text-white text-lg">▶</span>
+            <div className="flex h-10 w-10 items-center justify-center">
+              <img src={logo} alt="Logo" className="rounded-full" />
             </div>
             <h1 className="hidden sm:block text-2xl font-bold text-white">
               PlayTube

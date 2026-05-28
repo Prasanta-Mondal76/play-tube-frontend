@@ -2,6 +2,7 @@ import { Home, History, Users, ListVideo, X, Zap } from "lucide-react";
 import { useState, useContext } from "react"
 import { LoginContext } from "../../context/LoginContextProvider";
 import { AuthContext } from "../../context/AuthContextProvider";
+import logo from "../../assets/Logo.svg"
 
 const navItems = [
   { icon: Home, label: "Home", isProtected: false },
@@ -59,8 +60,8 @@ export function Sidebar({ isOpen, onClose }) {
         {/* Sidebar Header */}
         <div className="flex items-center justify-between px-4 h-16 border-b border-zinc-800 shrink-0">
           <div className="flex items-center gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-violet-600 to-blue-500">
-              <span className="text-white text-base">▶</span>
+            <div className="flex h-9 w-9 items-center justify-center ">
+              <img src={logo} alt="Logo" className="rounded-full" />
             </div>
             <h1 className="text-xl font-bold text-white">PlayTube</h1>
           </div>

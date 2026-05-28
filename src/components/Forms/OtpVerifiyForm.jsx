@@ -1,4 +1,4 @@
-
+import logo from "../../assets/Logo.svg"
 
 export function OtpVerifyForm({
   otp,
@@ -18,8 +18,8 @@ export function OtpVerifyForm({
 
       {/* LOGO */}
       <div className="flex items-center gap-3 mb-6">
-        <div className="h-9 w-9 rounded-full bg-gradient-to-br from-violet-600 to-blue-500 flex items-center justify-center text-white text-sm">
-          ▶
+        <div className="h-9 w-9 flex items-center justify-center">
+          <img src={logo} alt="Logo" className="rounded-full"/>
         </div>
 
         <span className="text-white font-bold text-lg">

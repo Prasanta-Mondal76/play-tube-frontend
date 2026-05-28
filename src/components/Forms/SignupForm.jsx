@@ -2,6 +2,7 @@ import { useState } from "react"
 import { Upload, Image } from "lucide-react"
 import axios from "axios"
 import { OtpVerifyForm } from "./OtpVerifiyForm"
+import logo from "../../assets/Logo.svg"
 
 const pwRules = [
   { id: "len", label: "At least 6 characters", test: v => v.length >= 6 },
@@ -186,7 +187,9 @@ export function SignupForm({ onSwitchToLogin }) {
           </button>
 
           <div className="flex items-center gap-3 mb-6">
-            <div className="h-9 w-9 rounded-full bg-gradient-to-br from-violet-600 to-blue-500 flex items-center justify-center text-white text-sm">▶</div>
+            <div className="h-9 w-9 flex items-center justify-center">
+              <img src={logo} alt="Logo" className="rounded-full"/>
+            </div>
             <span className="text-white font-bold text-lg">PlayTube</span>
           </div>
 
