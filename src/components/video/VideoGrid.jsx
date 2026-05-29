@@ -1,25 +1,30 @@
-import axios from "axios";
 import { useState, useEffect } from "react";
 import { VideoCard } from "./VideoCard";
-
+import { getAllVideos } from "../../services/videoApi";
 
 export function VideoGrid() {
-  const [videos, setVideos] = useState([])
 
-  useEffect(()=> {
-    axios.get("/api/v1/videos/all-videos")
-    .then((response) => {
-      setVideos(response.data.data.videos)
-    })
-    .catch((error) => {
-      console.error("Request failed for '/api/v1/videos/all-videos'", error);
-    })
+  const [videos, setVideos] = useState([]);
 
-    
-  }, [])
+  useEffect(() => {
+
+    getAllVideos()
+      .then((response) => {
+
+        setVideos(response.data.data.videos);
+
+      })
+      .catch((error) => {
+        console.error(
+          "Request failed for '/api/v1/videos/all-videos'",
+          error
+        );
+      });
+  }, []);
+  
   return (
     <div className="bg-black min-h-screen p-4">
-      
+
       <div
         className="
           grid gap-6
@@ -33,7 +38,7 @@ export function VideoGrid() {
         {videos.map((video) => (
           <VideoCard
             key={video._id}
-            file = {video.videoFile}
+            file={video.videoFile}
             thumbnail={video.thumbnail}
             avatar={video.avatar}
             title={video.title}
@@ -41,10 +46,11 @@ export function VideoGrid() {
             views={video.views}
             published={video.createdAt}
             duration={video.duration}
-            owner = {video.owner}
+            owner={video.owner}
           />
         ))}
       </div>
+
     </div>
   );
 }

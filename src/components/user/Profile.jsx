@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react"
 import { LogIn, LogOut, User, Settings, HelpCircle } from "lucide-react"
 import { LoginContext } from "../../context/LoginContextProvider"
 import { AuthContext } from "../../context/AuthContextProvider"
-import axios from "axios"
+import { logoutUser } from "../../services/authApi"
 
 export function Profile({ isProfileOpen, closeProfile }) {
   const { user, setUser, isLogIn, setIsLogIn } = useContext(LoginContext)
@@ -13,25 +13,23 @@ export function Profile({ isProfileOpen, closeProfile }) {
   }
 
   async function handleLogout() {
+
     try {
-      await axios.post(
-        "/api/v1/users/logout",
-        {},
-        {
-          withCredentials: true
-        }
-      )
+      await logoutUser();
+
       // Local state clear
-      setUser(null)
-      setIsLogIn(false)
+      setUser(null);
+
+      setIsLogIn(false);
 
       // Profile dropdown close
-      closeProfile()
+      closeProfile();
+
     } catch (error) {
       console.error(
         "Logout failed:",
         error.response?.data || error.message
-      )
+      );
     }
   }
 

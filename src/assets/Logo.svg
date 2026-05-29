@@ -1,4 +1,12 @@
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <clipPath id="circleClip">
+      <circle cx="50" cy="50" r="50" />
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#circleClip)">
+    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="100%" viewBox="0 0 1213 1297" enable-background="new 0 0 1213 1297" xml:space="preserve">
 <path fill="#01000C" opacity="1.000000" stroke="none" 
 	d="
@@ -11672,4 +11680,6 @@ M630.900208,1124.587280
 	C611.530334,1108.691895 620.760559,1108.334229 630.433777,1107.990723 
 	C630.898010,1113.371704 630.920044,1118.763428 630.900208,1124.587280 
 z"/>
+</svg>
+  </g>
 </svg>

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Navbar } from "../components/layout/Navbar";
 import { Sidebar } from "../components/layout/Sidebar";
-import { Profile } from "../components/layout/Profile"
-import { AuthPage } from "../components/Forms/AuthPage"
+import { Profile } from "../components/user/Profile"
+import { AuthPage } from "../components/auth/AuthPage"
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContextProvider";
 

@@ -1,7 +1,10 @@
 import { useState } from "react"
 import { Upload, Image } from "lucide-react"
-import axios from "axios"
-import { OtpVerifyForm } from "./OtpVerifiyForm"
+import {
+  initiateRegistration,
+  verifyRegistrationOtp,
+} from "../../services/authApi"
+import { OtpVerifyForm } from "./OtpVerifyForm"
 import logo from "../../assets/Logo.svg"
 
 const pwRules = [
@@ -33,68 +36,60 @@ export function SignupForm({ onSwitchToLogin }) {
   }
 
   async function handleSubmit() {
-    if (!validate()) return
-    try {
-      setLoading(true)
+    if (!validate()) return;
 
-      const formData = new FormData()
-      formData.append("fullName", fields.name)
-      formData.append("username", fields.username)
-      formData.append("email", fields.email)
-      formData.append("password", fields.password)
-      formData.append("avatar", fields.avatar)
+    try {
+      setLoading(true);
+
+      const formData = new FormData();
+
+      formData.append("fullName", fields.name);
+      formData.append("username", fields.username);
+      formData.append("email", fields.email);
+      formData.append("password", fields.password);
+      formData.append("avatar", fields.avatar);
+
       if (fields.cover) {
         formData.append(
           "coverImage",
           fields.cover
-        )
+        );
       }
 
-      await axios.post(
-        "/api/v1/users/initiate-registration",
-        formData,
-        {
-          headers: {
-            "Content-Type":
-              "multipart/form-data"
-          },
-          withCredentials: true
-        }
-      )
+      await initiateRegistration(formData);
 
-      setStep(2)
+      setStep(2);
     } catch (error) {
       setServerError(
         error.response?.data?.message
         || "Something went wrong"
-      )
+      );
 
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   }
 
   async function verifyOtp() {
     try {
-      setLoading(true)
+      setLoading(true);
+      await verifyRegistrationOtp({
+        email: fields.email,
+        otp,
+      });
 
-      await axios.post(
-        "/api/v1/users/verify-registration",
-        {
-          email: fields.email,
-          otp
-        }
-      )
+      alert("Registration successful");
 
-      alert("Registration successful")
-      onSwitchToLogin()
+      onSwitchToLogin();
+
     } catch (error) {
       setServerError(
         error.response?.data?.message
         || "Invalid OTP"
-      )
+      );
+
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   }
 
@@ -141,40 +136,34 @@ export function SignupForm({ onSwitchToLogin }) {
 
   async function resendOtp() {
     try {
-      setLoading(true)
-      setServerError("")
+      setLoading(true);
+      setServerError("");
 
-      const formData = new FormData()
-      formData.append("fullName", fields.name)
-      formData.append("username", fields.username)
-      formData.append("email", fields.email)
-      formData.append("password", fields.password)
-      formData.append("avatar", fields.avatar)
+      const formData = new FormData();
+
+      formData.append("fullName", fields.name);
+      formData.append("username", fields.username);
+      formData.append("email", fields.email);
+      formData.append("password", fields.password);
+      formData.append("avatar", fields.avatar);
+
       if (fields.cover) {
         formData.append(
           "coverImage",
           fields.cover
-        )
+        );
       }
 
-      await axios.post(
-        "/api/v1/users/initiate-registration",
-        formData,
-        {
-          headers: {
-            "Content-Type":
-              "multipart/form-data"
-          },
-          withCredentials: true
-        }
-      )
+      await initiateRegistration(formData);
+
     } catch (error) {
       setServerError(
         error.response?.data?.message
         || "Failed to resend OTP"
-      )
+      );
+
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   }
 
@@ -188,7 +177,7 @@ export function SignupForm({ onSwitchToLogin }) {
 
           <div className="flex items-center gap-3 mb-6">
             <div className="h-9 w-9 flex items-center justify-center">
-              <img src={logo} alt="Logo" className="rounded-full"/>
+              <img src={logo} alt="Logo" className="rounded-full" />
             </div>
             <span className="text-white font-bold text-lg">PlayTube</span>
           </div>

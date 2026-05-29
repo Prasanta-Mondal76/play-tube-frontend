@@ -1,5 +1,6 @@
 import { Bell, Menu, Sun, Search, UserCircle2Icon } from "lucide-react";
 import logo from "../../assets/Logo.svg"
+
 export function Navbar({ toggleSidebar, toggleProfile }) {
 
   return (
@@ -69,11 +70,12 @@ export function Navbar({ toggleSidebar, toggleProfile }) {
           </button>
 
           {/* PROFILE */}
-          <button className="cursor-pointer">
+          <button className="cursor-pointer"
+            onClick={toggleProfile}
+          >
             <UserCircle2Icon 
               className="h-10 w-10 rounded-full text-blue-300 object-cover " 
               strokeWidth={0.9}
-              onClick={toggleProfile}
             />
           </button>
         </div>

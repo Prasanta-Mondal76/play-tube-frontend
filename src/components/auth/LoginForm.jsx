@@ -1,6 +1,6 @@
 import { useState, useContext } from "react"
 import { LogIn } from "lucide-react"
-import axios from "axios"
+import { loginUser } from "../../services/authApi";
 import { LoginContext } from "../../context/LoginContextProvider"
 import { AuthContext } from "../../context/AuthContextProvider"
 import logo from "../../assets/Logo.svg"
@@ -10,7 +10,7 @@ export function LoginForm({ onSwitchToSignup }) {
   const [errors, setErrors] = useState({})
   const [serverError, setServerError] = useState("")
   const { setUser, setIsLogIn } = useContext(LoginContext)
-  const { setIsAuthOpen } = useContext( AuthContext )
+  const { setIsAuthOpen } = useContext(AuthContext)
 
   function validate() {
     const e = {}
@@ -20,27 +20,23 @@ export function LoginForm({ onSwitchToSignup }) {
     return Object.keys(e).length === 0
   }
 
-  function handleSubmit() {
-    if (!validate()) return
-
-    axios.post(
-      "/api/v1/users/login",
-      {
+  async function handleSubmit() {
+    if (!validate()) return;
+    
+    try {
+      const response = await loginUser({
         email: fields.email,
-        password: fields.pass
-      },
-      {
-        withCredentials: true
-      }
-    ).then(res => {
-      setUser(res.data.data.user.userData)
-      setIsLogIn(true)
-      setIsAuthOpen(false)
-    }).catch(err => {
+        password: fields.pass,
+      });
+
+      setUser(response.data.data.user.userData);
+      setIsLogIn(true);
+      setIsAuthOpen(false);
+    } catch (err) {
       setServerError(
         err.response?.data?.message || "Something went wrong"
-      )
-    })
+      );
+    }
 
   }
 
@@ -52,7 +48,7 @@ export function LoginForm({ onSwitchToSignup }) {
       onChange={e => {
         setServerError("")
         setFields(p => ({ ...p, [name]: e.target.value }))
-        
+
       }}
       className={`w-full bg-zinc-900 border rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-zinc-600 outline-none focus:border-blue-500 transition-colors
         ${errors[name] ? "border-red-500" : "border-zinc-700"}`}
@@ -63,7 +59,7 @@ export function LoginForm({ onSwitchToSignup }) {
     <div className="bg-zinc-950 border border-zinc-800 rounded-2xl p-8 w-full min-w-sm mx-auto">
       <div className="flex items-center gap-3 mb-6">
         <div className="h-9 w-9 flex items-center justify-center">
-          <img src={logo} alt="Logo" className="rounded-full"/>
+          <img src={logo} alt="Logo" className="rounded-full" />
         </div>
         <span className="text-white font-bold text-lg">PlayTube</span>
       </div>
