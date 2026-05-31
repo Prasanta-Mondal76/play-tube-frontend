@@ -1,5 +1,6 @@
 import { Home, History, Users, ListVideo, X, Zap } from "lucide-react";
-import { useState, useContext } from "react"
+import { useState, useContext  } from "react"
+import { useNavigate } from "react-router-dom";
 import { LoginContext } from "../../context/LoginContextProvider";
 import { AuthContext } from "../../context/AuthContextProvider";
 import logo from "../../assets/Logo.svg"
@@ -19,6 +20,8 @@ const favoriteChannels = [
 ];
 
 export function Sidebar({ isOpen, onClose }) {
+  const navigate = useNavigate()
+
   const [activeLabel, setActiveLabel] = useState("Home");
   const { isLogIn } = useContext(LoginContext);
   const { setIsAuthOpen } = useContext(AuthContext)
@@ -33,6 +36,7 @@ export function Sidebar({ isOpen, onClose }) {
 
     // user logged in OR route public
     setActiveLabel(label);
+    navigate("/")
   }
 
   return (

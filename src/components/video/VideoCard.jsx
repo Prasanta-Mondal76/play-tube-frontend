@@ -1,4 +1,7 @@
+import { useNavigate } from "react-router-dom";
+
 export function VideoCard({
+  videoId,
   file,
   thumbnail,
   avatar,
@@ -9,6 +12,8 @@ export function VideoCard({
   duration,
   owner
 }) {
+
+  const navigate = useNavigate();
 
   // Publish Video Time Formating
   function timeAgo(seconds) {
@@ -92,6 +97,8 @@ export function VideoCard({
     hover:border-blue-900 
     hover:rounded-xl
     p-1"
+
+    onClick={() => navigate(`/watch/${videoId}`)}
     >
 
       {/* Thumbnail */}

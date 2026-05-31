@@ -1,18 +1,23 @@
-import { useState } from 'react'
-import { MainLayout } from './layouts/MainLayout'
-import { VideoGrid } from "./components/video/VideoGrid"
-import { LoginProvider } from "./context/LoginContextProvider"
-import { AuthProvider } from './context/AuthContextProvider'
+import { LoginProvider } from "./context/LoginContextProvider";
+import { AuthProvider } from "./context/AuthContextProvider";
+
+import { AppRoutes } from "./routes/AppRoutes";
+
 function App() {
+
   return (
+
     <LoginProvider>
+
       <AuthProvider>
 
-        <MainLayout children={<VideoGrid />} />
+        <AppRoutes />
 
       </AuthProvider>
+
     </LoginProvider>
-  )
+
+  );
 }
 
-export default App
+export default App;

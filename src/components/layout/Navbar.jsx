@@ -1,7 +1,9 @@
 import { Bell, Menu, Sun, Search, UserCircle2Icon } from "lucide-react";
 import logo from "../../assets/Logo.svg"
+import { useNavigate } from "react-router-dom";
 
 export function Navbar({ toggleSidebar, toggleProfile }) {
+  const navigate = useNavigate()
 
   return (
     <header
@@ -26,7 +28,9 @@ export function Navbar({ toggleSidebar, toggleProfile }) {
           </button>
 
           {/* LOGO */}
-          <div className="flex items-center gap-3 cursor-pointer">
+          <div className="flex items-center gap-3 cursor-pointer"
+          onClick={() => navigate("/")}
+          >
             <div className="flex h-10 w-10 items-center justify-center">
               <img src={logo} alt="Logo" className="rounded-full" />
             </div>
