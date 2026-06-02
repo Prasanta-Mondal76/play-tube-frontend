@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { ThumbsUp } from "lucide-react";
 import { toggleCommentLike } from "../../services/likeApi";
+import { LoginContext } from "../../context/LoginContextProvider";
+import { BoxContext } from "../../context/BoxContextProvider";
 
 export function CommentCard({ comment }) {
 
@@ -8,12 +10,14 @@ export function CommentCard({ comment }) {
   const [likes, setLikes] = useState(comment.likes || 0);
   const [likeLoading, setLikeLoading] = useState(false);
 
-  // =========================
-  // LIKE COMMENT
-  // =========================
+  const {isLogIn} = useContext(LoginContext)
+  const {isLoginBoxOpen, setIsLoginBoxOpen} = useContext(BoxContext)
 
+  // LIKE COMMENT
   const handleLike = async () => {
     if (likeLoading) return;
+
+    if(!isLogIn) setIsLoginBoxOpen(true)
 
     const previousLiked = isLiked;
     const previousLikes = likes;

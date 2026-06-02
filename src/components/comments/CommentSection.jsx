@@ -14,10 +14,7 @@ export function CommentSection({ videoId }) {
   const [isOpen, setIsOpen] = useState(false);
   const [error, setError] = useState(null);
 
-  // =========================
   // TOGGLE + FETCH COMMENTS
-  // =========================
-
   const handleToggle = async () => {
 
     // If already open — just close, don't refetch
@@ -26,7 +23,7 @@ export function CommentSection({ videoId }) {
       return;
     }
 
-    // Open karo
+    // Open Comment Section
     setIsOpen(true);
 
     // Already fetched hai to dobara fetch mat karo
@@ -53,10 +50,7 @@ export function CommentSection({ videoId }) {
     }
   };
 
-  // =========================
   // ADD COMMENT LOCALLY
-  // =========================
-
   const handleCommentAdd = (newComment) => {
     if (!newComment) return;
     const commentWithOwner = {
@@ -72,20 +66,14 @@ export function CommentSection({ videoId }) {
     setComments((prev) => [commentWithOwner, ...prev]);
   };
 
-  // =========================
   // DELETE COMMENT LOCALLY
-  // =========================
-
   const handleCommentDelete = (commentId) => {
     setComments((prev) =>
       prev.filter((comment) => comment._id !== commentId)
     );
   };
 
-  // =========================
   // UPDATE COMMENT LOCALLY
-  // =========================
-
   const handleCommentUpdate = (updatedComment) => {
     setComments((prev) =>
       prev.map((comment) =>
@@ -135,7 +123,7 @@ export function CommentSection({ videoId }) {
             <div className="space-y-4">
               {[1, 2, 3].map((i) => (
                 <div key={i} className="flex gap-3">
-                  <div className="w-9 h-9 rounded-full bg-zinc-800 animate-pulse flex-shrink-0" />
+                  <div className="w-9 h-9 rounded-full bg-zinc-800 animate-pulse flex shrink-0" />
                   <div className="flex-1 space-y-2">
                     <div className="h-3 w-32 rounded bg-zinc-800 animate-pulse" />
                     <div className="h-3 w-full rounded bg-zinc-800 animate-pulse" />

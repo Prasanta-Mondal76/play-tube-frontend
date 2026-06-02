@@ -1,10 +1,5 @@
 import { Route, Routes } from "react-router-dom"
-import {
-  Home,
-  VideoPlay,
-
-} from "../pages/index"
-
+import { Home, VideoPlay, Profile } from "../pages/index"
 import { MainLayout } from "../layouts/MainLayout"
 
 export function AppRoutes() {
@@ -16,9 +11,7 @@ export function AppRoutes() {
         path="/"
         element={
           <MainLayout>
-
             <Home />
-
           </MainLayout>
         }
       />
@@ -27,13 +20,21 @@ export function AppRoutes() {
         path="/watch/:videoId"
         element={
           <MainLayout>
-
             <VideoPlay />
+          </MainLayout>
+        }
+      />
 
+      {/* PROFILE PAGE */}
+      <Route
+        path="/profile/:username"
+        element={
+          <MainLayout>
+            <Profile />
           </MainLayout>
         }
       />
 
     </Routes>
-  )
+  );
 }

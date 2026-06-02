@@ -1,9 +1,18 @@
 import { Bell, Menu, Sun, Search, UserCircle2Icon } from "lucide-react";
 import logo from "../../assets/Logo.svg"
 import { useNavigate } from "react-router-dom";
+import { BoxContext } from "../../context/BoxContextProvider"
+import { LoginContext } from "../../context//LoginContextProvider"
+import { useContext } from "react";
 
-export function Navbar({ toggleSidebar, toggleProfile }) {
+export function Navbar() {
   const navigate = useNavigate()
+  const {
+    isSidebarOpen, setIsSidebarOpen,
+    isProfileOpen, setIsProfileOpen
+  } = useContext(BoxContext)
+
+  const { isLogIn, user } = useContext(LoginContext)
 
   return (
     <header
@@ -13,6 +22,10 @@ export function Navbar({ toggleSidebar, toggleProfile }) {
         border-b border-zinc-800
         bg-black
       "
+      onClick={() => {
+        isProfileOpen ? setIsProfileOpen(false) : null
+        isSidebarOpen ? setIsSidebarOpen(false) : null
+      }}
     >
       <div className="flex h-full items-center justify-between px-3 md:px-6">
 
@@ -21,7 +34,10 @@ export function Navbar({ toggleSidebar, toggleProfile }) {
 
           {/* MENU BUTTON */}
           <button
-            onClick={toggleSidebar}
+            onClick={() => {
+              setIsProfileOpen(false)
+              setIsSidebarOpen(!isSidebarOpen)
+            }}
             className="rounded-full p-2 hover:bg-zinc-800 transition cursor-pointer"
           >
             <Menu className="h-6 w-6 text-white " />
@@ -29,7 +45,7 @@ export function Navbar({ toggleSidebar, toggleProfile }) {
 
           {/* LOGO */}
           <div className="flex items-center gap-3 cursor-pointer"
-          onClick={() => navigate("/")}
+            onClick={() => navigate("/")}
           >
             <div className="flex h-10 w-10 items-center justify-center">
               <img src={logo} alt="Logo" className="rounded-full" />
@@ -75,12 +91,22 @@ export function Navbar({ toggleSidebar, toggleProfile }) {
 
           {/* PROFILE */}
           <button className="cursor-pointer"
-            onClick={toggleProfile}
+            onClick={() => {
+              setIsSidebarOpen(false)
+              setIsProfileOpen(!isProfileOpen)
+            }}
           >
-            <UserCircle2Icon 
-              className="h-10 w-10 rounded-full text-blue-300 object-cover " 
-              strokeWidth={0.9}
-            />
+            {
+              isLogIn ?
+                <div className="flex h-10 w-10 items-center justify-center rounded-full to-blue-500 shrink-0">
+                  <img src={user?.avatar} alt="Profile Image" className="rounded-full" />
+                </div>
+                :
+                <UserCircle2Icon
+                  className="h-10 w-10 rounded-full text-blue-300 object-cover "
+                  strokeWidth={0.9}
+                />
+            }
           </button>
         </div>
       </div>

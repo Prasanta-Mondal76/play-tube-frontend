@@ -1,65 +1,42 @@
 import { useState } from "react";
 import { Navbar } from "../components/layout/Navbar";
 import { Sidebar } from "../components/layout/Sidebar";
-import { Profile } from "../components/user/Profile"
+import { ProfileBox } from "../components/user/ProfileBox"
 import { AuthPage } from "../components/auth/AuthPage"
 import { useContext } from "react";
-import { AuthContext } from "../context/AuthContextProvider";
+import { BoxContext } from "../context/BoxContextProvider";
 
 export function MainLayout({ children }) {
 
-  // Sidebar Toggle
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  function toggleSidebar() {
-    setIsSidebarOpen((prev) => !prev);
-  }
-  function closeSidebar() {
-    setIsSidebarOpen(false);
-  }
-
-  // Profile Toggle
-  const [isProfileOpen, seIsProfileOpen] = useState(false)
-  function toggleProfile() {
-    seIsProfileOpen((prev) => !prev)
-  }
-  function closeProfile() {
-    seIsProfileOpen(false)
-  }
-
-  // Auth Page Toggle
-  const {isAuthOpen, setIsAuthOpen} = useContext(AuthContext);
+  const {
+    isLoginBoxOpen,setIsLoginBoxOpen
+  } = useContext(BoxContext)
 
   return (
     <div className="bg-black min-h-screen">
 
       {/* NAVBAR */}
-      <Navbar
-        toggleSidebar={toggleSidebar}
-        toggleProfile={toggleProfile}
-      />
+      <Navbar />
 
       {/* SIDEBAR — overlay, controlled by isOpen */}
-      <Sidebar
-        isOpen={isSidebarOpen}
-        onClose={closeSidebar}
-      />
+      <Sidebar />
 
       {/* MAIN CONTENT */}
       <main className="pt-16">
         {children}
       </main>
 
-      {/* Profile Toggle Content */}
-      <Profile isProfileOpen={isProfileOpen} closeProfile={closeProfile} />
+      {/* Profile Box Content */}
+      <ProfileBox />
 
       {/* AUTH MODAL */}
       {
-        isAuthOpen && (
+        isLoginBoxOpen && (
           <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center px-4"
-            onClick={() => setIsAuthOpen(false)}
+            onClick={() => setIsLoginBoxOpen(false)}
           >
             <div onClick={(e) => e.stopPropagation()}>
-              <AuthPage onClose={() => setIsAuthOpen(false)} />
+              <AuthPage onClose={() => setIsLoginBoxOpen(false)} />
             </div>
           </div>
         )

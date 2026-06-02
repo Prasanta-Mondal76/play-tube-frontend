@@ -1,5 +1,5 @@
 import { LoginProvider } from "./context/LoginContextProvider";
-import { AuthProvider } from "./context/AuthContextProvider";
+import { BoxProvider } from "./context/BoxContextProvider";
 
 import { AppRoutes } from "./routes/AppRoutes";
 
@@ -9,11 +9,11 @@ function App() {
 
     <LoginProvider>
 
-      <AuthProvider>
+      <BoxProvider>
 
         <AppRoutes />
 
-      </AuthProvider>
+      </BoxProvider>
 
     </LoginProvider>
 

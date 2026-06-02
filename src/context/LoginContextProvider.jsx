@@ -31,8 +31,8 @@ export function LoginProvider({ children }) {
     <LoginContext.Provider
       value={{
         user,
-        isLogIn,
         setUser,
+        isLogIn,
         setIsLogIn
       }}
 

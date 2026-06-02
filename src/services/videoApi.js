@@ -1,34 +1,25 @@
 import api from "./axios";
 
 export const getAllVideos = async () => {
-   return await api.get("/api/v1/videos/all-videos");
+  return await api.get("/api/v1/videos/all-videos");
 };
 
 export const getVideoById = async (videoId) => {
-
-   return await api.get(
-      `/api/v1/videos/get-video/${videoId}`
-   );
-
+  return await api.get(`/api/v1/videos/get-video/${videoId}`);
 };
 
-export const recordVideoView = async (
-   videoId
-) => {
-
-   return await api.post(
-      `/api/v1/videos/views/${videoId}`
-   );
-
+export const recordVideoView = async (videoId) => {
+  return await api.post(`/api/v1/videos/views/${videoId}`);
 };
 
-export const getSuggestedVideos = async (
-   params = {}
-) => {
+export const getSuggestedVideos = async (params = {}) => {
+  return await api.get("/api/v1/videos/all-videos", { params });
+};
 
-   return await api.get(
-      "/api/v1/videos/all-videos",
-      { params }
-   );
 
+export const getChannelVideos = async (channelId, params = {}) => {
+  return await api.get(
+    `/api/v1/videos/user/all-videos/${channelId}`,
+    { params }
+  );
 };

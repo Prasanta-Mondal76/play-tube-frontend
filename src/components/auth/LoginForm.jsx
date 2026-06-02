@@ -2,7 +2,7 @@ import { useState, useContext } from "react"
 import { LogIn } from "lucide-react"
 import { loginUser } from "../../services/authApi";
 import { LoginContext } from "../../context/LoginContextProvider"
-import { AuthContext } from "../../context/AuthContextProvider"
+import { BoxContext } from "../../context/BoxContextProvider"
 import logo from "../../assets/Logo.svg"
 
 export function LoginForm({ onSwitchToSignup }) {
@@ -10,7 +10,7 @@ export function LoginForm({ onSwitchToSignup }) {
   const [errors, setErrors] = useState({})
   const [serverError, setServerError] = useState("")
   const { setUser, setIsLogIn } = useContext(LoginContext)
-  const { setIsAuthOpen } = useContext(AuthContext)
+  const { setIsLoginBoxOpen } = useContext(BoxContext)
 
   function validate() {
     const e = {}
@@ -31,7 +31,7 @@ export function LoginForm({ onSwitchToSignup }) {
 
       setUser(response.data.data.user.userData);
       setIsLogIn(true);
-      setIsAuthOpen(false);
+      setIsLoginBoxOpen(false);
     } catch (err) {
       setServerError(
         err.response?.data?.message || "Something went wrong"

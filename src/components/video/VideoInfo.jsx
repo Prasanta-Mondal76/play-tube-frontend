@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { AuthContext } from "../../context/AuthContextProvider";
+import { BoxContext } from "../../context/BoxContextProvider";
 import { LoginContext } from "../../context/LoginContextProvider";
 
 import {
@@ -15,8 +15,10 @@ export function VideoInfo({
   setVideo,
 }) {
 
-  const { setIsAuthOpen } = useContext(AuthContext);
-  const { isLogIn } = useContext(LoginContext);
+  const { setIsLoginBoxOpen } = useContext(BoxContext);
+  const { isLogIn, user } = useContext(LoginContext);
+
+  // const isOwner = isLogIn && user?._id === video.owner._id;
 
   const [likeLoading, setLikeLoading] =
     useState(false);
@@ -25,13 +27,10 @@ export function VideoInfo({
 
   if (!video) return null;
 
-  // =========================
   // VIDEO LIKE
-  // =========================
-
   const handleVideoLike = async () => {
     if (!isLogIn) {
-      setIsAuthOpen(true);
+      setIsLoginBoxOpen(true);
       return;
     }
 
@@ -46,7 +45,6 @@ export function VideoInfo({
       setLikeLoading(true);
 
       // Optimistic Update
-
       setVideo((prev) => ({
         ...prev,
         isLiked: !prev.isLiked,
@@ -75,24 +73,18 @@ export function VideoInfo({
     }
   };
 
-  // =========================
   // SUBSCRIBE
-  // =========================
-
   const handleSubscription =
     async () => {
       if (!isLogIn) {
-        setIsAuthOpen(true);
+        setIsLoginBoxOpen(true);
         return;
       }
 
       if (subscribeLoading) return;
 
-      const previousSubscribed =
-        video.isSubscribed;
-
-      const previousSubscribers =
-        video.owner.totalSubscribers;
+      const previousSubscribed = video.isSubscribed;
+      const previousSubscribers = video.owner.totalSubscribers;
 
       try {
 
@@ -100,27 +92,16 @@ export function VideoInfo({
 
         // Optimistic Update
 
-        setVideo((prev) => ({
-
-          ...prev,
-
-          isSubscribed:
-            !prev.isSubscribed,
-
-          owner: {
-
-            ...prev.owner,
-
-            totalSubscribers:
-              prev.isSubscribed
-                ? prev.owner
-                  .totalSubscribers - 1
-                : prev.owner
-                  .totalSubscribers + 1,
-
-          },
-
-        }));
+        setVideo((prev) => (
+          {
+            ...prev,
+            isSubscribed: !prev.isSubscribed,
+            owner: {
+              ...prev.owner,
+              totalSubscribers: prev.isSubscribed ? prev.owner.totalSubscribers - 1 : prev.owner.totalSubscribers + 1,
+            },
+          }
+        ));
 
         await toggleSubscription(
           video.owner._id
@@ -150,26 +131,18 @@ export function VideoInfo({
           },
 
         }));
-
       }
       finally {
-
         setTimeout(() => {
-
           setSubscribeLoading(false);
-
         }, 3000);
-
       }
-
     };
 
   return (
-
     <div className="mt-4">
 
       {/* TITLE */}
-
       <h1
         className="
           text-xl
@@ -178,13 +151,11 @@ export function VideoInfo({
           text-white
         "
       >
-
         {video.title}
 
       </h1>
 
       {/* CHANNEL + ACTIONS */}
-
       <div
         className="
           mt-5
@@ -198,7 +169,6 @@ export function VideoInfo({
       >
 
         {/* LEFT */}
-
         <div
           className="
             flex
@@ -208,7 +178,6 @@ export function VideoInfo({
         >
 
           {/* AVATAR */}
-
           <img
             src={video.owner.avatar}
             alt={video.owner.fullName}
@@ -221,18 +190,14 @@ export function VideoInfo({
           />
 
           {/* CHANNEL DETAILS */}
-
           <div>
-
             <h2
               className="
                 text-white
                 font-semibold
               "
             >
-
               {video.owner.fullName}
-
             </h2>
 
             <p
@@ -241,9 +206,7 @@ export function VideoInfo({
                 text-zinc-400
               "
             >
-
               @{video.owner.username}
-
             </p>
 
             <p
@@ -252,32 +215,26 @@ export function VideoInfo({
                 text-zinc-500
               "
             >
-
               {
                 video.owner
                   .totalSubscribers || 0
               }
               {" "}
               subscribers
-
             </p>
 
           </div>
 
           {/* SUBSCRIBE BUTTON */}
-
           {
             !video.isOwner && (
               <button
-
                 onClick={
                   handleSubscription
                 }
-
                 disabled={
                   subscribeLoading
                 }
-
                 className={`
                   ml-2
                   rounded-full
@@ -304,22 +261,18 @@ export function VideoInfo({
                   }
                 `}
               >
-
                 {
                   video.isSubscribed
                     ? "Unsubscribe"
                     : "Subscribe"
                 }
-
               </button>
             )
           }
 
-
         </div>
 
         {/* RIGHT ACTIONS */}
-
         <div
           className="
             flex
@@ -329,15 +282,9 @@ export function VideoInfo({
         >
 
           {/* LIKE BUTTON */}
-
           <button
-
-            onClick={
-              handleVideoLike
-            }
-
+            onClick={ handleVideoLike }
             disabled={likeLoading}
-
             className={`
               flex
               items-center
@@ -350,35 +297,20 @@ export function VideoInfo({
 
               disabled:opacity-50
               disabled:cursor-not-allowed
-
-              ${video.isLiked
-                ? `
-                    bg-white
-                    text-black
-                  `
-                : `
-                    bg-zinc-900
-                    text-white
-                    hover:bg-zinc-800
-                  `
-              }
+              bg-zinc-900
+              p-3
+              hover:bg-zinc-800
             `}
           >
-
             <ThumbsUp
-              className="h-5 w-5"
+              className={`h-5 w-5 text-white ${video.isLiked ? "fill-white": ""}`}
             />
-
-            <span>
-
+            <span className="text-white">
               {video.likes || 0}
-
             </span>
-
           </button>
 
           {/* BELL */}
-
           <button
             className="
               rounded-full
@@ -389,7 +321,6 @@ export function VideoInfo({
               cursor-pointer
             "
           >
-
             <Bell
               className="
                 h-5
@@ -397,15 +328,12 @@ export function VideoInfo({
                 text-white
               "
             />
-
           </button>
-
         </div>
 
       </div>
 
       {/* DESCRIPTION */}
-
       <div
         className="
           mt-5
@@ -414,9 +342,7 @@ export function VideoInfo({
           p-4
         "
       >
-
         {/* VIEWS */}
-
         <div
           className="
             mb-2
@@ -425,24 +351,18 @@ export function VideoInfo({
             text-zinc-300
           "
         >
-
           {video.views} views
-
         </div>
 
         {/* DESCRIPTION */}
-
         <p
           className="
             whitespace-pre-line
             text-zinc-200
           "
         >
-
           {video.description}
-
         </p>
-
       </div>
 
     </div>

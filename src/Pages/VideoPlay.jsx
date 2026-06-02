@@ -17,24 +17,18 @@ export const VideoPlay = () => {
   const { videoId } = useParams();
 
   const [video, setVideo] = useState(null);
-
-
   const [loading, setLoading] = useState(true);
-
   const [error, setError] = useState(null);
 
   useEffect(() => {
-
-    if (!videoId) return;
+    if (!videoId) return
 
     fetchVideoPageData();
-
   }, [videoId, setVideo]);
 
   const fetchVideoPageData = async () => {
 
     try {
-
       setLoading(true);
 
       const videoResponse =
@@ -47,54 +41,40 @@ export const VideoPlay = () => {
       // Record video view separately
       recordVideoView(videoId)
         .catch(() => { });
-
     }
     catch (error) {
-
       console.log(error);
-
       setError(
         error?.response?.data?.message
         || "Failed to load video"
       );
-
     }
     finally {
-
       setLoading(false);
-
     }
-
   };
 
   if (loading) {
-
     return (
       <div className="p-5">
         Loading...
       </div>
     );
-
   }
 
   if (error) {
-
     return (
       <div className="p-5 text-red-500">
         {error}
       </div>
     );
-
   }
 
   return (
-
     <div className="px-3 py-5">
-
       <div className="flex flex-col xl:flex-row gap-6">
 
         {/* LEFT SECTION */}
-
         <div className="w-full xl:w-[70%]">
 
           <VideoPlayer
@@ -122,10 +102,7 @@ export const VideoPlay = () => {
         </div>
 
       </div>
-
     </div>
-
   );
-
 };
 

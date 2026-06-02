@@ -1,30 +1,29 @@
 import { useState, useEffect, useContext } from "react"
-import { LogIn, LogOut, User, Settings, HelpCircle } from "lucide-react"
+import { LogIn, LogOut, User, Settings, HelpCircle, LayoutDashboardIcon } from "lucide-react"
 import { LoginContext } from "../../context/LoginContextProvider"
-import { AuthContext } from "../../context/AuthContextProvider"
+import { BoxContext } from "../../context/BoxContextProvider"
 import { logoutUser } from "../../services/authApi"
+import { useNavigate } from "react-router-dom"
 
-export function Profile({ isProfileOpen, closeProfile }) {
+export function ProfileBox() {
+  const navigate = useNavigate()
   const { user, setUser, isLogIn, setIsLogIn } = useContext(LoginContext)
-  const { setIsAuthOpen } = useContext(AuthContext)
+  const { isProfileOpen, setIsProfileOpen, setIsLoginBoxOpen } = useContext(BoxContext)
 
   function openSignIn() {
-    setIsAuthOpen(true)
+    setIsLoginBoxOpen(true)
   }
 
   async function handleLogout() {
-
     try {
       await logoutUser();
 
       // Local state clear
       setUser(null);
-
       setIsLogIn(false);
 
       // Profile dropdown close
-      closeProfile();
-
+      setIsProfileOpen(false);
     } catch (error) {
       console.error(
         "Logout failed:",
@@ -33,13 +32,18 @@ export function Profile({ isProfileOpen, closeProfile }) {
     }
   }
 
+  function handelProfileClick(){
+    navigate(`/profile/${user.username}`) 
+    setIsProfileOpen(false)
+  }
+
   return (
     <>
       {/* Blur backdrop */}
       {isProfileOpen && (
         <div
           className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm transition-opacity duration-300"
-          onClick={closeProfile}
+          onClick={() => setIsProfileOpen(false)}
         />
       )}
 
@@ -81,9 +85,17 @@ export function Profile({ isProfileOpen, closeProfile }) {
 
             {/* Menu Items */}
             <div className="flex flex-col py-2 px-2 gap-1">
-              <button className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-zinc-300 hover:bg-blue-400 hover:text-white transition-all duration-150 text-left cursor-pointer">
+              <button className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-zinc-300 hover:bg-blue-400 hover:text-white transition-all duration-150 text-left cursor-pointer"
+              onClick={ handelProfileClick}
+              >
                 <User className="h-4 w-4 shrink-0 text-zinc-300 " />
                 View Profile
+              </button>
+              <button className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-zinc-300 hover:bg-blue-400 hover:text-white transition-all duration-150 text-left cursor-pointer"
+              // onClick={ handelDashboard}
+              >
+                <LayoutDashboardIcon className="h-4 w-4 shrink-0 text-zinc-300 " />
+                Dashboard
               </button>
               <button className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-zinc-300 hover:bg-blue-400 hover:text-white transition-all duration-150 text-left cursor-pointer">
                 <Settings className="h-4 w-4 shrink-0 text-zinc-300 " />
@@ -118,7 +130,7 @@ export function Profile({ isProfileOpen, closeProfile }) {
               </div>
               <button className="mt-1 w-full flex items-center justify-center gap-2 rounded-xl bg-blue-700 hover:bg-blue-500 text-white text-sm font-semibold py-2.5 transition-all duration-150 cursor-pointer"
                 onClick={() => {
-                  closeProfile()
+                  setIsProfileOpen(false)
                   openSignIn()
                 }}
               >

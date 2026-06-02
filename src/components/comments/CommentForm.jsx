@@ -1,11 +1,11 @@
 import { useState, useContext } from "react";
-import { AuthContext } from "../../context/AuthContextProvider";
+import { BoxContext } from "../../context/BoxContextProvider";
 import { LoginContext } from "../../context/LoginContextProvider";
 import { addComment } from "../../services/commentApi";
 
 export function CommentForm({ videoId, onCommentAdd }) {
 
-  const { setIsAuthOpen } = useContext(AuthContext);
+  const { setIsLoginBoxOpen } = useContext(BoxContext);
   const { isLogIn } = useContext(LoginContext);
 
   const [content, setContent] = useState("");
@@ -19,7 +19,7 @@ export function CommentForm({ videoId, onCommentAdd }) {
     e.preventDefault();
 
     if (!isLogIn) {
-      setIsAuthOpen(true);
+      setIsLoginBoxOpen(true);
       return;
     }
 

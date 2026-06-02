@@ -65,7 +65,7 @@ export function VideoPlayer({
         }
         className="
                w-full
-               aspect-video
+               aspect-[16/7.5]
                bg-black
             "
       >

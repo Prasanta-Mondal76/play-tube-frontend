@@ -2,7 +2,7 @@ import { Home, History, Users, ListVideo, X, Zap } from "lucide-react";
 import { useState, useContext  } from "react"
 import { useNavigate } from "react-router-dom";
 import { LoginContext } from "../../context/LoginContextProvider";
-import { AuthContext } from "../../context/AuthContextProvider";
+import { BoxContext } from "../../context/BoxContextProvider";
 import logo from "../../assets/Logo.svg"
 
 const navItems = [
@@ -19,18 +19,18 @@ const favoriteChannels = [
   { name: "SoundWave Beats", avatar: "https://i.pravatar.cc/100?img=33" },
 ];
 
-export function Sidebar({ isOpen, onClose }) {
+export function Sidebar() {
   const navigate = useNavigate()
 
   const [activeLabel, setActiveLabel] = useState("Home");
   const { isLogIn } = useContext(LoginContext);
-  const { setIsAuthOpen } = useContext(AuthContext)
+  const { setIsLoginBoxOpen, isSidebarOpen, setIsSidebarOpen } = useContext(BoxContext)
 
   function handleNavClick(label, isProtected) {
     // if protected and not logged in
     if (isProtected && !isLogIn) {
-      onClose();          // sidebar close
-      setIsAuthOpen(true)   // open auth popup
+      setIsSidebarOpen(false)          // sidebar close
+      setIsLoginBoxOpen(true)   // open auth popup
       return;
     }
 
@@ -42,10 +42,10 @@ export function Sidebar({ isOpen, onClose }) {
   return (
     <>
       {/* Backdrop */}
-      {isOpen && (
+      {isSidebarOpen && (
         <div
           className="fixed inset-0 z-30 bg-black/60 backdrop-blur-sm"
-          onClick={onClose}
+          onClick={() => setIsSidebarOpen(false) }
         />
       )}
 
@@ -58,7 +58,7 @@ export function Sidebar({ isOpen, onClose }) {
           border-r border-zinc-800
           flex flex-col
           transform transition-transform duration-300 ease-in-out
-          ${isOpen ? "translate-x-0" : "-translate-x-full"}
+          ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
         `}
       >
         {/* Sidebar Header */}
@@ -71,7 +71,7 @@ export function Sidebar({ isOpen, onClose }) {
           </div>
 
           <button
-            onClick={onClose}
+            onClick={() => setIsSidebarOpen(false) }
             className="rounded-full p-2 hover:bg-zinc-800 transition"
           >
             <X className="h-5 w-5 text-zinc-400" />
