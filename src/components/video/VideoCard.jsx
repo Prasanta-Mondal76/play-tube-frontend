@@ -48,28 +48,6 @@ export function VideoCard({
   const posted = (Date.now() - new Date(published)) / 1000
   published = timeAgo(posted)
 
-  // Video Duration Formating
-  function formatDuration(totalSeconds) {
-
-    const hours = Math.floor(totalSeconds / 3600);
-
-    const minutes = Math.floor((totalSeconds % 3600) / 60);
-
-    const seconds = totalSeconds % 60;
-
-    // Add leading zero
-    const paddedMinutes = String(minutes).padStart(2, "0");
-    const paddedSeconds = String(seconds).padStart(2, "0");
-
-    // If video has hours
-    if (hours > 0) {
-      return `${hours}:${paddedMinutes}:${paddedSeconds}`;
-    }
-
-    return `${minutes}:${paddedSeconds}`;
-  }
-  duration = formatDuration(duration)
-
   // Video Views Formating
   function formatViews(views) {
 

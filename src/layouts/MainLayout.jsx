@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Outlet } from "react-router-dom";
 import { Navbar } from "../components/layout/Navbar";
 import { Sidebar } from "../components/layout/Sidebar";
 import { ProfileBox } from "../components/user/ProfileBox"
@@ -6,7 +7,7 @@ import { AuthPage } from "../components/auth/AuthPage"
 import { useContext } from "react";
 import { BoxContext } from "../context/BoxContextProvider";
 
-export function MainLayout({ children }) {
+export function MainLayout() {
 
   const {
     isLoginBoxOpen,setIsLoginBoxOpen
@@ -23,7 +24,7 @@ export function MainLayout({ children }) {
 
       {/* MAIN CONTENT */}
       <main className="pt-16">
-        {children}
+        <Outlet />
       </main>
 
       {/* Profile Box Content */}

@@ -23,7 +23,7 @@ export function VideoInfo({
   const [likeLoading, setLikeLoading] =
     useState(false);
 
-  const [ subscribeLoading, setSubscribeLoading ] = useState(false);
+  const [subscribeLoading, setSubscribeLoading] = useState(false);
 
   if (!video) return null;
 
@@ -283,7 +283,7 @@ export function VideoInfo({
 
           {/* LIKE BUTTON */}
           <button
-            onClick={ handleVideoLike }
+            onClick={handleVideoLike}
             disabled={likeLoading}
             className={`
               flex
@@ -303,7 +303,7 @@ export function VideoInfo({
             `}
           >
             <ThumbsUp
-              className={`h-5 w-5 text-white ${video.isLiked ? "fill-white": ""}`}
+              className={`h-5 w-5 text-white ${video.isLiked ? "fill-white" : ""}`}
             />
             <span className="text-white">
               {video.likes || 0}

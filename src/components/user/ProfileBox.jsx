@@ -8,7 +8,11 @@ import { useNavigate } from "react-router-dom"
 export function ProfileBox() {
   const navigate = useNavigate()
   const { user, setUser, isLogIn, setIsLogIn } = useContext(LoginContext)
-  const { isProfileOpen, setIsProfileOpen, setIsLoginBoxOpen } = useContext(BoxContext)
+  const { 
+    isProfileOpen, setIsProfileOpen, 
+    setIsLoginBoxOpen,
+    setIsSidebarOpen
+   } = useContext(BoxContext)
 
   function openSignIn() {
     setIsLoginBoxOpen(true)
@@ -32,9 +36,16 @@ export function ProfileBox() {
     }
   }
 
+  // Profile - Onclick 
   function handelProfileClick(){
     navigate(`/profile/${user.username}`) 
     setIsProfileOpen(false)
+  }
+  // Dashboard - Onclick
+  function handelDashboard(){
+    setIsProfileOpen(false)
+    setIsSidebarOpen(false)
+    navigate("/creator/dashboard/overview")
   }
 
   return (
@@ -42,7 +53,7 @@ export function ProfileBox() {
       {/* Blur backdrop */}
       {isProfileOpen && (
         <div
-          className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm transition-opacity duration-300"
+          className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm transition-opacity duration-300"
           onClick={() => setIsProfileOpen(false)}
         />
       )}
@@ -92,7 +103,7 @@ export function ProfileBox() {
                 View Profile
               </button>
               <button className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-zinc-300 hover:bg-blue-400 hover:text-white transition-all duration-150 text-left cursor-pointer"
-              // onClick={ handelDashboard}
+              onClick={ handelDashboard}
               >
                 <LayoutDashboardIcon className="h-4 w-4 shrink-0 text-zinc-300 " />
                 Dashboard

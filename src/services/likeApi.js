@@ -6,6 +6,7 @@ router.route("/video/:videoId").post(toggleVideoLike)
 router.route("/comment/:commentId").post(toggleCommentLike)
 router.route("/videos").get(getLikedVideos)
 router.route("/status").get(getLikeStatus) 
+router.route("/channel-total-likes").get(getChannelTotalLike)
 */
 
 export const toggleVideoLike = async (
@@ -38,3 +39,7 @@ export const getLikeStatus = async (
    );
 
 };
+
+export const getTotalVideoLike = async () =>{
+   return await api.get("/api/v1/likes/channel-total-likes")
+}

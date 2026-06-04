@@ -1,9 +1,16 @@
-import { Home } from "./Home";
-import { VideoPlay } from "./VideoPlay"
+
+export { Home } from "./Home";
+export { VideoPlay } from "./VideoPlay"
 export { Profile } from "./Profile"
 
-export {
-  Home,
-  VideoPlay,
-  
-}
+export { DashChannel } from "./dashboard/DashChannel"
+export { DashOverview } from "./dashboard/DashOverview"
+export { DashPlaylists } from "./dashboard/DashPlaylists"
+export { DashSubscribers } from "./dashboard/DashSubscribers"
+export { DashVideos } from "./dashboard/DashVideos"
+
+
+
+
+
+export { NotFound } from "./NotFound";

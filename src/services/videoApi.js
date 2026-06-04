@@ -23,3 +23,19 @@ export const getChannelVideos = async (channelId, params = {}) => {
     { params }
   );
 };
+
+
+export const publishVideo = async (formData) => {
+
+  const response = await api.post(
+    "/api/v1/videos/publish-video",
+    formData,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }
+  );
+
+  return response.data;
+};

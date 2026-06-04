@@ -1,18 +1,29 @@
-import { Bell, Menu, Sun, Search, UserCircle2Icon } from "lucide-react";
+import { Menu, Sun, UserCircle2Icon, Bell } from "lucide-react";
 import logo from "../../assets/Logo.svg"
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { BoxContext } from "../../context/BoxContextProvider"
-import { LoginContext } from "../../context//LoginContextProvider"
-import { useContext } from "react";
+import { LoginContext } from "../../context/LoginContextProvider"
+import { useContext, useState } from "react";
 
-export function Navbar() {
+export function DashNavbar() {
   const navigate = useNavigate()
+
+  const { isLogIn, user } = useContext(LoginContext)
   const {
-    isSidebarOpen, setIsSidebarOpen,
+    isDashSidebarOpen, setIsDashSidebarOpen,
     isProfileOpen, setIsProfileOpen
   } = useContext(BoxContext)
 
-  const { isLogIn, user } = useContext(LoginContext)
+  // Page Title 
+  const routeTitles = {
+    "/creator/dashboard": "Overview",
+    "/creator/dashboard/overview": "Overview",
+    "/creator/dashboard/channel": "Channel",
+    "/creator/dashboard/videos": "Videos",
+    "/creator/dashboard/playlist": "Playlist",
+    "/creator/dashboard/subscribers": "Subscribers",
+  };
+  const pageTitle = routeTitles[useLocation().pathname] || "Dashboard";
 
   return (
     <header
@@ -22,10 +33,6 @@ export function Navbar() {
         border-b border-zinc-800
         bg-black
       "
-      onClick={() => {
-        isProfileOpen ? setIsProfileOpen(false) : null
-        isSidebarOpen ? setIsSidebarOpen(false) : null
-      }}
     >
       <div className="flex h-full items-center justify-between px-3 md:px-6">
 
@@ -36,7 +43,7 @@ export function Navbar() {
           <button
             onClick={() => {
               setIsProfileOpen(false)
-              setIsSidebarOpen(!isSidebarOpen)
+              setIsDashSidebarOpen(!isDashSidebarOpen)
             }}
             className="rounded-full p-2 hover:bg-zinc-800 transition cursor-pointer"
           >
@@ -56,27 +63,16 @@ export function Navbar() {
           </div>
         </div>
 
-        {/* SEARCH BAR */}
-        <div className="mx-4 hidden max-w-2xl flex-1 md:flex">
-          <div className="flex h-11 w-full overflow-hidden rounded-full border border-zinc-800 bg-zinc-950">
-            <input
-              type="text"
-              placeholder="Search creators, topics, categories..."
-              className="flex-1 bg-transparent px-5 text-white outline-none placeholder:text-zinc-500"
-            />
-            <button className="flex w-20 items-center justify-center border-l border-zinc-800 bg-zinc-900 hover:bg-zinc-800 cursor-pointer">
-              <Search className="h-5 w-5 text-zinc-300" />
-            </button>
-          </div>
+        {/* PAGE TITLE */}
+        <div className="absolute left-1/2 -translate-x-1/2 ">
+          <h1 className="md:text-2xl font-bold shadow-2xl 
+          ">
+            {pageTitle}
+          </h1>
         </div>
 
         {/* RIGHT */}
         <div className="flex items-center gap-2 md:gap-4">
-
-          {/* MOBILE SEARCH */}
-          <button className="rounded-full p-2 hover:bg-zinc-800 md:hidden cursor-pointer">
-            <Search className="h-5 w-5 text-white " />
-          </button>
 
           {/* THEME — Sun icon */}
           <button className="rounded-full p-2 hover:bg-zinc-800 cursor-pointer">
@@ -90,9 +86,9 @@ export function Navbar() {
           </button>
 
           {/* PROFILE */}
-          <button className="cursor-pointer rounded-full"
+          <button className="cursor-pointer"
             onClick={() => {
-              setIsSidebarOpen(false)
+              setIsDashSidebarOpen(false)
               setIsProfileOpen(!isProfileOpen)
             }}
           >

@@ -1,14 +1,31 @@
-import { use, useContext } from "react";
-import { Settings } from "lucide-react";
-import { LoginContext } from "../../context/LoginContextProvider";
-import { BoxContext } from "../../context/BoxContextProvider";
-import { toggleSubscription } from "../../services/subscriptionApi";
-import { useNavigate } from "react-router-dom";
+import { useContext, useState, useEffect } from "react";
+import { Pencil, Upload } from "lucide-react";
+import { LoginContext } from "../../../context/LoginContextProvider";
+import { BoxContext } from "../../../context/BoxContextProvider";
+import { toggleSubscription } from "../../../services/subscriptionApi";
+import { getDashStats } from "../../../services/dashboardApi";
+import { UploadVideo } from "../dashMethods/UploadVideo";
 
-export function ProfileHeader({ channel, setChannel }) {
-  const navigate = useNavigate()
+export function ChannelHeader() {
+
   const { user, isLogIn } = useContext(LoginContext);
   const { setIsLoginBoxOpen } = useContext(BoxContext);
+  const [channel, setChannel] = useState()
+
+  const [openUploadBox, setOpenUploadBox] = useState(false);
+
+  useEffect(() => {
+    async function fetchChannel() {
+      try {
+        const result = await getDashStats();
+        setChannel(result.data.data);
+      } catch (error) {
+        console.error("Failed to fetch videos:", error);
+      }
+    }
+
+    fetchChannel();
+  }, []);
 
   if (!channel) return null;
 
@@ -48,7 +65,9 @@ export function ProfileHeader({ channel, setChannel }) {
   };
 
   return (
-    <div>
+    <div
+    
+    >
 
       {/* COVER IMAGE */}
       <div className="w-full h-40 sm:h-52 md:h-64 rounded-2xl overflow-hidden bg-zinc-800">
@@ -88,37 +107,30 @@ export function ProfileHeader({ channel, setChannel }) {
           </div>
         </div>
 
-        {/* RIGHT — Buttons */}
-        <div className="flex items-center gap-3 sm:flex-shrink-0">
+        {/* RIGHT — Button */}
+        <div className="flex items-center gap-3 sm:shrink-0">
 
-          {/* SUBSCRIBE — only if not owner */}
-          {!isOwner && (
-            <button
-              onClick={handleSubscribe}
-              className={`
-                px-5 py-2 rounded-full font-semibold text-sm transition cursor-pointer
-                ${isSubscribed
-                  ? "bg-zinc-700 text-white hover:bg-zinc-600"
-                  : "bg-white text-black hover:bg-zinc-200"
-                }
-              `}
-            >
-              {isSubscribed ? "Subscribed" : "Subscribe"}
-            </button>
-          )}
+          <button className="flex items-center gap-2 px-5 py-2 rounded-full bg-zinc-800 text-white text-sm font-semibold hover:bg-zinc-700 transition cursor-pointer">
+            <Pencil className="h-4 w-4" />
+            Update
+          </button>
 
-          {/* CUSTOMIZE — only if owner */}
-          {isOwner && (
-            <button className="flex items-center gap-2 px-5 py-2 rounded-full bg-zinc-800 text-white text-sm font-semibold hover:bg-zinc-700 transition cursor-pointer"
-            onClick={()=> navigate("/creator/dashboard/channel")}
-            >
-              <Settings className="h-4 w-4" />
-              Customize
-            </button>
-          )}
+          <button className="flex items-center gap-2 px-5 py-2 rounded-full bg-zinc-800 text-white text-sm font-semibold hover:bg-zinc-700 transition cursor-pointer"
+            onClick={() => setOpenUploadBox(true)}
+          >
+            <Upload className="h-4 w-4" />
+            Upload
+          </button>
         </div>
 
       </div>
+      {
+        openUploadBox && (
+          <UploadVideo
+            setOpenUploadBox={setOpenUploadBox}
+          />
+        )
+      }
     </div>
   );
 }
