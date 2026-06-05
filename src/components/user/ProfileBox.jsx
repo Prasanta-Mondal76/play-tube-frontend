@@ -4,6 +4,8 @@ import { LoginContext } from "../../context/LoginContextProvider"
 import { BoxContext } from "../../context/BoxContextProvider"
 import { logoutUser } from "../../services/authApi"
 import { useNavigate } from "react-router-dom"
+import toast from "react-hot-toast"
+import { Tids } from "../../utils/toastId"
 
 export function ProfileBox() {
   const navigate = useNavigate()
@@ -28,11 +30,14 @@ export function ProfileBox() {
 
       // Profile dropdown close
       setIsProfileOpen(false);
+
+      toast.success("See you again soon!", {id: Tids.auth})
     } catch (error) {
       console.error(
         "Logout failed:",
         error.response?.data || error.message
       );
+      toast.error("Logout failed. Try again.", { id: Tids.error });
     }
   }
 

@@ -6,6 +6,8 @@ import {
 } from "../../services/authApi"
 import { OtpVerifyForm } from "./OtpVerifyForm"
 import logo from "../../assets/Logo.svg"
+import toast from "react-hot-toast"
+import { Tids } from "../../utils"
 
 const pwRules = [
   { id: "len", label: "At least 6 characters", test: v => v.length >= 6 },
@@ -18,7 +20,6 @@ export function SignupForm({ onSwitchToLogin }) {
   const [fields, setFields] = useState({ name: "", username: "", email: "", password: "", avatar: null, cover: null })
   const [errors, setErrors] = useState({})
   const [step, setStep] = useState(1)
-  const [serverError, setServerError] = useState("")
   const [loading, setLoading] = useState(false)
   const [otp, setOtp] = useState("")
 
@@ -60,11 +61,7 @@ export function SignupForm({ onSwitchToLogin }) {
 
       setStep(2);
     } catch (error) {
-      setServerError(
-        error.response?.data?.message
-        || "Something went wrong"
-      );
-
+      toast.error(error.response?.data?.message || "Something went wrong", {id: Tids.error })
     } finally {
       setLoading(false);
     }
@@ -78,16 +75,11 @@ export function SignupForm({ onSwitchToLogin }) {
         otp,
       });
 
-      alert("Registration successful");
+      toast.success("Registration completed successfully. Please log in to continue.", {id: Tids.success})
 
       onSwitchToLogin();
-
     } catch (error) {
-      setServerError(
-        error.response?.data?.message
-        || "Invalid OTP"
-      );
-
+      toast.error(error.response?.data?.message || "Invalid OTP", {id: Tids.error })
     } finally {
       setLoading(false);
     }
@@ -99,7 +91,6 @@ export function SignupForm({ onSwitchToLogin }) {
       placeholder={placeholder}
       value={fields[name]}
       onChange={e => {
-        setServerError("")
         setFields(p => ({ ...p, [name]: e.target.value }))
       }}
       className={`w-full bg-zinc-900 border rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-zinc-600 outline-none focus:border-blue-500 transition-colors
@@ -124,7 +115,6 @@ export function SignupForm({ onSwitchToLogin }) {
         <input
           type="file" accept="image/*" className="hidden"
           onChange={e => {
-            setServerError("")
             setFields(p => ({ ...p, [name]: e.target.files[0] || null }))
           }}
         />
@@ -137,7 +127,6 @@ export function SignupForm({ onSwitchToLogin }) {
   async function resendOtp() {
     try {
       setLoading(true);
-      setServerError("");
 
       const formData = new FormData();
 
@@ -157,11 +146,7 @@ export function SignupForm({ onSwitchToLogin }) {
       await initiateRegistration(formData);
 
     } catch (error) {
-      setServerError(
-        error.response?.data?.message
-        || "Failed to resend OTP"
-      );
-
+      toast.error(error.response?.data?.message || "Failed to resend OTP", {id: Tids.error })
     } finally {
       setLoading(false);
     }
@@ -221,22 +206,12 @@ export function SignupForm({ onSwitchToLogin }) {
             {fileField("avatar", "Profile Picture", <Upload className="h-4 w-4 text-zinc-400" />, true)}
             {fileField("cover", "Cover Picture", <Image className="h-4 w-4 text-zinc-400" />, false)}
 
-            {
-              serverError && (
-                <div className="
-                  rounded-lg
-                  border border-red-500/40
-                  bg-red-500/10
-                  px-3 py-2
-                  text-sm text-red-400
-                ">
-                  {serverError}
-                </div>
-              )
-            }
+            
             <button
               onClick={handleSubmit}
-              className="w-full bg-blue-700 hover:bg-blue-600 text-white font-semibold text-sm py-2.5 rounded-xl transition-colors mt-1 cursor-pointer"
+              className="w-full bg-blue-700 hover:bg-blue-600 text-white font-semibold 
+              text-sm py-2.5 rounded-xl transition-colors mt-1 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled = {loading}
             >
               {
                 loading
@@ -253,8 +228,6 @@ export function SignupForm({ onSwitchToLogin }) {
           otp={otp}
           setOtp={setOtp}
           loading={loading}
-          serverError={serverError}
-          setServerError={setServerError}
           verifyOtp={verifyOtp}
           setStep={setStep}
           resendOtp={resendOtp}

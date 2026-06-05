@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
+import toast from "react-hot-toast"
+import { Tids } from "../utils/toastId"
 
 import { createContext } from "react"
+import { getLoginStats } from "../services/userApi"
 
 export const LoginContext = createContext()
 
@@ -9,22 +12,19 @@ export function LoginProvider({ children }) {
   const [isLogIn, setIsLogIn] = useState(false)
   const [user, setUser] = useState(null)
 
+  async function checkLogin() {
+    try {
+      const response = await getLoginStats()
+      const loggedUser = response.data.data?.user
+      setIsLogIn(response.data.data.loggedIn)
+      setUser(loggedUser)
+    } catch (error) {
+      console.error("Request failed:", error)
+      toast.error("Login failed. Please try again.", { id: Tids.error })
+    }
+  }
   useEffect(() => {
-    axios.get(
-      "/api/v1/users/login-stats",
-      {
-        withCredentials: true
-      }
-    ) .then((res) => {
-        setIsLogIn(res.data.data.loggedIn)
-        setUser(res.data.data?.user)
-
-        // setUser({ username: "pm123", fullName: "Prasanta Mondal", email: "abc@gmail.com", avatar: "https://i.pravatar.cc/100?img=11s" })
-        // setIsLogIn(true)
-      })
-      .catch((error) => {
-        console.error("Request failed:", error)
-      })
+    if (!isLogIn) checkLogin()
   }, [])
 
   return (

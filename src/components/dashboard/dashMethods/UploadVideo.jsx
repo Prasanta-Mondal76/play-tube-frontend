@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { publishVideo } from "../../../services/videoApi";
 import { X } from "lucide-react";
+import toast from "react-hot-toast";
 
 export function UploadVideo({ setOpenUploadBox }) {
 
@@ -15,12 +16,14 @@ export function UploadVideo({ setOpenUploadBox }) {
   const [loading, setLoading] = useState(false);
 
   const handleUpload = async (e) => {
-
+    
     e.preventDefault();
+    if (loading) return;
 
     try {
 
       setLoading(true);
+      const toastId = toast.loading("Uploading video...");
 
       const formData = new FormData();
 
@@ -41,7 +44,7 @@ export function UploadVideo({ setOpenUploadBox }) {
 
       console.log(result);
 
-      alert("Video Uploaded Successfully");
+      toast.success("Video Uploaded Successfully 🚀", { id: toastId } );
 
       setOpenUploadBox(false);
 
@@ -50,9 +53,7 @@ export function UploadVideo({ setOpenUploadBox }) {
       console.log(error);
       console.log(error?.response?.data?.message);
 
-      alert(
-        error?.response?.data?.message || "Upload failed"
-      );
+      toast.error( error?.response?.data?.message || "Upload failed", { id: toastId } );
 
     } finally {
 
@@ -62,8 +63,8 @@ export function UploadVideo({ setOpenUploadBox }) {
 
   return (
     <div className="fixed inset-0 bg-black/70 z-50 flex justify-center items-center"
-    onClick={() => setOpenUploadBox(false)}
-      
+      onClick={() => setOpenUploadBox(false)}
+
     >
 
       <form
@@ -168,7 +169,7 @@ export function UploadVideo({ setOpenUploadBox }) {
             w-full py-3 rounded-xl
             bg-purple-600 hover:bg-purple-800
             text-white font-semibold 
-            transition-all ${loading? "cursor-not-allowed" : "cursor-pointer"}` 
+            transition-all ${loading ? "cursor-not-allowed" : "cursor-pointer"}`
           }
         >
           {

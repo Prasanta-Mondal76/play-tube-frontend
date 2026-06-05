@@ -1,37 +1,24 @@
-import {
-   useEffect,
-   useState,
-} from "react";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { Tids } from "../../utils/toastId";
 
-import {
-   getAllVideos,
-} from "../../services/videoApi";
-
-import {
-   VideoCard
-} from "./VideoCard";
+import { getAllVideos } from "../../services/videoApi";
+import { VideoCard } from "./VideoCard";
 
 export function SuggestedVideos({
    currentVideoId
 }) {
 
-   const [videos, setVideos] =
-      useState([]);
+   const [videos, setVideos] = useState([]);
 
-   const [loading, setLoading] =
-      useState(true);
-
-   const [error, setError] =
-      useState(null);
+   const [loading, setLoading] = useState(true);
 
    // =========================
    // FETCH VIDEOS
    // =========================
 
    useEffect(() => {
-
       fetchSuggestedVideos();
-
    }, [currentVideoId]);
 
    const fetchSuggestedVideos =
@@ -58,19 +45,11 @@ export function SuggestedVideos({
 
          }
          catch (error) {
-
             console.log(error);
-
-            setError(
-               error?.response?.data?.message
-               || "Failed to load videos"
-            );
-
+            toast.error( error?.response?.data?.message || "Failed to load videos", {id: Tids.error});
          }
          finally {
-
             setLoading(false);
-
          }
 
       };
@@ -97,27 +76,6 @@ export function SuggestedVideos({
 
    }
 
-   // =========================
-   // ERROR
-   // =========================
-
-   if (error) {
-
-      return (
-
-         <div
-            className="
-               text-red-500
-            "
-         >
-
-            {error}
-
-         </div>
-
-      );
-
-   }
 
    return (
 

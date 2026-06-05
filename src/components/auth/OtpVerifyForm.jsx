@@ -1,11 +1,11 @@
 import logo from "../../assets/Logo.svg"
+import toast from "react-hot-toast"
+import { Tids } from "../../utils"
 
 export function OtpVerifyForm({
   otp,
   setOtp,
   loading,
-  serverError,
-  setServerError,
   verifyOtp,
   setStep,
   resendOtp,
@@ -48,7 +48,7 @@ export function OtpVerifyForm({
             type="text"
             value={otp}
             onChange={(e) => {
-              setServerError("")
+              // toast.error("", {id: Tids})
               setOtp(e.target.value)
             }}
             placeholder="Enter 6 digit OTP"
@@ -66,21 +66,6 @@ export function OtpVerifyForm({
         "
           />
         </div>
-
-        {/* SERVER ERROR */}
-        {
-          serverError && (
-            <div className="
-          rounded-lg
-          border border-red-500/40
-          bg-red-500/10
-          px-3 py-2
-          text-sm text-red-400
-        ">
-              {serverError}
-            </div>
-          )
-        }
 
         {/* VERIFY BUTTON */}
         <button

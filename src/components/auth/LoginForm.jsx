@@ -4,38 +4,40 @@ import { loginUser } from "../../services/authApi";
 import { LoginContext } from "../../context/LoginContextProvider"
 import { BoxContext } from "../../context/BoxContextProvider"
 import logo from "../../assets/Logo.svg"
+import toast from "react-hot-toast";
+import { Tids } from "../../utils";
 
 export function LoginForm({ onSwitchToSignup }) {
-  const [fields, setFields] = useState({ email: "", pass: "" })
-  const [errors, setErrors] = useState({})
-  const [serverError, setServerError] = useState("")
+  const [fields, setFields] = useState({ email: "", password: "" })
   const { setUser, setIsLogIn } = useContext(LoginContext)
   const { setIsLoginBoxOpen } = useContext(BoxContext)
+  const [loading, setLoading] = useState(false)
 
-  function validate() {
-    const e = {}
-    if (!fields.email.trim()) e.email = true
-    if (!fields.pass) e.pass = true
-    setErrors(e)
-    return Object.keys(e).length === 0
+  function handleChange(e) {
+    setFields(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }))
   }
 
-  async function handleSubmit() {
-    if (!validate()) return;
-    
+  async function handleSubmit(e) {
+    e.preventDefault()
+    setLoading(true)
+
     try {
       const response = await loginUser({
         email: fields.email,
-        password: fields.pass,
+        password: fields.password,
       });
 
       setUser(response.data.data.user.userData);
       setIsLogIn(true);
       setIsLoginBoxOpen(false);
+      toast.success(`Welcome back, ${response.data.data.user.userData.fullName}.`, { id: Tids.auth })
     } catch (err) {
-      setServerError(
-        err.response?.data?.message || "Something went wrong"
-      );
+      toast.error(err.response?.data?.message || "Something went wrong", { id: Tids.error })
+    } finally {
+      setLoading(false)
     }
 
   }
@@ -43,15 +45,12 @@ export function LoginForm({ onSwitchToSignup }) {
   const inp = (name, type, placeholder) => (
     <input
       type={type}
+      name={name}
       placeholder={placeholder}
       value={fields[name]}
-      onChange={e => {
-        setServerError("")
-        setFields(p => ({ ...p, [name]: e.target.value }))
-
-      }}
-      className={`w-full bg-zinc-900 border rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-zinc-600 outline-none focus:border-blue-500 transition-colors
-        ${errors[name] ? "border-red-500" : "border-zinc-700"}`}
+      onChange={handleChange}
+      required
+      className="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-zinc-600 outline-none focus:border-blue-500 transition-colors"
     />
   )
 
@@ -66,40 +65,26 @@ export function LoginForm({ onSwitchToSignup }) {
 
       <h1 className="text-white text-2xl font-bold mb-6">Login</h1>
 
-      <div className="flex flex-col gap-4">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <div>
           <label className="text-zinc-400 text-xs mb-1.5 block">Email</label>
-          {inp("email", "text", "Enter email")}
-          {errors.email && <span className="text-red-500 text-xs mt-1 block">Required*</span>}
+          {inp("email", "email", "Enter email")}
         </div>
 
         <div>
           <label className="text-zinc-400 text-xs mb-1.5 block">Password</label>
-          {inp("pass", "password", "Enter password")}
-          {errors.pass && <span className="text-red-500 text-xs mt-1 block">Required*</span>}
+          {inp("password", "password", "Enter password")}
         </div>
 
-        {
-          serverError && (
-            <div className="
-              rounded-lg
-              border border-red-500/40
-              bg-red-500/10
-              px-3 py-2
-              text-sm text-red-400
-            ">
-              {serverError}
-            </div>
-          )
-        }
-
         <button
-          onClick={handleSubmit}
+          type="submit"
           className="w-full flex items-center justify-center gap-2 bg-blue-700 hover:bg-blue-600 text-white font-semibold text-sm py-2.5 rounded-xl transition-colors mt-1 cursor-pointer"
+          disabled={loading}
         >
-          <LogIn className="h-4 w-4" /> Login
+          <LogIn className="h-4 w-4" /> 
+          {loading ? "Logging in..." : "Login"}
         </button>
-      </div>
+      </form>
 
       <hr className="border-zinc-800 my-5" />
       <p className="text-center text-zinc-500 text-sm">

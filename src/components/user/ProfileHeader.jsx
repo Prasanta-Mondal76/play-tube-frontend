@@ -1,9 +1,11 @@
-import { use, useContext } from "react";
+import { useContext } from "react";
 import { Settings } from "lucide-react";
 import { LoginContext } from "../../context/LoginContextProvider";
 import { BoxContext } from "../../context/BoxContextProvider";
 import { toggleSubscription } from "../../services/subscriptionApi";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import { Tids } from "../../utils/toastId";
 
 export function ProfileHeader({ channel, setChannel }) {
   const navigate = useNavigate()
@@ -20,9 +22,15 @@ export function ProfileHeader({ channel, setChannel }) {
       setIsLoginBoxOpen(true);
       return;
     }
-
+    
     const previousSubscribed = isSubscribed;
     const previousCount = channel.totalSubscribers;
+
+    toast.loading(
+      isSubscribed ? "Unsubscribing..." : "Subscribing...",
+      { id: Tids.toggleSubscription }
+    );
+
 
     try {
       // Optimistic update
@@ -36,8 +44,17 @@ export function ProfileHeader({ channel, setChannel }) {
 
       await toggleSubscription(channel._id);
 
+      toast.success(
+        isSubscribed ? "Unsubscribed" : "Subscribed successfully!",
+        { id: Tids.toggleSubscription }
+      );
+
     } catch (error) {
       console.log(error);
+      toast.error(
+        error?.response?.data?.message || "Something went wrong",
+        { id: Tids.error }
+      );
       // Rollback
       setChannel((prev) => ({
         ...prev,
@@ -110,7 +127,7 @@ export function ProfileHeader({ channel, setChannel }) {
           {/* CUSTOMIZE — only if owner */}
           {isOwner && (
             <button className="flex items-center gap-2 px-5 py-2 rounded-full bg-zinc-800 text-white text-sm font-semibold hover:bg-zinc-700 transition cursor-pointer"
-            onClick={()=> navigate("/creator/dashboard/channel")}
+              onClick={() => navigate("/creator/dashboard/channel")}
             >
               <Settings className="h-4 w-4" />
               Customize

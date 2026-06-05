@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import toast from "react-hot-toast";
+import { Tids } from "../utils/toastId";
 
 import { VideoPlayer } from "../components/video/VideoPlayer";
 import { VideoInfo } from "../components/video/VideoInfo";
 import { SuggestedVideos } from "../components/video/SuggestedVideos";
-import {CommentSection} from "../components/comments/CommentSection";
+import { CommentSection } from "../components/comments/CommentSection";
 
 import {
   getVideoById,
@@ -13,18 +15,16 @@ import {
 
 
 export const VideoPlay = () => {
-
   const { videoId } = useParams();
 
   const [video, setVideo] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     if (!videoId) return
 
     fetchVideoPageData();
-  }, [videoId, setVideo]);
+  }, [videoId]);
 
   const fetchVideoPageData = async () => {
 
@@ -39,14 +39,17 @@ export const VideoPlay = () => {
       );
 
       // Record video view separately
-      recordVideoView(videoId)
-        .catch(() => { });
+      recordVideoView(videoId).catch((err) => {
+        console.log("Could not record view. Error: ", err)
+      });
     }
+
     catch (error) {
       console.log(error);
-      setError(
+      toast.error(
         error?.response?.data?.message
-        || "Failed to load video"
+        || "Failed to load video",
+        { id: Tids.error }
       );
     }
     finally {
@@ -62,13 +65,6 @@ export const VideoPlay = () => {
     );
   }
 
-  if (error) {
-    return (
-      <div className="p-5 text-red-500">
-        {error}
-      </div>
-    );
-  }
 
   return (
     <div className="px-3 py-5">

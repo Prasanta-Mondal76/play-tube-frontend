@@ -65,9 +65,7 @@ export function ChannelHeader() {
   };
 
   return (
-    <div
-    
-    >
+    <div className="pb-3" >
 
       {/* COVER IMAGE */}
       <div className="w-full h-40 sm:h-52 md:h-64 rounded-2xl overflow-hidden bg-zinc-800">

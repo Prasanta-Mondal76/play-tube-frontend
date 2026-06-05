@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import toast from "react-hot-toast";
+import { Tids } from "../utils/toastId";
 
 import { ProfileHeader } from "../components/user/ProfileHeader";
 import { ProfileTabs } from "../components/user/ProfileTabs";
@@ -9,7 +11,6 @@ import { getChannelDetails } from "../services/userApi";
 import { getChannelVideos } from "../services/videoApi";
 
 export function Profile() {
-
   const { username } = useParams();
 
   const [channel, setChannel] = useState(null);
@@ -17,7 +18,6 @@ export function Profile() {
   const [activeTab, setActiveTab] = useState("Videos");
   const [loading, setLoading] = useState(true);
   const [videosLoading, setVideosLoading] = useState(false);
-  const [error, setError] = useState(null);
 
   // =========================
   // FETCH CHANNEL DETAILS
@@ -31,7 +31,7 @@ export function Profile() {
   const fetchChannel = async () => {
     try {
       setLoading(true);
-      setError(null);
+      toast.loading("Profile Loading...", {id: Tids.loading})
 
       const response = await getChannelDetails(username);
       const channelData = response.data.data;
@@ -39,13 +39,11 @@ export function Profile() {
       setChannel(channelData);
 
       // Fetch videos using channel's _id
-      fetchVideos(channelData._id);
-
+      await fetchVideos(channelData._id);
+      toast.success("Profile Loaded", {id: Tids.loading})
     } catch (error) {
       console.log(error);
-      setError(
-        error?.response?.data?.message || "Failed to load channel."
-      );
+      toast.error(error?.response?.data?.message || "Failed to load channel.", {id: Tids.error});
     } finally {
       setLoading(false);
     }
@@ -62,6 +60,7 @@ export function Profile() {
       setVideos(response.data.data.videos || []);
     } catch (error) {
       console.log(error);
+      toast.error(error?.response?.data?.message || "Failed to load videos", {id: Tids.error});
     } finally {
       setVideosLoading(false);
     }
@@ -78,18 +77,10 @@ export function Profile() {
       </div>
     );
   }
-
-  // =========================
-  // ERROR
-  // =========================
-
-  if (error) {
-    return (
-      <div className="min-h-screen bg-black p-6 text-red-500">
-        {error}
-      </div>
-    );
+  if (!channel) {
+    return null;
   }
+
 
   return (
     <div className="min-h-screen bg-black text-white px-4 sm:px-6 lg:px-10 py-6 max-w-7xl mx-auto">
