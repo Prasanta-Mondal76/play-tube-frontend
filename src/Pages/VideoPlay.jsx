@@ -12,7 +12,7 @@ import {
   getVideoById,
   recordVideoView,
 } from "../services/videoApi";
-
+import { updateHistory } from "../services/historyApi"
 
 export const VideoPlay = () => {
   const { videoId } = useParams();
@@ -31,17 +31,15 @@ export const VideoPlay = () => {
     try {
       setLoading(true);
 
-      const videoResponse =
-        await getVideoById(videoId);
+      const videoResponse = await getVideoById(videoId);
 
-      setVideo(
-        videoResponse.data.data
-      );
+      setVideo(videoResponse.data.data);
 
       // Record video view separately
-      recordVideoView(videoId).catch((err) => {
-        console.log("Could not record view. Error: ", err)
-      });
+      await recordVideoView(videoId).catch((err) => { console.log("Could not record view. Error: ", err) });
+
+      // Add vidoe to history
+      await updateHistory(videoId)
     }
 
     catch (error) {

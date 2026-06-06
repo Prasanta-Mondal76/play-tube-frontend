@@ -10,6 +10,8 @@ import {
   DashVideos,
   DashPlaylists,
   DashSubscribers,
+  History,
+  Subscriptions,
 
 
   NotFound
@@ -30,6 +32,10 @@ export function AppRoutes() {
 
         {/* PROFILE PAGE */}
         <Route path="/profile/:username" element={<Profile />} />
+
+        <Route path="/history" element = {<History />} />
+
+        <Route path="/subscriptions" element = {<Subscriptions />} />
 
       </Route>
 

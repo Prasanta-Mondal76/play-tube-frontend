@@ -1,23 +1,17 @@
 import { Home, History, Users, ListVideo, X, Zap } from "lucide-react";
-import { useState, useContext  } from "react"
+import { useState, useContext } from "react"
 import { useNavigate } from "react-router-dom";
 import { LoginContext } from "../../context/LoginContextProvider";
 import { BoxContext } from "../../context/BoxContextProvider";
 import logo from "../../assets/Logo.svg"
 
 const navItems = [
-  { icon: Home, label: "Home", isProtected: false },
-  { icon: History, label: "History", isProtected: true },
-  { icon: Users, label: "Subscriptions", isProtected: true },
-  { icon: ListVideo, label: "Playlists", isProtected: true },
+  { icon: Home, label: "Home", path: "/", isProtected: false },
+  { icon: History, label: "History", path: "/history", isProtected: true },
+  { icon: Users, label: "Subscriptions", path: "/subscriptions", isProtected: true },
+  { icon: ListVideo, label: "Playlists", path: "/playlists", isProtected: true },
 ];
 
-// Subscribed Channel lists of user. 
-const favoriteChannels = [
-  { name: "CodeCraft Studios", avatar: "https://i.pravatar.cc/100?img=11" },
-  { name: "Wandering Soul", avatar: "https://i.pravatar.cc/100?img=5" },
-  { name: "SoundWave Beats", avatar: "https://i.pravatar.cc/100?img=33" },
-];
 
 export function Sidebar() {
   const navigate = useNavigate()
@@ -26,18 +20,17 @@ export function Sidebar() {
   const { isLogIn } = useContext(LoginContext);
   const { setIsLoginBoxOpen, isSidebarOpen, setIsSidebarOpen } = useContext(BoxContext)
 
-  function handleNavClick(label, isProtected) {
-    // if protected and not logged in
-    if (isProtected && !isLogIn) {
-      setIsSidebarOpen(false)          // sidebar close
-      setIsLoginBoxOpen(true)   // open auth popup
-      return;
-    }
-
-    // user logged in OR route public
-    setActiveLabel(label);
-    navigate("/")
+  function handleNavClick(label, isProtected, path) {
+  if (isProtected && !isLogIn) {
+    setIsSidebarOpen(false);
+    setIsLoginBoxOpen(true);
+    return;
   }
+
+  setActiveLabel(label);
+  setIsSidebarOpen(false); 
+  navigate(path);          
+}
 
   return (
     <>
@@ -45,7 +38,7 @@ export function Sidebar() {
       {isSidebarOpen && (
         <div
           className="fixed inset-0 z-30 bg-black/60 backdrop-blur-sm"
-          onClick={() => setIsSidebarOpen(false) }
+          onClick={() => setIsSidebarOpen(false)}
         />
       )}
 
@@ -71,7 +64,7 @@ export function Sidebar() {
           </div>
 
           <button
-            onClick={() => setIsSidebarOpen(false) }
+            onClick={() => setIsSidebarOpen(false)}
             className="rounded-full p-2 hover:bg-zinc-800 transition"
           >
             <X className="h-5 w-5 text-zinc-400" />
@@ -83,7 +76,7 @@ export function Sidebar() {
         <div className="flex-1 overflow-y-auto py-4 px-3 flex flex-col gap-1">
 
           {/* Nav Items */}
-          {navItems.map(({ icon: Icon, label, active, isProtected }) => (
+          {navItems.map(({ icon: Icon, label, active, isProtected, path }) => (
             <button
               key={label}
               className={`
@@ -94,34 +87,14 @@ export function Sidebar() {
                   : "text-zinc-400 hover:bg-zinc-800 hover:text-white"
                 }
               `}
-              onClick={() => handleNavClick(label, isProtected)}
+              onClick={() => handleNavClick(label, isProtected, path)}
             >
-              <Icon className={`h-5 w-5 shrink-0 ${active ? "text-violet-400" : ""}`} />
+              <Icon className={`h-5 w-5 shrink-0 ${activeLabel === label ? "text-violet-400" : ""}`} />
               {label}
             </button>
           ))}
 
-          {/* Divider */}
-          <div className="my-3 border-t border-zinc-800" />
-
-          {/* Favorites Channels */}
-          <p className="px-4 mb-2 text-xs font-semibold uppercase tracking-widest text-zinc-500">
-            Favorites Channels
-          </p>
-
-          {favoriteChannels.map(({ name, avatar }) => (
-            <button
-              key={name}
-              className="flex items-center gap-3 w-full px-4 py-2.5 rounded-xl text-sm text-zinc-300 hover:bg-zinc-800 hover:text-white transition-all duration-200"
-            >
-              <img
-                src={avatar}
-                alt={name}
-                className="h-8 w-8 rounded-full object-cover border border-zinc-700"
-              />
-              <span className="truncate">{name}</span>
-            </button>
-          ))}
+          
         </div>
 
         {/* Premium Access Card */}
