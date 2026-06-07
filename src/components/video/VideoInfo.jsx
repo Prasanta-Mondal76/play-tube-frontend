@@ -5,10 +5,12 @@ import { LoginContext } from "../../context/LoginContextProvider";
 import {
   ThumbsUp,
   Bell,
+  PlusCircle
 } from "lucide-react";
 
 import { toggleVideoLike } from "../../services/likeApi";
 import { toggleSubscription } from "../../services/subscriptionApi";
+import { AddToPlaylist } from "./AddToPlaylist";
 
 export function VideoInfo({
   video,
@@ -20,10 +22,10 @@ export function VideoInfo({
 
   // const isOwner = isLogIn && user?._id === video.owner._id;
 
-  const [likeLoading, setLikeLoading] =
-    useState(false);
-
+  const [likeLoading, setLikeLoading] = useState(false);
   const [subscribeLoading, setSubscribeLoading] = useState(false);
+  const [showPlaylistBox, setShowPlaylistBox] = useState(false);
+
 
   if (!video) return null;
 
@@ -310,6 +312,20 @@ export function VideoInfo({
             </span>
           </button>
 
+          {/* Add Button */}
+          <button
+            type="button"
+            onClick={() => {
+              if (!isLogIn) { setIsLoginBoxOpen(true); return; }
+              setShowPlaylistBox(true);
+            }}
+            className="flex items-center gap-2 rounded-full bg-zinc-900 px-5 py-2
+             text-white hover:bg-zinc-800 transition cursor-pointer"
+          >
+            <PlusCircle className="h-5 w-5" />
+            Add
+          </button>
+
           {/* BELL */}
           <button
             className="
@@ -365,6 +381,13 @@ export function VideoInfo({
         </p>
       </div>
 
+      {/* Playlist Popup Box */}
+      {showPlaylistBox && (
+        <AddToPlaylist
+          videoId={video._id}
+          onClose={() => setShowPlaylistBox(false)}
+        />
+      )}
     </div>
 
   );

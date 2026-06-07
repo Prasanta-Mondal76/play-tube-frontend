@@ -5,14 +5,15 @@ import { BoxContext } from "../../../context/BoxContextProvider";
 import { toggleSubscription } from "../../../services/subscriptionApi";
 import { getDashStats } from "../../../services/dashboardApi";
 import { UploadVideo } from "../dashMethods/UploadVideo";
+import { UpdateImages } from "../dashMethods/UpdateImages";
 
 export function ChannelHeader() {
 
   const { user, isLogIn } = useContext(LoginContext);
   const { setIsLoginBoxOpen } = useContext(BoxContext);
   const [channel, setChannel] = useState()
-
   const [openUploadBox, setOpenUploadBox] = useState(false);
+  const [openUpdateBox, setOpenUpdateBox] = useState(false);
 
   useEffect(() => {
     async function fetchChannel() {
@@ -108,7 +109,9 @@ export function ChannelHeader() {
         {/* RIGHT — Button */}
         <div className="flex items-center gap-3 sm:shrink-0">
 
-          <button className="flex items-center gap-2 px-5 py-2 rounded-full bg-zinc-800 text-white text-sm font-semibold hover:bg-zinc-700 transition cursor-pointer">
+          <button className="flex items-center gap-2 px-5 py-2 rounded-full bg-zinc-800 text-white text-sm font-semibold hover:bg-zinc-700 transition cursor-pointer"
+            onClick={() => setOpenUpdateBox(true)}
+          >
             <Pencil className="h-4 w-4" />
             Update
           </button>
@@ -129,6 +132,14 @@ export function ChannelHeader() {
           />
         )
       }
+
+      {/* update avatar and cover image */}
+      {openUpdateBox && (
+        <UpdateImages
+          setOpenUpdateBox={setOpenUpdateBox}
+          setChannel={setChannel}       
+        />
+      )}
     </div>
   );
 }

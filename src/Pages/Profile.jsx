@@ -18,6 +18,7 @@ export function Profile() {
   const [activeTab, setActiveTab] = useState("Videos");
   const [loading, setLoading] = useState(true);
   const [videosLoading, setVideosLoading] = useState(false);
+  const toastId = "Profile-Toast-Id"
 
   // =========================
   // FETCH CHANNEL DETAILS
@@ -31,7 +32,7 @@ export function Profile() {
   const fetchChannel = async () => {
     try {
       setLoading(true);
-      toast.loading("Profile Loading...", {id: Tids.loading})
+      toast.loading("Profile Loading...", {id: toastId})
 
       const response = await getChannelDetails(username);
       const channelData = response.data.data;
@@ -40,10 +41,10 @@ export function Profile() {
 
       // Fetch videos using channel's _id
       await fetchVideos(channelData._id);
-      toast.success("Profile Loaded", {id: Tids.loading})
+      toast.success("Profile Loaded", {id: toastId})
     } catch (error) {
       console.log(error);
-      toast.error(error?.response?.data?.message || "Failed to load channel.", {id: Tids.error});
+      toast.error(error?.response?.data?.message || "Failed to load channel.", {id: toastId});
     } finally {
       setLoading(false);
     }
@@ -60,7 +61,7 @@ export function Profile() {
       setVideos(response.data.data.videos || []);
     } catch (error) {
       console.log(error);
-      toast.error(error?.response?.data?.message || "Failed to load videos", {id: Tids.error});
+      toast.error(error?.response?.data?.message || "Failed to load videos", {id: toastId});
     } finally {
       setVideosLoading(false);
     }

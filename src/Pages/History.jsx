@@ -80,11 +80,11 @@ export function History() {
             disabled={loading}
             className={`
               px-4 sm:px-5 py-2 rounded-full
-              transition-all duration-200
+              transition-all duration-200 cursor-pointer
               text-sm font-medium
               disabled:opacity-50 disabled:cursor-not-allowed
               ${activeFilter === days
-                ? "bg-white text-black"
+                ? "bg-blue-600 text-white hover:bg-blue-900"
                 : "bg-[#272727] hover:bg-[#3a3a3a] text-white"
               }
             `}

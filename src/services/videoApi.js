@@ -39,3 +39,18 @@ export const publishVideo = async (formData) => {
 
   return response.data;
 };
+
+
+export const updateVideoDetails = async (videoId, formData) => {
+  return await api.patch(`/api/v1/videos/update-video-details/${videoId}`, formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
+};
+
+export const deleteVideo = async (videoId) => {
+  return await api.delete(`/api/v1/videos/delete-video/${videoId}`);
+};
+
+export const togglePublishStatus = async (videoId) => {
+  return await api.patch(`/api/v1/videos/toggle-published/${videoId}`);
+};

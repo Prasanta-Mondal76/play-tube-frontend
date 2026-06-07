@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import { Tids } from "../utils/toastId";
@@ -13,9 +13,11 @@ import {
   recordVideoView,
 } from "../services/videoApi";
 import { updateHistory } from "../services/historyApi"
+import { LoginContext } from "../context/LoginContextProvider";
 
 export const VideoPlay = () => {
   const { videoId } = useParams();
+  const {isLogIn} = useContext(LoginContext)
 
   const [video, setVideo] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -39,7 +41,7 @@ export const VideoPlay = () => {
       await recordVideoView(videoId).catch((err) => { console.log("Could not record view. Error: ", err) });
 
       // Add vidoe to history
-      await updateHistory(videoId)
+      if(isLogIn) await updateHistory(videoId)
     }
 
     catch (error) {

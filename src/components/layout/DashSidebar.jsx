@@ -1,33 +1,28 @@
 import { Home, VideoIcon, UserRoundCog, ListVideo, X, LucideUsers2, ClipboardList } from "lucide-react";
 import { useState, useContext } from "react"
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { LoginContext } from "../../context/LoginContextProvider";
 import { BoxContext } from "../../context/BoxContextProvider";
 import logo from "../../assets/Logo.svg"
 
 const navItems = [
-  { icon: ClipboardList, label: "Overview", url: "/creator/dashboard/overview" },
-  { icon: UserRoundCog, label: "Channel", url: "/creator/dashboard/channel" },
-  { icon: VideoIcon, label: "Videos", url: "/creator/dashboard/videos" },
-  { icon: ListVideo, label: "Playlists", url: "/creator/dashboard/playlists" },
-  { icon: LucideUsers2, label: "Subscribers", url: "/creator/dashboard/subscribers" },
+  { icon: ClipboardList, label: "Overview", path: "/creator/dashboard/overview" },
+  { icon: UserRoundCog, label: "Channel", path: "/creator/dashboard/channel" },
+  { icon: LucideUsers2, label: "Subscribers", path: "/creator/dashboard/subscribers" },
 ];
 
 
 export function DashSidebar() {
   const navigate = useNavigate()
+  const location = useLocation();
 
-  const [activeLabel, setActiveLabel] = useState("");
   const { isLogIn } = useContext(LoginContext);
-  const {
-    isDashSidebarOpen, setIsDashSidebarOpen
-  } = useContext(BoxContext)
+  const { isDashSidebarOpen, setIsDashSidebarOpen } = useContext(BoxContext)
 
 
-  function handleNavClick(label, url) {
+  function handleNavClick(path) {
     setIsDashSidebarOpen(false)
-    setActiveLabel(label);
-    navigate(url)
+    navigate(path)
   }
 
   return (
@@ -76,23 +71,25 @@ export function DashSidebar() {
         <div className="flex-1 overflow-y-auto py-4 px-3 flex flex-col gap-1">
 
           {/* Nav Items */}
-          {navItems.map(({ icon: Icon, label, url }) => (
-            <button
-              key={label}
-              className={`
-                flex items-center gap-4 w-full px-4 py-3 rounded-xl
-                text-sm font-medium transition-all duration-200 cursor-pointer
-                ${activeLabel === label
-                  ? "bg-violet-600/20 text-white border-l-4 border-violet-500 pl-3"
-                  : "text-zinc-400 hover:bg-zinc-800 hover:text-white"
-                }
-              `}
-              onClick={() => handleNavClick(label, url)}
-            >
-              <Icon className={`h-5 w-5 shrink-0 ${activeLabel === label ? "text-violet-400" : ""}`} />
-              {label}
-            </button>
-          ))}
+          {navItems.map(({ icon: Icon, label, path }) => {
+            const isActive = location.pathname === path;
+            return (
+              <button
+                key={label}
+                className={`flex items-center gap-4 w-full px-4 py-3 rounded-xl
+                  text-sm font-medium transition-all duration-200 cursor-pointer
+                  ${isActive
+                    ? "bg-violet-600/20 text-white border-l-4 border-violet-500 pl-3"
+                    : "text-zinc-400 hover:bg-zinc-800 hover:text-white"
+                  }
+                `}
+                onClick={() => handleNavClick(path)}
+              >
+                <Icon className={`h-5 w-5 shrink-0 ${isActive ? "text-violet-400" : ""}`} />
+                {label}
+              </button>
+            );
+          })}
 
         </div>
       </aside>

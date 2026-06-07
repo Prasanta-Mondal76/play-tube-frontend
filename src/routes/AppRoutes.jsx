@@ -7,11 +7,11 @@ import {
   Profile,
   DashOverview,
   DashChannel,
-  DashVideos,
-  DashPlaylists,
   DashSubscribers,
   History,
   Subscriptions,
+  UpdateProfile,
+  Playlist,
 
 
   NotFound
@@ -37,6 +37,11 @@ export function AppRoutes() {
 
         <Route path="/subscriptions" element = {<Subscriptions />} />
 
+        <Route path="/playlists" element={<Playlist />} />
+
+
+        <Route path="/settings/update" element = {<UpdateProfile />} />
+
       </Route>
 
 
@@ -46,10 +51,6 @@ export function AppRoutes() {
         <Route path="overview" element={<DashOverview />} />
 
         <Route path="channel" element={<DashChannel />} />
-
-        <Route path="videos" element={<DashVideos />} />
-
-        <Route path="playlists" element={<DashPlaylists />} />
 
         <Route path="subscribers" element={<DashSubscribers />} />
 
