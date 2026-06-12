@@ -52,6 +52,18 @@ export function ProfileBox() {
     setIsSidebarOpen(false)
     navigate("/creator/dashboard/overview")
   }
+  // Settings - onClick
+  function handelSettingsClick(){
+    setIsProfileOpen(false)
+    setIsSidebarOpen(false)
+    navigate("/settings")
+  }
+  // Help & Support - onClick 
+  function handelSupportClick(){
+    setIsProfileOpen(false)
+    setIsSidebarOpen(false)
+    navigate("/support")
+  }
 
   return (
     <>
@@ -113,11 +125,15 @@ export function ProfileBox() {
                 <LayoutDashboardIcon className="h-4 w-4 shrink-0 text-zinc-300 " />
                 Dashboard
               </button>
-              <button className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-zinc-300 hover:bg-blue-400 hover:text-white transition-all duration-150 text-left cursor-pointer">
+              <button className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-zinc-300 hover:bg-blue-400 hover:text-white transition-all duration-150 text-left cursor-pointer"
+              onClick={ handelSettingsClick }
+              >
                 <Settings className="h-4 w-4 shrink-0 text-zinc-300 " />
                 Settings
               </button>
-              <button className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-zinc-300 hover:bg-blue-400 hover:text-white transition-all duration-150 text-left cursor-pointer">
+              <button className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-zinc-300 hover:bg-blue-400 hover:text-white transition-all duration-150 text-left cursor-pointer"
+              onClick={ handelSupportClick }
+              >
                 <HelpCircle className="h-4 w-4 shrink-0 text-zinc-300 " />
                 Help & Support
               </button>

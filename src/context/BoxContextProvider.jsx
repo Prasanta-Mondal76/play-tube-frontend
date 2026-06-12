@@ -18,6 +18,8 @@ export function BoxProvider({ children }) {
   // Dashboard Sidebar Open / Close
   const [isDashSidebarOpen, setIsDashSidebarOpen] = useState(false)
 
+  const [isSettingsSidebarOpen, setIsSettingsSidebarOpen] = useState(false);
+
   return (
 
     <BoxContext.Provider
@@ -29,7 +31,9 @@ export function BoxProvider({ children }) {
         isSidebarOpen,
         setIsSidebarOpen,
         isDashSidebarOpen,
-        setIsDashSidebarOpen
+        setIsDashSidebarOpen,
+        isSettingsSidebarOpen,
+        setIsSettingsSidebarOpen
       }}
     >
 

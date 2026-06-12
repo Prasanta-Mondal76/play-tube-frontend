@@ -42,3 +42,21 @@ export const initiateEmailChange = async (newEmail) => {
 export const verifyEmailChange = async (otp) => {
   return await api.post("/api/v1/users/verify-email-change", { otp });
 };
+
+// Update Settings account section
+export const updateAbout = async (about) => {
+  return await api.patch("/api/v1/users/update-about", { about });
+};
+
+
+export const logoutAllDevices = async () => {
+  return await api.post("/api/v1/users/logout-all-devices");
+};
+
+export const cancelDeleteAccount = async () => {
+  return await api.delete(`/api/v1/users/delete-account/cancel/${token}`)
+}
+
+export const confirmDeleteAccount = async () => {
+  api.delete(`/api/v1/users/delete-account/confirm/${token}`)
+}
