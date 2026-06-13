@@ -16,5 +16,7 @@ export { SettingsProfile } from "./settings/SettingsProfile"
 export { SettingsSecurity } from "./settings/SettingsSecurity"
 export { CancelDeleteAccount } from "./settings/CancelDeleteAccount"
 export { ConfirmDeleteAccount } from "./settings/ConfirmDeleteAccount"
+export { HelpAndSupport } from "./HelpAndSupport"
+export { SearchResults } from "./SearchResults"
 
 export { NotFound } from "./NotFound";

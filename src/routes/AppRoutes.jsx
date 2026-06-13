@@ -19,6 +19,8 @@ import {
   SettingsSecurity,
   ConfirmDeleteAccount,
   CancelDeleteAccount,
+  HelpAndSupport,
+  SearchResults,
 
   NotFound
 } from "../pages/index";
@@ -45,7 +47,9 @@ export function AppRoutes() {
 
         <Route path="/playlists" element={<Playlist />} />
 
+        <Route path="/search" element={<SearchResults />} />
       </Route>
+
 
       <Route path="/settings" element={<SettingsLayout />}>
         {/* Default redirect: /settings → /settings/account */}
@@ -68,6 +72,7 @@ export function AppRoutes() {
 
       </Route>
 
+      <Route path="/support" element={<HelpAndSupport />} />
 
       <Route path="/delete-account/confirm/:token" element={<ConfirmDeleteAccount />} />
       <Route path="/delete-account/cancel/:token" element={<CancelDeleteAccount />} />

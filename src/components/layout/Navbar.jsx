@@ -3,7 +3,7 @@ import logo from "../../assets/Logo.svg"
 import { useNavigate } from "react-router-dom";
 import { BoxContext } from "../../context/BoxContextProvider"
 import { LoginContext } from "../../context//LoginContextProvider"
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 export function Navbar() {
   const navigate = useNavigate()
@@ -13,6 +13,12 @@ export function Navbar() {
   } = useContext(BoxContext)
 
   const { isLogIn, user } = useContext(LoginContext)
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearch = () => {
+    if (!searchQuery.trim()) return;
+    navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+  };
 
   return (
     <header
@@ -58,13 +64,27 @@ export function Navbar() {
 
         {/* SEARCH BAR */}
         <div className="mx-4 hidden max-w-2xl flex-1 md:flex">
-          <div className="flex h-11 w-full overflow-hidden rounded-full border border-zinc-800 bg-zinc-950">
+          <div
+            className="
+              flex h-12 w-full overflow-hidden
+              rounded-full
+              border border-zinc-700
+              bg-zinc-900
+              shadow-lg shadow-black/20
+              transition-all duration-200
+              focus-within:border-blue-500
+              focus-within:ring-2
+              focus-within:ring-blue-500/30
+            " >
             <input
               type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleSearch()}
               placeholder="Search creators, topics, categories..."
               className="flex-1 bg-transparent px-5 text-white outline-none placeholder:text-zinc-500"
             />
-            <button className="flex w-20 items-center justify-center border-l border-zinc-800 bg-zinc-900 hover:bg-zinc-800 cursor-pointer">
+            <button onClick={handleSearch} className="flex items-center justify-center w-14 bg-zinc-700 hover:bg-blue-600 transition-all duration-200 cursor-pointer">
               <Search className="h-5 w-5 text-zinc-300" />
             </button>
           </div>
@@ -79,7 +99,7 @@ export function Navbar() {
           </button>
 
           {/* THEME — Sun icon */}
-          <button className="rounded-full p-2 hover:bg-zinc-800 cursor-pointer">
+          <button className="rounded-full p-2 hover:bg-zinc-800 cursor-pointer hover:cursor-not-allowed">
             <Sun className="h-5 w-5 text-white " />
           </button>
 

@@ -54,3 +54,8 @@ export const deleteVideo = async (videoId) => {
 export const togglePublishStatus = async (videoId) => {
   return await api.patch(`/api/v1/videos/toggle-published/${videoId}`);
 };
+
+
+export const searchVideos = async (query) => {
+  return await api.get("/api/v1/videos/search", { params: { q: query } });
+};
