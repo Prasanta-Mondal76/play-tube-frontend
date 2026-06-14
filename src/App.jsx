@@ -1,5 +1,6 @@
 import { LoginProvider } from "./context/LoginContextProvider";
 import { BoxProvider } from "./context/BoxContextProvider";
+import { SocketContextProvider } from "./context/SocketContextProvider";
 import { Toaster } from "react-hot-toast";
 
 import { AppRoutes } from "./routes/AppRoutes";
@@ -10,22 +11,26 @@ function App() {
 
     <LoginProvider>
 
-      <BoxProvider>
+      <SocketContextProvider>
 
-        <AppRoutes />
+        <BoxProvider>
 
-        <Toaster
-          position="top-center"
-          toastOptions={{
-            style: {
-              background: "#18181b",
-              color: "#fff",
-              border: "1px solid #3f3f46",
-            },
-          }}
-        />
+          <AppRoutes />
 
-      </BoxProvider>
+          <Toaster
+            position="top-center"
+            toastOptions={{
+              style: {
+                background: "#18181b",
+                color: "#fff",
+                border: "1px solid #3f3f46",
+              },
+            }}
+          />
+
+        </BoxProvider>
+        
+      </SocketContextProvider>
 
     </LoginProvider>
 
