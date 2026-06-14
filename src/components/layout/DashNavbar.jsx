@@ -74,16 +74,16 @@ export function DashNavbar() {
         {/* RIGHT */}
         <div className="flex items-center gap-2 md:gap-4">
 
-          {/* THEME — Sun icon */}
+          {/* THEME — Sun icon
           <button className="rounded-full p-2 hover:bg-zinc-800 cursor-pointer">
             <Sun className="h-5 w-5 text-white " />
           </button>
 
-          {/* NOTIFICATION */}
+           NOTIFICATION 
           <button className="relative rounded-full p-2 hover:bg-zinc-800 cursor-pointer">
             <Bell className="h-5 w-5 text-white " />
             <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-violet-500" />
-          </button>
+          </button> */}
 
           {/* PROFILE */}
           <button className="cursor-pointer"

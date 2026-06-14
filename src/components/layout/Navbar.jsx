@@ -98,16 +98,16 @@ export function Navbar() {
             <Search className="h-5 w-5 text-white " />
           </button>
 
-          {/* THEME — Sun icon */}
+          {/* THEME — Sun icon 
           <button className="rounded-full p-2 hover:bg-zinc-800 cursor-pointer hover:cursor-not-allowed">
             <Sun className="h-5 w-5 text-white " />
           </button>
 
-          {/* NOTIFICATION */}
+           NOTIFICATION 
           <button className="relative rounded-full p-2 hover:bg-zinc-800 cursor-pointer">
             <Bell className="h-5 w-5 text-white " />
             <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-violet-500" />
-          </button>
+          </button> */}
 
           {/* PROFILE */}
           <button className="cursor-pointer rounded-full"
