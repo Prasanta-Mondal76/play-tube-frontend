@@ -53,10 +53,10 @@ export const logoutAllDevices = async () => {
   return await api.post("/api/v1/users/logout-all-devices");
 };
 
-export const cancelDeleteAccount = async () => {
+export const cancelDeleteAccount = async (token) => {
   return await api.delete(`/api/v1/users/delete-account/cancel/${token}`)
 }
 
-export const confirmDeleteAccount = async () => {
-  api.delete(`/api/v1/users/delete-account/confirm/${token}`)
+export const confirmDeleteAccount = async (token) => {
+  return api.delete(`/api/v1/users/delete-account/confirm/${token}`)
 }
