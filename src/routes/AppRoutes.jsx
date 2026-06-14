@@ -21,7 +21,7 @@ import {
   CancelDeleteAccount,
   HelpAndSupport,
   SearchResults,
-  Messages,
+  Messenger,
 
   NotFound
 } from "../pages/index";
@@ -50,7 +50,7 @@ export function AppRoutes() {
 
         <Route path="/search" element={<SearchResults />} />
 
-        <Route path="/messages" element={<Messages />} />
+        <Route path="/messenger" element={<Messenger />} />
       </Route>
 
 

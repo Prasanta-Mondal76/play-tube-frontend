@@ -8,7 +8,7 @@ import { RequestsTab } from "../components/messages/RequestsTab";
 import { BlockedTab } from "../components/messages/BlockedTab";
 import { LoginContext } from "../context/LoginContextProvider";
 
-export function Messages() {
+export function Messenger() {
   const { user, isLogIn } = useContext(LoginContext);
   const [activeTab, setActiveTab] = useState("connections");
   const navigate = useNavigate();
@@ -25,8 +25,8 @@ export function Messages() {
 
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold">Messages</h1>
-        <p className="text-gray-400">Manage your connections and chats</p>
+        <h1 className="text-3xl font-bold">Messenger</h1>
+        <p className="text-gray-400">Manage your subscriptions and chats</p>
       </div>
 
       {/* Tabs */}
