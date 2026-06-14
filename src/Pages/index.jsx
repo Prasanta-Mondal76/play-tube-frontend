@@ -18,5 +18,6 @@ export { CancelDeleteAccount } from "./settings/CancelDeleteAccount"
 export { ConfirmDeleteAccount } from "./settings/ConfirmDeleteAccount"
 export { HelpAndSupport } from "./HelpAndSupport"
 export { SearchResults } from "./SearchResults"
+export { Messages } from "./Messages"
 
 export { NotFound } from "./NotFound";

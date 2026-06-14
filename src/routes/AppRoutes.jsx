@@ -21,6 +21,7 @@ import {
   CancelDeleteAccount,
   HelpAndSupport,
   SearchResults,
+  Messages,
 
   NotFound
 } from "../pages/index";
@@ -48,6 +49,8 @@ export function AppRoutes() {
         <Route path="/playlists" element={<Playlist />} />
 
         <Route path="/search" element={<SearchResults />} />
+
+        <Route path="/messages" element={<Messages />} />
       </Route>
 
 
