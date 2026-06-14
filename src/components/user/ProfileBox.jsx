@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react"
-import { LogIn, LogOut, User, Settings, HelpCircle, LayoutDashboardIcon } from "lucide-react"
+import { LogIn, LogOut, User, Settings, HelpCircle, LayoutDashboardIcon, MessageCircleMore } from "lucide-react"
 import { LoginContext } from "../../context/LoginContextProvider"
 import { BoxContext } from "../../context/BoxContextProvider"
 import { logoutUser } from "../../services/authApi"
@@ -51,6 +51,12 @@ export function ProfileBox() {
     setIsProfileOpen(false)
     setIsSidebarOpen(false)
     navigate("/creator/dashboard/overview")
+  }
+  // Messenger - Onclick
+  function handelMessenger(){
+    setIsProfileOpen(false)
+    setIsSidebarOpen(false)
+    navigate("/messenger")
   }
   // Settings - onClick
   function handelSettingsClick(){
@@ -124,6 +130,12 @@ export function ProfileBox() {
               >
                 <LayoutDashboardIcon className="h-4 w-4 shrink-0 text-zinc-300 " />
                 Dashboard
+              </button>
+              <button className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-zinc-300 hover:bg-blue-400 hover:text-white transition-all duration-150 text-left cursor-pointer"
+              onClick={ handelMessenger }
+              >
+                <MessageCircleMore className="h-4 w-4 shrink-0 text-zinc-300 " />
+                Messenger
               </button>
               <button className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-zinc-300 hover:bg-blue-400 hover:text-white transition-all duration-150 text-left cursor-pointer"
               onClick={ handelSettingsClick }
