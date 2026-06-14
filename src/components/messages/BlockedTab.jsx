@@ -65,7 +65,7 @@ export function BlockedTab() {
           <img
             src={block.blocked.avatar}
             alt={block.blocked.fullName}
-            className="w-11 h-11 rounded-full object-cover flex-shrink-0 opacity-60"
+            className="w-11 h-11 rounded-full object-cover shrink-0 opacity-60"
           />
 
           {/* Info */}

@@ -79,7 +79,7 @@ export function RequestsTab() {
           <img
             src={request.sender.avatar}
             alt={request.sender.fullName}
-            className="w-12 h-12 rounded-full object-cover flex-shrink-0"
+            className="w-12 h-12 rounded-full object-cover shrink-0"
           />
 
           {/* Info */}
@@ -105,7 +105,7 @@ export function RequestsTab() {
           </div>
 
           {/* Actions */}
-          <div className="flex gap-2 flex-shrink-0">
+          <div className="flex gap-2 shrink-0">
             <button
               onClick={() => handleAccept(request._id)}
               disabled={actionLoadingId === request._id}

@@ -138,7 +138,7 @@ export function ConnectionsTab() {
               <img
                 src={channel.avatar}
                 alt={channel.fullName}
-                className="w-11 h-11 rounded-full object-cover flex-shrink-0"
+                className="w-11 h-11 rounded-full object-cover shrink-0"
               />
 
               {/* Info */}

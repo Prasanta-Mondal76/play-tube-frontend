@@ -46,7 +46,7 @@ export function Messenger() {
       </div>
 
       {/* Content */}
-      <div className="bg-zinc-900 rounded-xl p-5 min-h-[500px]">
+      <div className="bg-zinc-900 rounded-xl p-5 min-h-125">
         {activeTab === "connections" && <ConnectionsTab />}
         {activeTab === "requests"    && <RequestsTab />}
         {activeTab === "chats"       && <ChatsTab />}

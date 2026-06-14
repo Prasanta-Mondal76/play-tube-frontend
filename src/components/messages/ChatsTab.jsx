@@ -131,7 +131,7 @@ export function ChatsTab() {
 
   return (
     // On mobile: full height, single column. On md+: side-by-side.
-    <div className="flex h-[calc(100vh-220px)] min-h-[400px] md:h-[600px]">
+    <div className="flex h-[calc(100vh-220px)] min-h-100 md:h-150">
 
       {/* 
         Conversation list:
@@ -141,7 +141,7 @@ export function ChatsTab() {
       <div
         className={`
           flex-col gap-2 overflow-y-auto
-          w-full md:w-72 md:flex-shrink-0 md:pr-2 md:mr-2 md:border-r md:border-zinc-700
+          w-full md:w-72 md:shrink-0 md:pr-2 md:mr-2 md:border-r md:border-zinc-700
           ${activeConversation ? "hidden md:flex" : "flex"}
         `}
       >

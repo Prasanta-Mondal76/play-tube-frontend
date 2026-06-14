@@ -28,19 +28,19 @@ export function ChatList({ conversation, isActive, onClick }) {
       <img
         src={other.avatar}
         alt={other.fullName}
-        className="w-10 h-10 rounded-full object-cover flex-shrink-0"
+        className="w-10 h-10 rounded-full object-cover shrink-0"
       />
       <div className="flex-1 min-w-0">
         <div className="flex justify-between items-center">
           <p className="font-medium text-white text-sm truncate">
             {other.fullName}
           </p>
-          <div className="flex items-center gap-2 flex-shrink-0 ml-2">
+          <div className="flex items-center gap-2 shrink-0 ml-2">
             {lastMsgAt && (
               <span className="text-xs text-gray-400">{lastMsgAt}</span>
             )}
             {!isActive && unreadCount > 0 && (
-              <span className="bg-blue-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center flex-shrink-0">
+              <span className="bg-blue-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center shrink-0">
                 {unreadCount > 99 ? "99+" : unreadCount}
               </span>
             )}

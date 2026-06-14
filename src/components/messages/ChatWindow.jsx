@@ -149,19 +149,19 @@ export function ChatWindow({ conversation, onNewMessage, onBlocked, onSeen, onCh
     <div className="flex flex-col h-full">
 
       {/* Header */}
-      <div className="flex items-center gap-2 px-3 py-3 border-b border-zinc-700 flex-shrink-0">
+      <div className="flex items-center gap-2 px-3 py-3 border-b border-zinc-700 shrink-0">
 
         {/* Back button — only visible on mobile */}
         <button
           onClick={onBack}
-          className="md:hidden p-1.5 rounded-lg hover:bg-zinc-700 text-gray-400 hover:text-white transition-colors cursor-pointer flex-shrink-0"
+          className="md:hidden p-1.5 rounded-lg hover:bg-zinc-700 text-gray-400 hover:text-white transition-colors cursor-pointer shrink-0"
         >
           <ArrowLeft size={18} />
         </button>
 
         <img
           src={other.avatar}
-          className="w-9 h-9 rounded-full object-cover flex-shrink-0"
+          className="w-9 h-9 rounded-full object-cover shrink-0"
         />
         <div className="flex-1 min-w-0">
           <p className="font-semibold text-white text-sm truncate">{other.fullName}</p>
@@ -169,7 +169,7 @@ export function ChatWindow({ conversation, onNewMessage, onBlocked, onSeen, onCh
         </div>
 
         {/* Menu */}
-        <div className="relative flex-shrink-0" ref={menuRef}>
+        <div className="relative shrink-0" ref={menuRef}>
           <button
             onClick={() => setMenuOpen((prev) => !prev)}
             className="p-2 rounded-lg hover:bg-zinc-700 text-gray-400 hover:text-white transition-colors cursor-pointer"

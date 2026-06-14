@@ -40,7 +40,7 @@ export function MessageInput({ conversationId, onSent }) {
       <button
         onClick={handleSend}
         disabled={!text.trim() || sending}
-        className="p-2.5 bg-blue-600 hover:bg-blue-700 rounded-xl text-white transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex-shrink-0"
+        className="p-2.5 bg-blue-600 hover:bg-blue-700 rounded-xl text-white transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed shrink-0"
       >
         <Send size={18} />
       </button>
