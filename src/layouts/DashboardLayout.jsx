@@ -1,12 +1,12 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 
-import { DashNavbar } from "../components/layout/DashNavbar";
-import { DashSidebar } from "../components/layout/DashSidebar";
-import { ProfileBox } from "../components/user/ProfileBox";
+import { DashNavbar } from "../components/layout/DashNavbar.jsx";
+import { DashSidebar } from "../components/layout/DashSidebar.jsx";
+import { ProfileBox } from "../components/user/ProfileBox.jsx";
 
-import { BoxContext } from "../context/BoxContextProvider";
-import { LoginContext } from "../context/LoginContextProvider";
+import { BoxContext } from "../context/BoxContextProvider.jsx";
+import { LoginContext } from "../context/LoginContextProvider.jsx";
 
 export function DashboardLayout() {
   const navigate = useNavigate()

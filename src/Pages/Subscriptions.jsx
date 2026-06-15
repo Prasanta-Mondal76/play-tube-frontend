@@ -2,9 +2,9 @@ import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { Users, Home, Loader2, UserMinus, UserPlus } from "lucide-react";
-import { LoginContext } from "../context/LoginContextProvider";
-import { getUserSubscriptions, toggleSubscription } from "../services/subscriptionApi";
-import { Tids } from "../utils";
+import { LoginContext } from "../context/LoginContextProvider.jsx";
+import { getUserSubscriptions, toggleSubscription } from "../services/subscriptionApi.js";
+import { Tids } from "../utils/index.js";
 
 export function Subscriptions() {
   const { isLogIn, user } = useContext(LoginContext);

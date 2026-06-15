@@ -1,12 +1,12 @@
 import { useState, useEffect, useContext } from "react";
 import { X, Plus, ListVideo } from "lucide-react";
 import toast from "react-hot-toast";
-import { LoginContext } from "../../context/LoginContextProvider";
+import { LoginContext } from "../../context/LoginContextProvider.jsx";
 import {
   getUserPlaylists,
   createPlaylist,
   addVideoToPlaylist,
-} from "../../services/playlistApi";
+} from "../../services/playlistApi.js";
 
 export function AddToPlaylist({ videoId, onClose }) {
   const { user } = useContext(LoginContext);

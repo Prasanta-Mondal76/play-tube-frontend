@@ -1,8 +1,8 @@
 import { Home, VideoIcon, UserRoundCog, ListVideo, X, LucideUsers2, ClipboardList } from "lucide-react";
 import { useState, useContext } from "react"
 import { useNavigate, useLocation } from "react-router-dom";
-import { LoginContext } from "../../context/LoginContextProvider";
-import { BoxContext } from "../../context/BoxContextProvider";
+import { LoginContext } from "../../context/LoginContextProvider.jsx";
+import { BoxContext } from "../../context/BoxContextProvider.jsx";
 import logo from "../../assets/Logo.svg"
 
 const navItems = [

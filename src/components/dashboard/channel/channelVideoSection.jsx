@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { getAllVideos } from "../../../services/dashboardApi";
-import { togglePublishStatus } from "../../../services/videoApi";
+import { getAllVideos } from "../../../services/dashboardApi.js";
+import { togglePublishStatus } from "../../../services/videoApi.js";
 import { MoreVertical, Pencil, Trash2, Eye, EyeOff } from "lucide-react";
 import toast from "react-hot-toast";
-import { UpdateVideo } from "../dashMethods/UpdateVideo";
-import { DeleteVideoConfirm } from "../dashMethods/DeleteVideoConfirm";
+import { UpdateVideo } from "../dashMethods/UpdateVideo.jsx";
+import { DeleteVideoConfirm } from "../dashMethods/DeleteVideoConfirm.jsx";
 
 const FILTERS = ["All", "Published", "Unpublished"];
 

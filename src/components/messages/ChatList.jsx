@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { LoginContext } from "../../context/LoginContextProvider";
+import { LoginContext } from "../../context/LoginContextProvider.jsx";
 
 export function ChatList({ conversation, isActive, onClick }) {
   const { user } = useContext(LoginContext);

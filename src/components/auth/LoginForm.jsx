@@ -1,11 +1,11 @@
 import { useState, useContext } from "react"
 import { LogIn } from "lucide-react"
-import { loginUser } from "../../services/authApi";
-import { LoginContext } from "../../context/LoginContextProvider"
-import { BoxContext } from "../../context/BoxContextProvider"
+import { loginUser } from "../../services/authApi.js";
+import { LoginContext } from "../../context/LoginContextProvider.jsx"
+import { BoxContext } from "../../context/BoxContextProvider.jsx"
 import logo from "../../assets/Logo.svg"
 import toast from "react-hot-toast";
-import { Tids } from "../../utils";
+import { Tids } from "../../utils/index.js";
 
 export function LoginForm({ onSwitchToSignup }) {
   const [fields, setFields] = useState({ email: "", password: "" })

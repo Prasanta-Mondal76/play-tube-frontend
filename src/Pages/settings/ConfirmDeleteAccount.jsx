@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { confirmDeleteAccount } from "../../services/userApi";
+import { confirmDeleteAccount } from "../../services/userApi.js";
 import toast from "react-hot-toast";
 
 export function ConfirmDeleteAccount() {

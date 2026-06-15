@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
-import { Navbar } from "../components/layout/Navbar";
-import { Sidebar } from "../components/layout/Sidebar";
-import { ProfileBox } from "../components/user/ProfileBox"
-import { AuthPage } from "../components/auth/AuthPage"
+import { Navbar } from "../components/layout/Navbar.jsx";
+import { Sidebar } from "../components/layout/Sidebar.jsx";
+import { ProfileBox } from "../components/user/ProfileBox.jsx"
+import { AuthPage } from "../components/auth/AuthPage.jsx"
 import { useContext } from "react";
-import { BoxContext } from "../context/BoxContextProvider";
+import { BoxContext } from "../context/BoxContextProvider.jsx";
 
 export function MainLayout() {
 

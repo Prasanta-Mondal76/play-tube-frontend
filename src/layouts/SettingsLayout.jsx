@@ -1,9 +1,9 @@
 import { Outlet, Navigate } from "react-router-dom";
 import { useContext } from "react";
-import { LoginContext } from "../context/LoginContextProvider";
-import { SettingsNavbar } from "../components/layout/SettingsNavbar";
-import { SettingsSidebar } from "../components/layout/SettingsSidebar";
-import { ProfileBox } from "../components/user/ProfileBox"
+import { LoginContext } from "../context/LoginContextProvider.jsx";
+import { SettingsNavbar } from "../components/layout/SettingsNavbar.jsx";
+import { SettingsSidebar } from "../components/layout/SettingsSidebar.jsx";
+import { ProfileBox } from "../components/user/ProfileBox.jsx"
 
 
 export function SettingsLayout() {

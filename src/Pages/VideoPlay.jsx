@@ -1,19 +1,19 @@
 import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import toast from "react-hot-toast";
-import { Tids } from "../utils/toastId";
+import { Tids } from "../utils/toastId.js";
 
-import { VideoPlayer } from "../components/video/VideoPlayer";
-import { VideoInfo } from "../components/video/VideoInfo";
-import { SuggestedVideos } from "../components/video/SuggestedVideos";
-import { CommentSection } from "../components/comments/CommentSection";
+import { VideoPlayer } from "../components/video/VideoPlayer.jsx";
+import { VideoInfo } from "../components/video/VideoInfo.jsx";
+import { SuggestedVideos } from "../components/video/SuggestedVideos.jsx";
+import { CommentSection } from "../components/comments/CommentSection.jsx";
 
 import {
   getVideoById,
   recordVideoView,
-} from "../services/videoApi";
-import { updateHistory } from "../services/historyApi"
-import { LoginContext } from "../context/LoginContextProvider";
+} from "../services/videoApi.js";
+import { updateHistory } from "../services/historyApi.js"
+import { LoginContext } from "../context/LoginContextProvider.jsx";
 
 export const VideoPlay = () => {
   const { videoId } = useParams();

@@ -1,14 +1,14 @@
 import { useEffect, useState, useCallback, useRef } from "react";
 import { useParams } from "react-router-dom";
 import toast from "react-hot-toast";
-import { Tids } from "../utils/toastId";
+import { Tids } from "../utils/toastId.js";
 
-import { ProfileHeader } from "../components/user/ProfileHeader";
-import { ProfileTabs } from "../components/user/ProfileTabs";
-import { VideoCard } from "../components/video/VideoCard";
+import { ProfileHeader } from "../components/user/ProfileHeader.jsx";
+import { ProfileTabs } from "../components/user/ProfileTabs.jsx";
+import { VideoCard } from "../components/video/VideoCard.jsx";
 
-import { getChannelDetails } from "../services/userApi";
-import { getChannelVideos } from "../services/videoApi";
+import { getChannelDetails } from "../services/userApi.js";
+import { getChannelVideos } from "../services/videoApi.js";
 
 export function Profile() {
   const { username } = useParams();

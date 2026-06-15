@@ -2,11 +2,11 @@ import { useState, useContext } from "react";
 import { Users, Inbox, MessageCircle, MessageCircleMore, Home, ShieldOff } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-import { ConnectionsTab } from "../components/messages/ConnectionsTab";
-import { ChatsTab } from "../components/messages/ChatsTab";
-import { RequestsTab } from "../components/messages/RequestsTab";
-import { BlockedTab } from "../components/messages/BlockedTab";
-import { LoginContext } from "../context/LoginContextProvider";
+import { ConnectionsTab } from "../components/messages/ConnectionsTab.jsx";
+import { ChatsTab } from "../components/messages/ChatsTab.jsx";
+import { RequestsTab } from "../components/messages/RequestsTab.jsx";
+import { BlockedTab } from "../components/messages/BlockedTab.jsx";
+import { LoginContext } from "../context/LoginContextProvider.jsx";
 
 export function Messenger() {
   const { user, isLogIn } = useContext(LoginContext);

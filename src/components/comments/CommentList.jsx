@@ -1,4 +1,4 @@
-import {CommentCard} from "./CommentCard";
+import {CommentCard} from "./CommentCard.jsx";
 
 export function CommentList({ comments }) {
 

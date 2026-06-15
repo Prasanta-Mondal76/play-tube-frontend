@@ -1,9 +1,9 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import { LoginContext } from "../../context/LoginContextProvider";
-import { logoutAllDevices } from "../../services/userApi";
-import api from "../../services/axios";
+import { LoginContext } from "../../context/LoginContextProvider.jsx";
+import { logoutAllDevices } from "../../services/userApi.js";
+import api from "../../services/axios.js";
 import { KeyRound, LogOut, Monitor, Eye, EyeOff } from "lucide-react";
 
 const inputCls = `

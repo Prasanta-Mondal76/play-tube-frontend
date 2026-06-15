@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { VideoCard } from "./VideoCard";
-import { getAllVideos } from "../../services/videoApi";
+import { VideoCard } from "./VideoCard.jsx";
+import { getAllVideos } from "../../services/videoApi.js";
 import toast from "react-hot-toast"
-import { Tids } from "../../utils/toastId";
+import { Tids } from "../../utils/toastId.js";
 
 export function VideoGrid({ videos: propVideos }) {
 

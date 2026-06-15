@@ -1,4 +1,4 @@
-import { VideoGrid } from "../components/video/VideoGrid";
+import { VideoGrid } from "../components/video/VideoGrid.jsx";
 
 export function Home (){
 

@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import toast from "react-hot-toast";
-import { LoginContext } from "../../context/LoginContextProvider";
-import { clearWatchHistory, togglePauseHistory } from "../../services/historyApi";
+import { LoginContext } from "../../context/LoginContextProvider.jsx";
+import { clearWatchHistory, togglePauseHistory } from "../../services/historyApi.js";
 import { Trash2, PauseCircle, PlayCircle, Search } from "lucide-react";
 
 function Card({ title, description, children }) {

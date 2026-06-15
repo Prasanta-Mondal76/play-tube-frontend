@@ -1,11 +1,11 @@
 import { useContext, useState, useEffect } from "react";
 import { Pencil, Upload } from "lucide-react";
-import { LoginContext } from "../../../context/LoginContextProvider";
-import { BoxContext } from "../../../context/BoxContextProvider";
-import { toggleSubscription } from "../../../services/subscriptionApi";
-import { getDashStats } from "../../../services/dashboardApi";
-import { UploadVideo } from "../dashMethods/UploadVideo";
-import { UpdateImages } from "../dashMethods/UpdateImages";
+import { LoginContext } from "../../../context/LoginContextProvider.jsx";
+import { BoxContext } from "../../../context/BoxContextProvider.jsx";
+import { toggleSubscription } from "../../../services/subscriptionApi.js";
+import { getDashStats } from "../../../services/dashboardApi.js";
+import { UploadVideo } from "../dashMethods/UploadVideo.jsx";
+import { UpdateImages } from "../dashMethods/UpdateImages.jsx";
 
 export function ChannelHeader() {
 

@@ -1,1 +1,1 @@
-export { Tids } from "./toastId";
+export { Tids } from "./toastId.js";

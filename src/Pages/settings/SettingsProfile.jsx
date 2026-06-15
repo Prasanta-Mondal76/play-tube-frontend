@@ -1,7 +1,7 @@
 import { useState, useContext, useRef } from "react";
 import toast from "react-hot-toast";
-import { LoginContext } from "../../context/LoginContextProvider";
-import { updateAvatar, updateCoverImage, updateAbout } from "../../services/userApi";
+import { LoginContext } from "../../context/LoginContextProvider.jsx";
+import { updateAvatar, updateCoverImage, updateAbout } from "../../services/userApi.js";
 import { Camera, ImagePlus, Plus, X, Link2, Pencil } from "lucide-react";
 
 const inputCls = `

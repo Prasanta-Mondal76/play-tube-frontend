@@ -1,11 +1,11 @@
 import { useState, useEffect, useContext } from "react"
 import { LogIn, LogOut, User, Settings, HelpCircle, LayoutDashboardIcon, MessageCircleMore } from "lucide-react"
-import { LoginContext } from "../../context/LoginContextProvider"
-import { BoxContext } from "../../context/BoxContextProvider"
-import { logoutUser } from "../../services/authApi"
+import { LoginContext } from "../../context/LoginContextProvider.jsx"
+import { BoxContext } from "../../context/BoxContextProvider.jsx"
+import { logoutUser } from "../../services/authApi.js"
 import { useNavigate } from "react-router-dom"
 import toast from "react-hot-toast"
-import { Tids } from "../../utils/toastId"
+import { Tids } from "../../utils/toastId.js"
 
 export function ProfileBox() {
   const navigate = useNavigate()

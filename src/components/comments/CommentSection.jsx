@@ -1,9 +1,9 @@
 import { useState, useContext } from "react";
-import { LoginContext } from "../../context/LoginContextProvider";
+import { LoginContext } from "../../context/LoginContextProvider.jsx";
 import { ChevronDown, ChevronUp } from "lucide-react";
-import { getVideoComments } from "../../services/commentApi";
-import {CommentForm} from "./CommentForm";
-import {CommentList} from "./CommentList";
+import { getVideoComments } from "../../services/commentApi.js";
+import {CommentForm} from "./CommentForm.jsx";
+import {CommentList} from "./CommentList.jsx";
 
 export function CommentSection({ videoId }) {
   const { user } = useContext(LoginContext);

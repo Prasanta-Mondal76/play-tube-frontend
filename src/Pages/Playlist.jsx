@@ -2,14 +2,14 @@ import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { MoreVertical, Plus, Trash2, X, ListVideo, ListVideoIcon, Home } from "lucide-react";
 import toast from "react-hot-toast";
-import { LoginContext } from "../context/LoginContextProvider";
+import { LoginContext } from "../context/LoginContextProvider.jsx";
 import {
   getUserPlaylists,
   createPlaylist,
   deletePlaylist,
   getPlaylistById,
   removeVideoFromPlaylist,
-} from "../services/playlistApi";
+} from "../services/playlistApi.js";
 
 export function Playlist() {
   const { user, isLogIn } = useContext(LoginContext);

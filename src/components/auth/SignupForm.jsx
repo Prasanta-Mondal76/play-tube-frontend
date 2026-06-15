@@ -3,11 +3,11 @@ import { Upload, Image } from "lucide-react"
 import {
   initiateRegistration,
   verifyRegistrationOtp,
-} from "../../services/authApi"
-import { OtpVerifyForm } from "./OtpVerifyForm"
+} from "../../services/authApi.js"
+import { OtpVerifyForm } from "./OtpVerifyForm.jsx"
 import logo from "../../assets/Logo.svg"
 import toast from "react-hot-toast"
-import { Tids } from "../../utils"
+import { Tids } from "../../utils/index.js"
 
 const pwRules = [
   { id: "len", label: "At least 6 characters", test: v => v.length >= 6 },

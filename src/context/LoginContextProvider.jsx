@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
 import toast from "react-hot-toast"
-import { Tids } from "../utils/toastId"
+import { Tids } from "../utils/toastId.js"
 
 import { createContext } from "react"
-import { getLoginStats } from "../services/userApi"
+import { getLoginStats } from "../services/userApi.js"
 
 export const LoginContext = createContext()
 

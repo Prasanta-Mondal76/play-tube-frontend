@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Send } from "lucide-react";
-import { sendMessage } from "../../services/messageApi";
+import { sendMessage } from "../../services/messageApi.js";
 
 export function MessageInput({ conversationId, onSent }) {
   const [text, setText] = useState("");

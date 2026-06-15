@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { searchVideos } from "../services/videoApi";
-import { VideoGrid } from "../components/video/VideoGrid"; 
+import { searchVideos } from "../services/videoApi.js";
+import { VideoGrid } from "../components/video/VideoGrid.jsx"; 
 
 export function SearchResults() {
   const [searchParams] = useSearchParams();

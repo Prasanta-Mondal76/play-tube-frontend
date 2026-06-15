@@ -1,6 +1,6 @@
 import { useState } from "react"
-import { LoginForm } from "./LoginForm"
-import { SignupForm } from "./SignupForm"
+import { LoginForm } from "./LoginForm.jsx"
+import { SignupForm } from "./SignupForm.jsx"
 import { X } from "lucide-react"
 
 export function AuthPage({ onClose }) {

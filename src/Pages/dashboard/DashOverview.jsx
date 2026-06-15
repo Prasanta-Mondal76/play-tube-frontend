@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { LucideVideo, Eye, Heart, Users2, MessageSquareMore } from "lucide-react"
-import { getDashStats } from "../../services/dashboardApi";
+import { getDashStats } from "../../services/dashboardApi.js";
 
 const WaveChart = ({ color, gradientId }) => {
   return (

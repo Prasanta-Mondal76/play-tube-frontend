@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
-import { BoxContext } from "../../context/BoxContextProvider";
-import { LoginContext } from "../../context/LoginContextProvider";
+import { BoxContext } from "../../context/BoxContextProvider.jsx";
+import { LoginContext } from "../../context/LoginContextProvider.jsx";
 
 import {
   ThumbsUp,
@@ -8,9 +8,9 @@ import {
   PlusCircle
 } from "lucide-react";
 
-import { toggleVideoLike } from "../../services/likeApi";
-import { toggleSubscription } from "../../services/subscriptionApi";
-import { AddToPlaylist } from "./AddToPlaylist";
+import { toggleVideoLike } from "../../services/likeApi.js";
+import { toggleSubscription } from "../../services/subscriptionApi.js";
+import { AddToPlaylist } from "./AddToPlaylist.jsx";
 
 export function VideoInfo({
   video,

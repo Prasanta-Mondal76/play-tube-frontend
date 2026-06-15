@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import { useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { BoxContext } from "../../context/BoxContextProvider";
+import { BoxContext } from "../../context/BoxContextProvider.jsx";
 
 const navItems = [
   { icon: UserCog,       label: "Account",          path: "/settings/account" },

@@ -1,10 +1,10 @@
 import { useState, useEffect, useContext } from "react";
 import { MessageCircle, ArrowLeft, Search, X } from "lucide-react";
-import { getMyConversations } from "../../services/messageApi";
-import { ChatList } from "./ChatList";
-import { ChatWindow } from "./ChatWindow";
-import { useSocket } from "../../context/SocketContextProvider";
-import { LoginContext } from "../../context/LoginContextProvider";
+import { getMyConversations } from "../../services/messageApi.js";
+import { ChatList } from "./ChatList.jsx";
+import { ChatWindow } from "./ChatWindow.jsx";
+import { useSocket } from "../../context/SocketContextProvider.jsx";
+import { LoginContext } from "../../context/LoginContextProvider.jsx";
 
 export function ChatsTab() {
   const { socket } = useSocket();

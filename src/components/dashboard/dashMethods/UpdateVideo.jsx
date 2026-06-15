@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { X, ImagePlus } from "lucide-react";
 import toast from "react-hot-toast";
-import { updateVideoDetails } from "../../../services/videoApi";
+import { updateVideoDetails } from "../../../services/videoApi.js";
 
 export function UpdateVideo({ video, onClose, setVideos }) {
   const [title, setTitle] = useState(video.title || "");

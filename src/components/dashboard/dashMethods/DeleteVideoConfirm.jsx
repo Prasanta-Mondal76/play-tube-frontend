@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Trash2, X } from "lucide-react";
 import toast from "react-hot-toast";
-import { deleteVideo } from "../../../services/videoApi";
+import { deleteVideo } from "../../../services/videoApi.js";
 
 export function DeleteVideoConfirm({ video, onClose, setVideos }) {
   const [loading, setLoading] = useState(false);

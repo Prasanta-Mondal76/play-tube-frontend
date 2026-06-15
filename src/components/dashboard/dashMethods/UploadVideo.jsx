@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { publishVideo } from "../../../services/videoApi";
+import { publishVideo } from "../../../services/videoApi.js";
 import { X } from "lucide-react";
 import toast from "react-hot-toast";
 

@@ -1,4 +1,4 @@
-import api from "./axios";
+import api from "./axios.js";
 
 export const createPlaylist = async (data) =>
   await api.post("/api/v1/playlists/create-playlist", data);

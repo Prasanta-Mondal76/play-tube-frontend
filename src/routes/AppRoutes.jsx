@@ -1,7 +1,7 @@
 import { Route, Routes, Navigate } from "react-router-dom"
-import { MainLayout } from "../layouts/MainLayout"
-import { DashboardLayout } from "../layouts/DashboardLayout";
-import { SettingsLayout } from "../layouts/SettingsLayout"
+import { MainLayout } from "../layouts/MainLayout.jsx"
+import { DashboardLayout } from "../layouts/DashboardLayout.jsx";
+import { SettingsLayout } from "../layouts/SettingsLayout.jsx"
 import {
   Home,
   VideoPlay,
@@ -24,7 +24,7 @@ import {
   Messenger,
 
   NotFound
-} from "../pages/index";
+} from "../pages/index.jsx";
 
 
 export function AppRoutes() {

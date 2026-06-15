@@ -1,11 +1,11 @@
 import { useContext } from "react";
 import { Settings } from "lucide-react";
-import { LoginContext } from "../../context/LoginContextProvider";
-import { BoxContext } from "../../context/BoxContextProvider";
-import { toggleSubscription } from "../../services/subscriptionApi";
+import { LoginContext } from "../../context/LoginContextProvider.jsx";
+import { BoxContext } from "../../context/BoxContextProvider.jsx";
+import { toggleSubscription } from "../../services/subscriptionApi.js";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import { Tids } from "../../utils/toastId";
+import { Tids } from "../../utils/toastId.js";
 
 export function ProfileHeader({ channel, setChannel }) {
   const navigate = useNavigate()

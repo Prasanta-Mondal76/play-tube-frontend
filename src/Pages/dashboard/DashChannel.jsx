@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 
-import { ChannelHeader } from "../../components/dashboard/channel/channelHeader";
-import {ChannelVideoSection} from "../../components/dashboard/channel/channelVideoSection";
+import { ChannelHeader } from "../../components/dashboard/channel/channelHeader.jsx";
+import {ChannelVideoSection} from "../../components/dashboard/channel/channelVideoSection.jsx";
 
 
 export function DashChannel() {

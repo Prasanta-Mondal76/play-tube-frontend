@@ -1,4 +1,4 @@
-import api from "./axios";
+import api from "./axios.js";
 
 // Get Channel Overview
 export const getDashStats = async () => {

@@ -1,9 +1,9 @@
 import { useEffect, useState, useCallback, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Crown, Users, Clock, ChevronDown, Loader2, AlertCircle, CheckCircle2, ArrowRight, ExternalLink, FlaskConical, Info } from "lucide-react";
-import { getPaymentStatus, createOrder, verifyPayment } from "../../services/paymentApi";
-import { getChannelSubscribers } from "../../services/subscriptionApi";
-import { LoginContext } from "../../context/LoginContextProvider";
+import { getPaymentStatus, createOrder, verifyPayment } from "../../services/paymentApi.js";
+import { getChannelSubscribers } from "../../services/subscriptionApi.js";
+import { LoginContext } from "../../context/LoginContextProvider.jsx";
 
 const PLANS = [
   { id: "plan_1hr", price: "₹10", duration: "1 Hour", description: "Quick peek", highlight: false },

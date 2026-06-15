@@ -1,4 +1,4 @@
-import api from "./axios";
+import api from "./axios.js";
 
 // Check if the current user has an active payment
 export const getPaymentStatus = () =>

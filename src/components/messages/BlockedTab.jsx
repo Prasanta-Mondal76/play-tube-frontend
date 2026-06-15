@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { ShieldOff, ShieldCheck } from "lucide-react";
-import { getBlockedUsers, unblockUser } from "../../services/messageApi";
+import { getBlockedUsers, unblockUser } from "../../services/messageApi.js";
 
 export function BlockedTab() {
   const [blockedUsers, setBlockedUsers] = useState([]);

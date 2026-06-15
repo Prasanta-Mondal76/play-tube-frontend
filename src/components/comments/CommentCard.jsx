@@ -1,8 +1,8 @@
 import { useState, useContext } from "react";
 import { ThumbsUp } from "lucide-react";
-import { toggleCommentLike } from "../../services/likeApi";
-import { LoginContext } from "../../context/LoginContextProvider";
-import { BoxContext } from "../../context/BoxContextProvider";
+import { toggleCommentLike } from "../../services/likeApi.js";
+import { LoginContext } from "../../context/LoginContextProvider.jsx";
+import { BoxContext } from "../../context/BoxContextProvider.jsx";
 
 export function CommentCard({ comment }) {
 

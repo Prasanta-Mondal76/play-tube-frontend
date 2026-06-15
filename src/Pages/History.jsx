@@ -1,10 +1,10 @@
 import { useEffect, useState, useContext } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import { getHistory } from "../services/historyApi";
+import { getHistory } from "../services/historyApi.js";
 import { Loader2, HistoryIcon, Home } from "lucide-react";
-import { Tids } from "../utils";
-import { LoginContext } from "../context/LoginContextProvider";
+import { Tids } from "../utils/index.js";
+import { LoginContext } from "../context/LoginContextProvider.jsx";
 
 export function History() {
   const { isLogIn } = useContext(LoginContext);

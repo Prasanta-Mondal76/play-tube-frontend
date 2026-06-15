@@ -1,8 +1,8 @@
 import { Bell, Menu, Sun, Search, UserCircle2Icon } from "lucide-react";
 import logo from "../../assets/Logo.svg"
 import { useNavigate } from "react-router-dom";
-import { BoxContext } from "../../context/BoxContextProvider"
-import { LoginContext } from "../../context//LoginContextProvider"
+import { BoxContext } from "../../context/BoxContextProvider.jsx"
+import { LoginContext } from "../../context//LoginContextProvider.jsx"
 import { useContext, useState } from "react";
 
 export function Navbar() {

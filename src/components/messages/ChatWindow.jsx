@@ -1,14 +1,14 @@
 import { useState, useEffect, useRef, useContext } from "react";
 import { MoreVertical, ShieldOff, Trash2, EyeOffIcon, EyeIcon, ArrowLeft } from "lucide-react";
-import { LoginContext } from "../../context/LoginContextProvider";
+import { LoginContext } from "../../context/LoginContextProvider.jsx";
 import {
   getConversationMessages,
   markMessagesAsSeen,
   blockUser,
   clearChat,
-} from "../../services/messageApi";
-import { MessageInput } from "./MessageInput";
-import { useSocket } from "../../context/SocketContextProvider";
+} from "../../services/messageApi.js";
+import { MessageInput } from "./MessageInput.jsx";
+import { useSocket } from "../../context/SocketContextProvider.jsx";
 
 export function ChatWindow({ conversation, onNewMessage, onBlocked, onSeen, onChatCleared, onBack }) {
   const { user } = useContext(LoginContext);

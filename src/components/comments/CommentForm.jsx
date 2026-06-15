@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
-import { BoxContext } from "../../context/BoxContextProvider";
-import { LoginContext } from "../../context/LoginContextProvider";
-import { addComment } from "../../services/commentApi";
+import { BoxContext } from "../../context/BoxContextProvider.jsx";
+import { LoginContext } from "../../context/LoginContextProvider.jsx";
+import { addComment } from "../../services/commentApi.js";
 
 export function CommentForm({ videoId, onCommentAdd }) {
 

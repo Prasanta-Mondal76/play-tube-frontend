@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { X, UserCircle, Image } from "lucide-react";
 import toast from "react-hot-toast";
-import { updateAvatar, updateCoverImage } from "../../../services/userApi";
+import { updateAvatar, updateCoverImage } from "../../../services/userApi.js";
 
 export function UpdateImages({ setOpenUpdateBox, setChannel }) {
   const avatarInputRef = useRef(null);

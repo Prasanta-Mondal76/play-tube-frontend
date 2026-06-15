@@ -4,7 +4,7 @@ import {
   getReceivedChatRequests,
   acceptChatRequest,
   rejectChatRequest,
-} from "../../services/messageApi";
+} from "../../services/messageApi.js";
 
 export function RequestsTab() {
   const [requests, setRequests] = useState([]);

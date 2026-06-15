@@ -1,9 +1,9 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import { LoginContext } from "../../context/LoginContextProvider";
-import { clearWatchHistory } from "../../services/historyApi";
-import api from "../../services/axios";
+import { LoginContext } from "../../context/LoginContextProvider.jsx";
+import { clearWatchHistory } from "../../services/historyApi.js";
+import api from "../../services/axios.js";
 import { TriangleAlert, Trash2, History } from "lucide-react";
 
 function Card({ title, description, children, border = "border-zinc-800" }) {

@@ -1,6 +1,6 @@
 import logo from "../../assets/Logo.svg"
 import toast from "react-hot-toast"
-import { Tids } from "../../utils"
+import { Tids } from "../../utils/index.js"
 
 export function OtpVerifyForm({
   otp,

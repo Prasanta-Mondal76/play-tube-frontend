@@ -1,8 +1,8 @@
 import { Menu, Sun, UserCircle2Icon, Bell } from "lucide-react";
 import logo from "../../assets/Logo.svg"
 import { useNavigate, useLocation } from "react-router-dom";
-import { BoxContext } from "../../context/BoxContextProvider"
-import { LoginContext } from "../../context/LoginContextProvider"
+import { BoxContext } from "../../context/BoxContextProvider.jsx"
+import { LoginContext } from "../../context/LoginContextProvider.jsx"
 import { useContext, useState } from "react";
 
 export function DashNavbar() {

@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import toast from "react-hot-toast";
-import { LoginContext } from "../../context/LoginContextProvider";
-import { updateUserData, initiateEmailChange, verifyEmailChange } from "../../services/userApi";
+import { LoginContext } from "../../context/LoginContextProvider.jsx";
+import { updateUserData, initiateEmailChange, verifyEmailChange } from "../../services/userApi.js";
 import { User, Mail, AtSign, Calendar } from "lucide-react";
 
 // ── Reusable input style ──────────────────────────────────────

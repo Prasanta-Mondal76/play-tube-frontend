@@ -1,9 +1,9 @@
-import { LoginProvider } from "./context/LoginContextProvider";
-import { BoxProvider } from "./context/BoxContextProvider";
-import { SocketContextProvider } from "./context/SocketContextProvider";
+import { LoginProvider } from "./context/LoginContextProvider.jsx";
+import { BoxProvider } from "./context/BoxContextProvider.jsx";
+import { SocketContextProvider } from "./context/SocketContextProvider.jsx";
 import { Toaster } from "react-hot-toast";
 
-import { AppRoutes } from "./routes/AppRoutes";
+import { AppRoutes } from "./routes/AppRoutes.jsx";
 
 function App() {
 

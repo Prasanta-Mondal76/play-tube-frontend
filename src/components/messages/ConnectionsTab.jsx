@@ -1,8 +1,8 @@
 import { useState, useEffect, useContext } from "react";
 import { Send, Users, CheckCircle, Clock, XCircle } from "lucide-react";
-import { getUserSubscriptions } from "../../services/subscriptionApi";
-import { getChatConnectionStatus, sendChatRequest } from "../../services/messageApi";
-import { LoginContext } from "../../context/LoginContextProvider";
+import { getUserSubscriptions } from "../../services/subscriptionApi.js";
+import { getChatConnectionStatus, sendChatRequest } from "../../services/messageApi.js";
+import { LoginContext } from "../../context/LoginContextProvider.jsx";
 
 export function ConnectionsTab() {
   const { user } = useContext(LoginContext);

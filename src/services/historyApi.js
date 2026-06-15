@@ -1,4 +1,4 @@
-import api from "./axios";
+import api from "./axios.js";
 
 export const updateHistory = async(videoId) => {
   return await api.post(`/api/v1/history/update/${videoId}`)

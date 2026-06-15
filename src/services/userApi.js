@@ -1,4 +1,4 @@
-import api from "./axios";
+import api from "./axios.js";
 
 export const getLoginStats = async () => {
   return await api.get("/api/v1/users/login-stats")

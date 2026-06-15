@@ -1,23 +1,23 @@
 
-export { Home } from "./Home";
-export { VideoPlay } from "./VideoPlay"
-export { Profile } from "./Profile"
+export { Home } from "./Home.jsx";
+export { VideoPlay } from "./VideoPlay.jsx"
+export { Profile } from "./Profile.jsx"
 
-export { DashChannel } from "./dashboard/DashChannel"
-export { DashOverview } from "./dashboard/DashOverview"
-export { DashSubscribers } from "./dashboard/DashSubscribers"
-export { History } from "./History"
-export { Subscriptions } from "./Subscriptions"
-export { Playlist } from "./Playlist"
-export { SettingsAccount } from "./settings/SettingsAccount"
-export { SettingsDangerZone } from "./settings/SettingsDangerZone"
-export { SettingsHistory } from "./settings/SettingsHistory"
-export { SettingsProfile } from "./settings/SettingsProfile"
-export { SettingsSecurity } from "./settings/SettingsSecurity"
-export { CancelDeleteAccount } from "./settings/CancelDeleteAccount"
-export { ConfirmDeleteAccount } from "./settings/ConfirmDeleteAccount"
-export { HelpAndSupport } from "./HelpAndSupport"
-export { SearchResults } from "./SearchResults"
-export { Messenger } from "./Messenger"
+export { DashChannel } from "./dashboard/DashChannel.jsx"
+export { DashOverview } from "./dashboard/DashOverview.jsx"
+export { DashSubscribers } from "./dashboard/DashSubscribers.jsx"
+export { History } from "./History.jsx"
+export { Subscriptions } from "./Subscriptions.jsx"
+export { Playlist } from "./Playlist.jsx"
+export { SettingsAccount } from "./settings/SettingsAccount.jsx"
+export { SettingsDangerZone } from "./settings/SettingsDangerZone.jsx"
+export { SettingsHistory } from "./settings/SettingsHistory.jsx"
+export { SettingsProfile } from "./settings/SettingsProfile.jsx"
+export { SettingsSecurity } from "./settings/SettingsSecurity.jsx"
+export { CancelDeleteAccount } from "./settings/CancelDeleteAccount.jsx"
+export { ConfirmDeleteAccount } from "./settings/ConfirmDeleteAccount.jsx"
+export { HelpAndSupport } from "./HelpAndSupport.jsx"
+export { SearchResults } from "./SearchResults.jsx"
+export { Messenger } from "./Messenger.jsx"
 
-export { NotFound } from "./NotFound";
+export { NotFound } from "./NotFound.jsx";
