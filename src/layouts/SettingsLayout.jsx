@@ -1,8 +1,8 @@
 import { Outlet, Navigate } from "react-router-dom";
 import { useContext } from "react";
 import { LoginContext } from "../context/LoginContextProvider";
-import { SettingsNavbar } from "../components/settings/SettingsNavbar";
-import { SettingsSidebar } from "../components/settings/SettingsSidebar";
+import { SettingsNavbar } from "../components/layout/SettingsNavbar";
+import { SettingsSidebar } from "../components/layout/SettingsSidebar";
 import { ProfileBox } from "../components/user/ProfileBox"
 
 
