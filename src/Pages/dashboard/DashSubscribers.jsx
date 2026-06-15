@@ -1,15 +1,15 @@
 import { useEffect, useState, useCallback, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { Crown, Users, Clock, ChevronDown, Loader2, AlertCircle, CheckCircle2, ArrowRight, ExternalLink } from "lucide-react";
+import { Crown, Users, Clock, ChevronDown, Loader2, AlertCircle, CheckCircle2, ArrowRight, ExternalLink, FlaskConical, Info } from "lucide-react";
 import { getPaymentStatus, createOrder, verifyPayment } from "../../services/paymentApi";
 import { getChannelSubscribers } from "../../services/subscriptionApi";
 import { LoginContext } from "../../context/LoginContextProvider";
 
 const PLANS = [
-  { id: "plan_1hr",  price: "₹10",  duration: "1 Hour",   description: "Quick peek",     highlight: false },
-  { id: "plan_5hr",  price: "₹20",  duration: "5 Hours",  description: "Half day access", highlight: true  },
-  { id: "plan_2day", price: "₹50",  duration: "2 Days",   description: "Weekend access",  highlight: false },
-  { id: "plan_15day",price: "₹100", duration: "15 Days",  description: "Best value",      highlight: false },
+  { id: "plan_1hr", price: "₹10", duration: "1 Hour", description: "Quick peek", highlight: false },
+  { id: "plan_5hr", price: "₹20", duration: "5 Hours", description: "Half day access", highlight: true },
+  { id: "plan_2day", price: "₹50", duration: "2 Days", description: "Weekend access", highlight: false },
+  { id: "plan_15day", price: "₹100", duration: "15 Days", description: "Best value", highlight: false },
 ];
 
 function formatTimeLeft(expiresAt) {
@@ -34,17 +34,29 @@ function loadRazorpayScript() {
   });
 }
 
+// ── Demo Mode Banner ───────────────────────────────────────────────────────────
+function DemoBanner() {
+  return (
+    <div className="flex items-start gap-2.5 px-4 py-3 rounded-xl bg-amber-500/10 border border-amber-500/25 text-amber-400">
+      <FlaskConical className="h-4 w-4 shrink-0 mt-0.5" />
+      <div className="text-xs leading-relaxed">
+        <span className="font-bold">Demo Mode —</span> This is a simulated payment experience.{" "}
+        <span className="text-amber-300/80">No real money will be charged.</span>{" "}
+        Use any test details in the Razorpay popup to proceed.
+      </div>
+    </div>
+  );
+}
+
 // ── Subscriber Card ────────────────────────────────────────────────────────────
 function SubscriberCard({ subscriber }) {
   const navigate = useNavigate();
-
   return (
     <div
       onClick={() => navigate(`/profile/${subscriber.username}`)}
       className="group flex items-center gap-4 p-4 rounded-2xl bg-zinc-900 border border-zinc-800
                  hover:border-violet-500/50 hover:bg-zinc-800/80 transition-all duration-200 cursor-pointer"
     >
-      {/* Avatar */}
       <div className="relative shrink-0">
         <img
           src={subscriber.avatar || "/default-avatar.png"}
@@ -53,17 +65,26 @@ function SubscriberCard({ subscriber }) {
         />
         <div className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full bg-green-500 ring-2 ring-zinc-900" />
       </div>
-
-      {/* Info */}
       <div className="min-w-0 flex-1">
         <p className="text-sm font-semibold text-white truncate group-hover:text-violet-300 transition-colors">
           {subscriber.fullName}
         </p>
         <p className="text-xs text-zinc-500 truncate mt-0.5">@{subscriber.username}</p>
       </div>
-
-      {/* Arrow */}
       <ExternalLink className="h-4 w-4 text-zinc-600 group-hover:text-violet-400 shrink-0 transition-colors" />
+    </div>
+  );
+}
+
+// ── Skeleton ───────────────────────────────────────────────────────────────────
+function SkeletonCard() {
+  return (
+    <div className="flex items-center gap-4 p-4 rounded-2xl bg-zinc-900 border border-zinc-800 animate-pulse">
+      <div className="h-12 w-12 rounded-full bg-zinc-800 shrink-0" />
+      <div className="flex-1 space-y-2">
+        <div className="h-3.5 w-32 rounded-full bg-zinc-800" />
+        <div className="h-3 w-20 rounded-full bg-zinc-800" />
+      </div>
     </div>
   );
 }
@@ -90,8 +111,8 @@ function PaymentModal({ onSuccess, onClose }) {
         key: keyId,
         amount,
         currency,
-        name: "PlayTube Creator",
-        description: `Subscriber access — ${planLabel}`,
+        name: "PlayTube — Demo",
+        description: `[TEST] Subscriber access — ${planLabel}`,
         order_id: orderId,
         handler: async function (response) {
           try {
@@ -102,7 +123,7 @@ function PaymentModal({ onSuccess, onClose }) {
             });
             onSuccess();
           } catch {
-            setError("Payment received but verification failed. Contact support.");
+            setError("Verification failed. Please try again.");
             setPaying(false);
           }
         },
@@ -128,12 +149,27 @@ function PaymentModal({ onSuccess, onClose }) {
       <div className="w-full max-w-md bg-zinc-950 border border-zinc-800 rounded-3xl shadow-2xl overflow-hidden">
 
         {/* Header */}
-        <div className="relative px-6 pt-8 pb-5 text-center border-b border-zinc-800/60">
-          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-violet-600/20 mb-4 mx-auto">
+        <div className="px-6 pt-7 pb-5 text-center border-b border-zinc-800/60">
+          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-violet-600/20 mb-4">
             <Crown className="h-7 w-7 text-violet-400" />
           </div>
           <h2 className="text-xl font-bold text-white">Unlock Subscriber Access</h2>
           <p className="text-sm text-zinc-400 mt-1">Choose a plan to view who subscribed to you</p>
+        </div>
+
+        {/* Demo banner inside modal */}
+        <div className="px-5 pt-5">
+          <DemoBanner />
+        </div>
+
+        {/* Test card hint */}
+        <div className="mx-5 mt-3 flex items-start gap-2 px-3 py-2.5 rounded-lg bg-zinc-900 border border-zinc-800">
+          <Info className="h-3.5 w-3.5 text-zinc-500 shrink-0 mt-0.5" />
+          <p className="text-xs text-zinc-400">
+            In the Razorpay popup, use test card{" "}
+            <span className="text-zinc-200 font-mono">Netbanking</span>{" "}
+            service to complete your payment.
+          </p>
         </div>
 
         {/* Plans */}
@@ -195,25 +231,12 @@ function PaymentModal({ onSuccess, onClose }) {
             {paying ? (
               <><Loader2 className="h-4 w-4 animate-spin" /> Processing…</>
             ) : selectedPlan ? (
-              <>Pay {selectedPlan.price} <ArrowRight className="h-4 w-4" /></>
+              <><FlaskConical className="h-4 w-4" /> Simulate {selectedPlan.price} Payment</>
             ) : (
               "Select a plan"
             )}
           </button>
         </div>
-      </div>
-    </div>
-  );
-}
-
-// ── Skeleton loader ────────────────────────────────────────────────────────────
-function SkeletonCard() {
-  return (
-    <div className="flex items-center gap-4 p-4 rounded-2xl bg-zinc-900 border border-zinc-800 animate-pulse">
-      <div className="h-12 w-12 rounded-full bg-zinc-800 shrink-0" />
-      <div className="flex-1 space-y-2">
-        <div className="h-3.5 w-32 rounded-full bg-zinc-800" />
-        <div className="h-3 w-20 rounded-full bg-zinc-800" />
       </div>
     </div>
   );
@@ -230,7 +253,6 @@ export function DashSubscribers() {
   const [hasNextPage, setHasNextPage] = useState(false);
   const [loadingSubscribers, setLoadingSubscribers] = useState(false);
   const [subError, setSubError] = useState("");
-  const [totalCount, setTotalCount] = useState(0);
 
   useEffect(() => {
     async function checkStatus() {
@@ -254,7 +276,6 @@ export function DashSubscribers() {
       setSubscribers((prev) => cursor ? [...prev, ...newSubs] : newSubs);
       setNextCursor(pagination.nextCursor);
       setHasNextPage(pagination.hasNextPage);
-      if (!cursor) setTotalCount(pagination.count);
     } catch {
       setSubError("Couldn't load subscribers. Please refresh.");
     } finally {
@@ -285,7 +306,8 @@ export function DashSubscribers() {
   if (!payStatus.active) {
     return (
       <>
-        <div className="flex flex-col items-center justify-center min-h-[70vh] text-center px-4">
+        <div className="flex flex-col items-center justify-center min-h-[70vh] text-center px-4 pt-16">
+
           {/* Icon */}
           <div className="relative mb-6">
             <div className="w-24 h-24 rounded-3xl bg-violet-600/10 border border-violet-500/20 flex items-center justify-center">
@@ -297,12 +319,14 @@ export function DashSubscribers() {
           </div>
 
           <h1 className="text-3xl font-black text-white mb-2">Your Subscribers</h1>
-          <p className="text-zinc-400 text-sm max-w-xs mb-2">
+          <p className="text-zinc-400 text-sm max-w-xs mb-6">
             See exactly who's subscribed to your channel.
           </p>
-          <p className="text-zinc-600 text-xs mb-8">
-            Access is time-limited — starting at just ₹10
-          </p>
+
+          {/* Demo notice on unlock screen */}
+          <div className="w-full max-w-sm mb-6">
+            <DemoBanner />
+          </div>
 
           {/* Pricing preview */}
           <div className="flex gap-2 mb-8 flex-wrap justify-center">
@@ -319,10 +343,12 @@ export function DashSubscribers() {
                        text-white font-bold text-sm transition cursor-pointer flex items-center gap-2
                        shadow-xl shadow-violet-600/30"
           >
-            <Crown className="h-4 w-4" />
-            Unlock Access
+            <FlaskConical className="h-4 w-4" />
+            Try Demo Access
             <ArrowRight className="h-4 w-4" />
           </button>
+
+          <p className="text-zinc-600 text-xs mt-3">No real money involved · Test experience only</p>
         </div>
 
         {showModal && (
@@ -337,7 +363,7 @@ export function DashSubscribers() {
     <div className="max-w-3xl mx-auto px-4 py-6 pt-16">
 
       {/* Header */}
-      <div className="flex items-start justify-between mb-8">
+      <div className="flex items-start justify-between mb-6">
         <div>
           <h1 className="text-2xl font-black text-white">Subscribers</h1>
           <p className="text-sm text-zinc-500 mt-1">
@@ -357,6 +383,11 @@ export function DashSubscribers() {
         </div>
       </div>
 
+      {/* Demo reminder banner when viewing subscribers */}
+      <div className="mb-5">
+        <DemoBanner />
+      </div>
+
       {/* Error */}
       {subError && (
         <div className="flex items-center gap-2 text-sm text-red-400 bg-red-500/10 border border-red-500/20 rounded-xl p-3 mb-5">
@@ -368,7 +399,7 @@ export function DashSubscribers() {
       {/* Skeleton */}
       {loadingSubscribers && subscribers.length === 0 && (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {[1,2,3,4,5,6].map((i) => <SkeletonCard key={i} />)}
+          {[1, 2, 3, 4, 5, 6].map((i) => <SkeletonCard key={i} />)}
         </div>
       )}
 
