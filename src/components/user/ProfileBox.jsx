@@ -105,7 +105,7 @@ export function ProfileBox() {
             {/* User Info Header */}
             <div className="flex items-center gap-3 px-4 py-4 border-b border-zinc-800 cursor-pointer">
               <div className="flex h-10 w-10 items-center justify-center rounded-full to-blue-500 shrink-0">
-                <img src={user.avatar} alt="Profile Image" className="rounded-full" />
+                <img src={user.avatar} alt="Profile Image" className="rounded-full w-10 h-10 object-cover" />
               </div>
               <div className="flex flex-col min-w-0">
                 <p className="text-white font-semibold text-sm truncate">

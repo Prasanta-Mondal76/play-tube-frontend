@@ -119,7 +119,7 @@ export function Navbar() {
             {
               isLogIn ?
                 <div className="flex h-10 w-10 items-center justify-center rounded-full to-blue-500 shrink-0">
-                  <img src={user?.avatar} alt="Profile Image" className="rounded-full" />
+                  <img src={user?.avatar} alt="Profile Image" className="rounded-full w-10 h-10 object-cover" />
                 </div>
                 :
                 <UserCircle2Icon
