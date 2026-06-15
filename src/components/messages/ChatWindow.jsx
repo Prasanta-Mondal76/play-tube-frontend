@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useContext } from "react";
-import { MoreVertical, ShieldOff, Trash2, Check, CheckCheck, ArrowLeft } from "lucide-react";
+import { MoreVertical, ShieldOff, Trash2, EyeOffIcon, EyeIcon, ArrowLeft } from "lucide-react";
 import { LoginContext } from "../../context/LoginContextProvider";
 import {
   getConversationMessages,
@@ -232,8 +232,8 @@ export function ChatWindow({ conversation, onNewMessage, onBlocked, onSeen, onCh
                     </span>
                     {isMine && isLastSent && (
                       msg.isSeen
-                        ? <CheckCheck size={13} className="text-blue-200" />
-                        : <Check size={13} className="text-blue-300 opacity-60" />
+                        ? <EyeIcon size={13} className="text-green-400" />
+                        : <EyeOffIcon size={13} className="text-red-400 opacity-80" />
                     )}
                   </div>
                 </div>

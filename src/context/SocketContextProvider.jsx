@@ -11,7 +11,7 @@ export function SocketContextProvider({ children }) {
   useEffect(() => {
     if (!isLogIn || !user?._id) return;
 
-    const s = io(import.meta.env.VITE_API_BASE_URL, {
+    const s = io(import.meta.env.VITE_SOCKET_URL, {
       query: { userId: user._id },
       withCredentials: true,
     });
