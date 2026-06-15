@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import { Tids } from "../utils/toastId";
@@ -18,7 +18,46 @@ export function Profile() {
   const [activeTab, setActiveTab] = useState("Videos");
   const [loading, setLoading] = useState(true);
   const [videosLoading, setVideosLoading] = useState(false);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [nextCursor, setNextCursor] = useState(null);
+  const [hasMore, setHasMore] = useState(false);
+  const sentinelRef = useRef(null);
+  const observerRef = useRef(null);
   const toastId = "Profile-Toast-Id"
+
+
+  // =========================
+  // FETCH CHANNEL VIDEOS
+  // =========================
+
+  const fetchVideos = useCallback(async (channelId, cursor = null) => {
+    try {
+      if (cursor) {
+        setLoadingMore(true);
+      } else {
+        setVideosLoading(true);
+      }
+
+      const params = { limit: 12 };
+      if (cursor) {
+        params.lastValue = cursor.lastValue;
+        params.lastId = cursor.lastId;
+      }
+
+      const response = await getChannelVideos(channelId, params);
+      const { videos: newVideos, nextCursor: newCursor } = response.data.data;
+
+      setVideos((prev) => (cursor ? [...prev, ...(newVideos || [])] : (newVideos || [])));
+      setNextCursor(newCursor);
+      setHasMore(!!newCursor);
+    } catch (error) {
+      console.log(error);
+      toast.error(error?.response?.data?.message || "Failed to load videos", {id: toastId});
+    } finally {
+      setVideosLoading(false);
+      setLoadingMore(false);
+    }
+  }, []);
 
   // =========================
   // FETCH CHANNEL DETAILS
@@ -51,21 +90,40 @@ export function Profile() {
   };
 
   // =========================
-  // FETCH CHANNEL VIDEOS
+  // LOAD MORE (triggered by sentinel)
   // =========================
 
-  const fetchVideos = async (channelId) => {
-    try {
-      setVideosLoading(true);
-      const response = await getChannelVideos(channelId);
-      setVideos(response.data.data.videos || []);
-    } catch (error) {
-      console.log(error);
-      toast.error(error?.response?.data?.message || "Failed to load videos", {id: toastId});
-    } finally {
-      setVideosLoading(false);
-    }
-  };
+  const loadMore = useCallback(() => {
+    if (loadingMore || !hasMore || !nextCursor || !channel?._id) return;
+    fetchVideos(channel._id, nextCursor);
+  }, [loadingMore, hasMore, nextCursor, channel?._id, fetchVideos]);
+
+  // =========================
+  // INTERSECTION OBSERVER
+  // =========================
+
+  useEffect(() => {
+    if (activeTab !== "Videos" || !hasMore) return;
+
+    const sentinel = sentinelRef.current;
+    if (!sentinel) return;
+
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          loadMore();
+        }
+      },
+      { rootMargin: "200px" }
+    );
+
+    observerRef.current.observe(sentinel);
+
+    return () => {
+      if (observerRef.current) observerRef.current.disconnect();
+    };
+  }, [activeTab, hasMore, loadMore]);
+
 
   // =========================
   // LOADING
@@ -126,6 +184,15 @@ export function Profile() {
                   />
                 ))}
               </div>
+            )}
+
+            {/* Sentinel for infinite scroll */}
+            {!videosLoading && hasMore && (
+              <div ref={sentinelRef} className="h-10 w-full" />
+            )}
+
+            {loadingMore && (
+              <p className="text-zinc-500 text-sm text-center py-4">Loading more videos...</p>
             )}
           </>
         )}

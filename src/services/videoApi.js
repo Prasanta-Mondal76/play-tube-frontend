@@ -1,7 +1,7 @@
 import api from "./axios";
 
-export const getAllVideos = async () => {
-  return await api.get("/api/v1/videos/all-videos");
+export const getAllVideos = async (params = {}) => {
+  return await api.get("/api/v1/videos/all-videos", { params });
 };
 
 export const getVideoById = async (videoId) => {
