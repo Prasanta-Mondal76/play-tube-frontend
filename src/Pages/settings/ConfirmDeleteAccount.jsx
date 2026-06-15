@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { confirmDeleteAccount } from "../../services/userApi";
 import toast from "react-hot-toast";
@@ -8,8 +8,12 @@ export function ConfirmDeleteAccount() {
   const navigate = useNavigate();
   const [status, setStatus] = useState("loading");
   const [message, setMessage] = useState("");
+  const calledRef = useRef(false);
 
   useEffect(() => {
+    if (calledRef.current) return;
+    calledRef.current = true;
+
     const tid = toast.loading("Processing account deletion...");
     confirmDeleteAccount(token)
       .then(() => {
