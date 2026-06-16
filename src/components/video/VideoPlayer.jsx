@@ -32,21 +32,8 @@ export function VideoPlayer({
       {
         isLoading && (
 
-          <div
-            className="
-                     absolute
-                     inset-0
-                     z-10
-                     flex
-                     items-center
-                     justify-center
-                     bg-black
-                     text-white
-                  "
-          >
-
-            Loading Video...
-
+          <div className="fixed inset-0 flex items-center justify-center bg-zinc-900">
+            <div className="h-12 w-12 animate-spin rounded-full border-4 border-blue-500 border-t-transparent" />
           </div>
 
         )
