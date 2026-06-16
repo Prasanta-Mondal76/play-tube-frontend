@@ -11,6 +11,7 @@ export const LoginContext = createContext()
 export function LoginProvider({ children }) {
   const [isLogIn, setIsLogIn] = useState(false)
   const [user, setUser] = useState(null)
+  const [authLoading, setAuthLoading] = useState(true)
 
   async function checkLogin() {
     try {
@@ -20,11 +21,15 @@ export function LoginProvider({ children }) {
       setUser(loggedUser)
     } catch (error) {
       console.error("Request failed:", error)
+      setIsLogIn(false)
+      setUser(null)
       toast.error("Login failed. Please try again.", { id: Tids.error })
+    } finally {
+      setAuthLoading(false)
     }
   }
   useEffect(() => {
-    if (!isLogIn) checkLogin()
+    checkLogin()
   }, [])
 
   return (
@@ -33,7 +38,8 @@ export function LoginProvider({ children }) {
         user,
         setUser,
         isLogIn,
-        setIsLogIn
+        setIsLogIn,
+        authLoading
       }}
 
     >

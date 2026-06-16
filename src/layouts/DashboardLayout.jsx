@@ -11,10 +11,18 @@ import { LoginContext } from "../context/LoginContextProvider.jsx";
 export function DashboardLayout() {
   const navigate = useNavigate()
   const { setIsSidebarOpen } = useContext(BoxContext)
-  const { isLogIn } = useContext(LoginContext)
+  const { isLogIn, authLoading } = useContext(LoginContext)
 
   // In Dashboard, we never show or open MainLayout Sidebar
   setIsSidebarOpen(false)
+
+  if (authLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="h-10 w-10 animate-spin rounded-full border-4 border-zinc-600 border-t-white bg-zinc-900" />
+      </div>
+    );
+  }
 
   return (
     !isLogIn ?
