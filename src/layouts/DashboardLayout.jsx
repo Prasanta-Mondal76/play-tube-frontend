@@ -18,8 +18,8 @@ export function DashboardLayout() {
 
   if (authLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="h-10 w-10 animate-spin rounded-full border-4 border-zinc-600 border-t-white bg-zinc-900" />
+      <div className="fixed inset-0 flex items-center justify-center bg-zinc-900">
+        <div className="h-12 w-12 animate-spin rounded-full border-4 border-blue-500 border-t-transparent" />
       </div>
     );
   }
