@@ -6,9 +6,9 @@ import { clearWatchHistory } from "../../services/historyApi.js";
 import api from "../../services/axios.js";
 import { TriangleAlert, Trash2, History } from "lucide-react";
 
-function Card({ title, description, children, border = "border-zinc-800" }) {
+function Card({ title, description, children, border = "border-white/5" }) {
   return (
-    <div className={`bg-zinc-900 rounded-2xl p-6 flex flex-col gap-5 border ${border}`}>
+    <div className={`bg-night-900 rounded-3xl p-6 flex flex-col gap-5 border animate-fade-up ${border}`}>
       <div>
         <h2 className="text-base font-semibold text-white">{title}</h2>
         {description && <p className="text-xs text-zinc-500 mt-1">{description}</p>}
@@ -25,7 +25,7 @@ function ConfirmModal({ title, message, confirmLabel = "Confirm", onConfirm, onC
 
   return (
     <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center px-4">
-      <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 w-full max-w-sm flex flex-col gap-4">
+      <div className="bg-night-800 border border-white/10 rounded-3xl p-6 w-full max-w-sm flex flex-col gap-4 animate-scale-in">
         <div className="flex items-center gap-3">
           <TriangleAlert className={`h-5 w-5 shrink-0 ${danger ? "text-red-400" : "text-orange-400"}`} />
           <h3 className="text-base font-semibold text-white">{title}</h3>
@@ -43,9 +43,9 @@ function ConfirmModal({ title, message, confirmLabel = "Confirm", onConfirm, onC
               value={typed}
               onChange={(e) => setTyped(e.target.value)}
               placeholder={requireTyping}
-              className="w-full bg-zinc-800 rounded-xl px-4 py-2.5 text-sm text-white
-                         placeholder:text-zinc-600 outline-none focus:ring-2
-                         focus:ring-red-600/60 transition font-mono"
+              className="w-full bg-night-850 border border-line rounded-xl px-4 py-2.5 text-sm text-white
+                         placeholder:text-zinc-600 outline-none focus:border-red-500 focus:ring-2
+                         focus:ring-red-600/30 transition font-mono"
             />
           </div>
         )}
@@ -53,14 +53,14 @@ function ConfirmModal({ title, message, confirmLabel = "Confirm", onConfirm, onC
         <div className="flex gap-3 justify-end">
           <button
             onClick={onCancel}
-            className="px-4 py-2 rounded-xl bg-zinc-800 text-zinc-300 text-sm hover:bg-zinc-700 transition cursor-pointer"
+            className="px-4 py-2 rounded-full bg-night-700 text-zinc-300 text-sm hover:bg-night-600 transition cursor-pointer"
           >
             Cancel
           </button>
           <button
             onClick={onConfirm}
             disabled={!canConfirm}
-            className={`px-4 py-2 rounded-xl text-white text-sm font-semibold transition cursor-pointer
+            className={`px-4 py-2 rounded-full text-white text-sm font-semibold transition cursor-pointer
                         disabled:opacity-40 disabled:cursor-not-allowed
                         ${danger ? "bg-red-600 hover:bg-red-500" : "bg-orange-600 hover:bg-orange-500"}`}
           >
@@ -153,10 +153,10 @@ export function SettingsDangerZone() {
         <Card
           title="Remove All History"
           description="Permanently delete your entire watch history across all devices."
-          border="border-zinc-800"
+          border="border-white/5"
         >
           <div className="flex items-start gap-4">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-zinc-800 shrink-0 mt-0.5">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-night-800 shrink-0 mt-0.5">
               <History className="h-5 w-5 text-orange-400" />
             </div>
             <div className="flex flex-col gap-3 flex-1">
@@ -166,7 +166,7 @@ export function SettingsDangerZone() {
               <button
                 onClick={() => setShowHistoryConfirm(true)}
                 disabled={historyLoading}
-                className="self-start px-6 py-2.5 rounded-xl bg-orange-600/20 border border-orange-600/40
+                className="self-start px-6 py-2.5 rounded-full bg-orange-600/20 border border-orange-600/40
                            text-orange-400 text-sm font-semibold hover:bg-orange-600/30 transition
                            disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
               >
@@ -211,7 +211,7 @@ export function SettingsDangerZone() {
               <button
                 onClick={() => setShowDeleteConfirm(true)}
                 disabled={deleteLoading}
-                className="self-start px-6 py-2.5 rounded-xl bg-red-600 text-white text-sm
+                className="self-start px-6 py-2.5 rounded-full bg-red-600 text-white text-sm
                            font-semibold hover:bg-red-500 transition disabled:opacity-50
                            disabled:cursor-not-allowed cursor-pointer"
               >

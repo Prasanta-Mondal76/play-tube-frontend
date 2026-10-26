@@ -40,7 +40,7 @@ export const HelpAndSupport = () => {
   }
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-white p-6 lg:p-10">
+    <div className="min-h-screen bg-night-950 text-white p-6 lg:p-10 animate-fade-in">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <button className="flex items-center gap-2 text-zinc-400 hover:text-white transition mb-6 cursor-pointer"
@@ -51,16 +51,16 @@ export const HelpAndSupport = () => {
         </button>
 
         {/* Hero Section */}
-        <div className="relative overflow-hidden rounded-3xl border border-zinc-800 bg-gradient-to-br from-zinc-900 via-zinc-950 to-black p-8 md:p-12">
-          <div className="absolute top-0 right-0 w-72 h-72 bg-blue-500/10 blur-3xl rounded-full" />
+        <div className="relative overflow-hidden rounded-3xl border border-white/5 bg-gradient-to-br from-night-800 via-night-950 to-black p-8 md:p-12">
+          <div className="absolute top-0 right-0 w-72 h-72 bg-ember/15 blur-3xl rounded-full" />
 
           <div className="relative z-10">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-ember/10 border border-ember/25 text-ember-soft mb-6">
               <Rocket size={16} />
               New Features Coming Soon
             </div>
 
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
               Help & Support
             </h1>
 
@@ -71,13 +71,13 @@ export const HelpAndSupport = () => {
             </p>
 
             <div className="flex flex-wrap gap-4 mt-8">
-              <button className="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 font-medium transition cursor-pointer"
+              <button className="px-6 py-3 rounded-full ember-gradient shadow-lg shadow-ember/30 hover:brightness-110 font-semibold transition cursor-pointer"
               onClick={ handelNotify }
               >
                 Notify Me
               </button>
 
-              <button className="px-6 py-3 rounded-xl border border-zinc-700 hover:border-zinc-500 transition cursor-pointer"
+              <button className="px-6 py-3 rounded-full border border-line hover:border-ember/50 transition cursor-pointer"
               onClick={ () => navigate("/")}
               >
                 Back to Home
@@ -96,9 +96,9 @@ export const HelpAndSupport = () => {
             {features.map((feature) => (
               <div
                 key={feature.title}
-                className="bg-zinc-900/70 border border-zinc-800 rounded-2xl p-6 hover:border-blue-500 transition-all duration-300 hover:-translate-y-1"
+                className="bg-night-800/70 border border-white/5 rounded-3xl p-6 hover:border-ember/60 transition-all duration-300 hover:-translate-y-1 animate-fade-up"
               >
-                <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400 mb-4">
+                <div className="w-12 h-12 rounded-2xl bg-ember/10 ring-1 ring-ember/25 flex items-center justify-center text-ember-soft mb-4">
                   <feature.icon size={22} />
                 </div>
 
@@ -120,9 +120,9 @@ export const HelpAndSupport = () => {
                   </span>
                 </div>
 
-                <div className="h-2 rounded-full bg-zinc-800 overflow-hidden">
+                <div className="h-2 rounded-full bg-night-700 overflow-hidden">
                   <div
-                    className="h-full bg-blue-500 rounded-full"
+                    className="h-full ember-gradient rounded-full"
                     style={{ width: `${feature.progress}%` }}
                   />
                 </div>
@@ -132,7 +132,7 @@ export const HelpAndSupport = () => {
         </div>
 
         {/* Contact Placeholder */}
-        <div className="mt-10 rounded-3xl border border-blue-900 bg-blue-950/20 p-8">
+        <div className="mt-10 rounded-3xl border border-ember/25 bg-ember/5 p-8">
           <h2 className="text-xl font-semibold mb-3">
             Need Immediate Assistance?
           </h2>
@@ -143,13 +143,13 @@ export const HelpAndSupport = () => {
             resources.
           </p>
 
-          <div className="mt-5 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-400 text-sm">
+          <div className="mt-5 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-night-800 border border-white/5 text-zinc-400 text-sm">
             🚧 Under Development
           </div>
         </div>
 
         {/* Footer */}
-        <div className="mt-12 text-center border-t border-zinc-900 pt-8">
+        <div className="mt-12 text-center border-t border-white/5 pt-8">
           <h3 className="font-semibold text-lg">PlayTube Support Center</h3>
 
           <p className="text-zinc-500 text-sm mt-2">

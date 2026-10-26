@@ -25,8 +25,8 @@ export function Navbar() {
       className="
         fixed top-0 left-0 z-50
         h-16 w-full
-        border-b border-zinc-800
-        bg-black
+        border-b border-white/5
+        glass-bar
       "
       onClick={() => {
         isProfileOpen ? setIsProfileOpen(false) : null
@@ -44,7 +44,7 @@ export function Navbar() {
               setIsProfileOpen(false)
               setIsSidebarOpen(!isSidebarOpen)
             }}
-            className="rounded-full p-2 hover:bg-zinc-800 transition cursor-pointer"
+            className="rounded-full p-2 hover:bg-night-700 transition cursor-pointer"
           >
             <Menu className="h-6 w-6 text-white " />
           </button>
@@ -56,8 +56,8 @@ export function Navbar() {
             <div className="flex h-10 w-10 items-center justify-center">
               <img src={logo} alt="Logo" className="rounded-full" />
             </div>
-            <h1 className="hidden sm:block text-2xl font-bold text-white">
-              PlayTube
+            <h1 className="hidden sm:block text-2xl font-black tracking-tight text-white">
+              Play<span className="ember-text">Tube</span>
             </h1>
           </div>
         </div>
@@ -68,13 +68,13 @@ export function Navbar() {
             className="
               flex h-12 w-full overflow-hidden
               rounded-full
-              border border-zinc-700
-              bg-zinc-900
+              border border-line
+              bg-night-850
               shadow-lg shadow-black/20
               transition-all duration-200
-              focus-within:border-blue-500
+              focus-within:border-ember
               focus-within:ring-2
-              focus-within:ring-blue-500/30
+              focus-within:ring-ember/25
             " >
             <input
               type="text"
@@ -84,8 +84,8 @@ export function Navbar() {
               placeholder="Search creators, topics, categories..."
               className="flex-1 bg-transparent px-5 text-white outline-none placeholder:text-zinc-500"
             />
-            <button onClick={handleSearch} className="flex items-center justify-center w-14 bg-zinc-700 hover:bg-blue-600 transition-all duration-200 cursor-pointer">
-              <Search className="h-5 w-5 text-zinc-300" />
+            <button onClick={handleSearch} className="flex items-center justify-center w-14 bg-night-700 hover:ember-gradient transition-all duration-200 cursor-pointer">
+              <Search className="h-5 w-5 text-white" />
             </button>
           </div>
         </div>
@@ -94,7 +94,7 @@ export function Navbar() {
         <div className="flex items-center gap-2 md:gap-4">
 
           {/* MOBILE SEARCH */}
-          <button className="rounded-full p-2 hover:bg-zinc-800 md:hidden cursor-pointer">
+          <button className="rounded-full p-2 hover:bg-night-700 md:hidden cursor-pointer">
             <Search className="h-5 w-5 text-white " />
           </button>
 
@@ -106,7 +106,7 @@ export function Navbar() {
            NOTIFICATION 
           <button className="relative rounded-full p-2 hover:bg-zinc-800 cursor-pointer">
             <Bell className="h-5 w-5 text-white " />
-            <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-violet-500" />
+            <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-ember" />
           </button> */}
 
           {/* PROFILE */}
@@ -118,12 +118,12 @@ export function Navbar() {
           >
             {
               isLogIn ?
-                <div className="flex h-10 w-10 items-center justify-center rounded-full to-blue-500 shrink-0">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full ring-2 ring-ember/60 ring-offset-2 ring-offset-black transition hover:ring-ember shrink-0">
                   <img src={user?.avatar} alt="Profile Image" className="rounded-full w-10 h-10 object-cover" />
                 </div>
                 :
                 <UserCircle2Icon
-                  className="h-10 w-10 rounded-full text-blue-300 object-cover "
+                  className="h-10 w-10 rounded-full text-ember-soft object-cover "
                   strokeWidth={0.9}
                 />
             }

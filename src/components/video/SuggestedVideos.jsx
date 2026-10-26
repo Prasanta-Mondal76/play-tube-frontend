@@ -62,13 +62,22 @@ export function SuggestedVideos({
 
       return (
 
-         <div
-            className="
-               text-zinc-400
-            "
-         >
+         <div className="flex flex-col gap-4">
 
-            Loading videos...
+            <h3 className="text-base font-bold text-white">Up Next</h3>
+
+            {[1, 2, 3, 4, 5].map((i) => (
+               <div key={i}>
+                  <div className="skeleton-wave aspect-video w-full rounded-2xl bg-night-800" />
+                  <div className="mt-3 flex gap-3">
+                     <div className="skeleton-wave h-9 w-9 shrink-0 rounded-full bg-night-800" />
+                     <div className="flex-1">
+                        <div className="skeleton-wave h-3.5 w-11/12 rounded bg-night-800" />
+                        <div className="skeleton-wave mt-2 h-3 w-3/5 rounded bg-night-800" />
+                     </div>
+                  </div>
+               </div>
+            ))}
 
          </div>
 
@@ -86,6 +95,8 @@ export function SuggestedVideos({
             gap-4
          "
       >
+
+         <h3 className="text-base font-bold text-white">Up Next</h3>
 
          {
             videos.map((video) => (

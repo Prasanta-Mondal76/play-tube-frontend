@@ -7,20 +7,20 @@ import api from "../../services/axios.js";
 import { KeyRound, LogOut, Monitor, Eye, EyeOff } from "lucide-react";
 
 const inputCls = `
-  w-full bg-zinc-800 rounded-xl px-4 py-2.5 text-sm text-white
-  placeholder:text-zinc-500 outline-none focus:ring-2
-  focus:ring-violet-600/60 transition
+  w-full bg-night-850 border border-line rounded-xl px-4 py-2.5 text-sm text-white
+  placeholder:text-zinc-500 outline-none focus:border-ember focus:ring-2
+  focus:ring-ember/20 transition
 `;
 
 const btnCls = `
-  self-end px-6 py-2.5 rounded-xl bg-violet-600 text-white text-sm
-  font-semibold hover:bg-violet-500 transition disabled:opacity-50
+  self-end px-6 py-2.5 rounded-full ember-gradient shadow-lg shadow-ember/30 text-white text-sm
+  font-semibold hover:brightness-110 active:scale-[0.98] transition disabled:opacity-50
   disabled:cursor-not-allowed cursor-pointer
 `;
 
 function Card({ title, description, children }) {
   return (
-    <div className="bg-zinc-900 rounded-2xl p-6 flex flex-col gap-5">
+    <div className="bg-night-900 border border-white/5 rounded-3xl p-6 flex flex-col gap-5 animate-fade-up">
       <div>
         <h2 className="text-base font-semibold text-white">{title}</h2>
         {description && <p className="text-xs text-zinc-500 mt-1">{description}</p>}
@@ -34,20 +34,22 @@ function Card({ title, description, children }) {
 function PasswordInput({ value, onChange, placeholder }) {
   const [show, setShow] = useState(false);
   return (
-    <div className="relative">
+    // Password field + bahar side me attach eye button (approved design)
+    <div className="flex items-stretch gap-2">
       <input
         type={show ? "text" : "password"}
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        className={`${inputCls} pr-10`}
+        className={`${inputCls} flex-1 min-w-0`}
       />
       <button
         type="button"
         onClick={() => setShow(!show)}
-        className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-white transition cursor-pointer"
+        aria-label={show ? "Hide password" : "Show password"}
+        className="shrink-0 flex items-center justify-center px-3 rounded-xl bg-night-800 border border-line text-zinc-300 transition cursor-pointer hover:ember-gradient hover:text-white hover:border-transparent active:scale-95"
       >
-        {show ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+        {show ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
       </button>
     </div>
   );
@@ -105,7 +107,7 @@ export function SettingsSecurity() {
     <div className="px-4 py-8 max-w-2xl mx-auto flex flex-col gap-6">
 
       <div>
-        <h1 className="text-2xl font-bold text-white">Security</h1>
+        <h1 className="text-2xl font-extrabold tracking-tight text-white">Security</h1>
         <p className="text-zinc-400 text-sm mt-1">
           Manage your password and active sessions.
         </p>
@@ -154,15 +156,15 @@ export function SettingsSecurity() {
         description="You are currently signed in on this device. Logging out all devices will require you to sign in again everywhere."
       >
         {/* Current session indicator */}
-        <div className="flex items-center gap-4 py-3 border border-zinc-800 rounded-xl px-4">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-zinc-800 shrink-0">
-            <Monitor className="h-5 w-5 text-violet-400" />
+        <div className="flex items-center gap-4 py-3 border border-white/5 rounded-xl px-4">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-night-800 shrink-0">
+            <Monitor className="h-5 w-5 text-ember-soft" />
           </div>
           <div className="flex flex-col min-w-0">
             <span className="text-sm text-white font-medium">Current Session</span>
             <span className="text-xs text-zinc-500">This device — Active now</span>
           </div>
-          <span className="ml-auto text-xs bg-violet-600/20 text-violet-400 px-2 py-1 rounded-lg font-medium shrink-0">
+          <span className="ml-auto text-xs bg-ember/15 text-ember-soft px-2 py-1 rounded-lg font-medium shrink-0">
             Active
           </span>
         </div>
@@ -178,7 +180,7 @@ export function SettingsSecurity() {
         description="This will sign you out from every device and browser where you are logged in."
       >
         <div className="flex items-start gap-4">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-zinc-800 shrink-0 mt-0.5">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-night-800 shrink-0 mt-0.5">
             <LogOut className="h-5 w-5 text-orange-400" />
           </div>
           <div className="flex flex-col gap-3 flex-1">
@@ -188,8 +190,8 @@ export function SettingsSecurity() {
             <button
               onClick={handleLogoutAll}
               disabled={logoutLoading}
-              className="self-start px-6 py-2.5 rounded-xl bg-orange-600 text-white text-sm
-                         font-semibold hover:bg-orange-500 transition disabled:opacity-50
+              className="self-start px-6 py-2.5 rounded-full bg-orange-600 text-white text-sm
+                         font-semibold hover:bg-orange-500 active:scale-[0.98] transition disabled:opacity-50
                          disabled:cursor-not-allowed cursor-pointer"
             >
               {logoutLoading ? "Logging out..." : "Logout All Devices"}

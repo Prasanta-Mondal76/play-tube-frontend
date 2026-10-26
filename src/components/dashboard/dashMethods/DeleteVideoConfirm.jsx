@@ -8,7 +8,6 @@ export function DeleteVideoConfirm({ video, onClose, setVideos }) {
 
   const handleDelete = async () => {
     setLoading(true);
-    const toastId = toast.loading("Deleting video...");
     try {
       await deleteVideo(video._id);
       setVideos((prev) => prev.filter((v) => v._id !== video._id));
@@ -23,9 +22,9 @@ export function DeleteVideoConfirm({ video, onClose, setVideos }) {
 
   return (
     <>
-      <div className="fixed inset-0 bg-black/60 z-40" onClick={onClose} />
+      <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 animate-fade-in" onClick={onClose} />
       <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50
-                      bg-zinc-900 rounded-2xl shadow-xl w-80 p-6 flex flex-col gap-5">
+                      bg-night-800 ring-1 ring-white/10 rounded-3xl shadow-2xl shadow-black/60 w-[min(20rem,92vw)] p-6 flex flex-col gap-5 animate-scale-in">
 
         <div className="flex items-center justify-between">
           <h2 className="text-white font-semibold text-base">Delete Video</h2>
@@ -55,8 +54,8 @@ export function DeleteVideoConfirm({ video, onClose, setVideos }) {
             type="button"
             onClick={handleDelete}
             disabled={loading}
-            className={`flex items-center gap-2 px-5 py-2 rounded-xl bg-red-500
-                       text-white text-sm font-semibold hover:bg-red-800
+            className={`flex items-center gap-2 px-5 py-2 rounded-full bg-red-600
+                       text-white text-sm font-semibold hover:bg-red-500
                        transition disabled:opacity-50 cursor-pointer ${loading ? 'disabled:cursor-not-allowed' : null}`}
           >
             <Trash2 size={14} />

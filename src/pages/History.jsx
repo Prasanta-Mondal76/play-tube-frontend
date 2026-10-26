@@ -35,8 +35,8 @@ export function History() {
   // ── Not logged in ──────────────────────────────────────────────────────────
   if (!isLogIn) {
     return (
-      <div className="min-h-screen bg-[#0f0f0f] flex flex-col items-center justify-center gap-5 px-4 text-white">
-        <HistoryIcon size={56} className="text-gray-500" />
+      <div className="min-h-screen bg-night-950 flex flex-col items-center justify-center gap-5 px-4 text-white">
+        <HistoryIcon size={56} className="text-ember-soft" />
         <h2 className="text-2xl font-bold text-center">
           Sign in to see your watch history
         </h2>
@@ -45,7 +45,7 @@ export function History() {
         </p>
         <button
           onClick={() => navigate("/")}
-          className="flex items-center gap-2 mt-2 bg-white text-black font-semibold px-6 py-2.5 rounded-full hover:bg-gray-200 transition-colors duration-200"
+          className="flex items-center gap-2 mt-2 ember-gradient shadow-lg shadow-ember/30 text-white font-semibold px-6 py-2.5 rounded-full hover:brightness-110 transition-all duration-200 cursor-pointer"
         >
           <Home size={16} />
           Back to Home
@@ -56,13 +56,13 @@ export function History() {
 
   // ── Logged in ──────────────────────────────────────────────────────────────
   return (
-    <div className="min-h-screen bg-[#0f0f0f] text-white px-4 sm:px-6 md:px-8 py-6">
+    <div className="min-h-screen bg-night-950 text-white px-4 sm:px-6 md:px-8 py-6 animate-fade-in">
 
       {/* Header */}
       <div className="flex items-center gap-3 mb-6">
         <HistoryIcon size={28} className="shrink-0" />
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold leading-tight">
+          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight leading-tight">
             Watch History
           </h1>
           <p className="text-gray-400 text-sm mt-0.5">
@@ -84,8 +84,8 @@ export function History() {
               text-sm font-medium
               disabled:opacity-50 disabled:cursor-not-allowed
               ${activeFilter === days
-                ? "bg-blue-600 text-white hover:bg-blue-900"
-                : "bg-[#272727] hover:bg-[#3a3a3a] text-white"
+                ? "ember-gradient shadow-lg shadow-ember/30 text-white"
+                : "bg-night-700 hover:bg-night-600 text-white"
               }
             `}
           >
@@ -97,14 +97,14 @@ export function History() {
       {/* Loader */}
       {loading && (
         <div className="flex justify-center py-24">
-          <Loader2 size={40} className="animate-spin text-gray-400" />
+          <Loader2 size={40} className="animate-spin text-ember" />
         </div>
       )}
 
       {/* Empty State */}
       {!loading && history.length === 0 && (
         <div className="flex flex-col items-center justify-center py-20 px-4 text-center">
-          <div className="bg-[#1a1a1a] rounded-full p-6 mb-5">
+          <div className="bg-night-800 ring-1 ring-white/5 rounded-full p-6 mb-5">
             <HistoryIcon size={48} className="text-gray-500" />
           </div>
           <h2 className="text-xl sm:text-2xl font-semibold mb-2 text-white">
@@ -116,7 +116,7 @@ export function History() {
           </p>
           <button
             onClick={() => navigate("/")}
-            className="mt-6 flex items-center gap-2 bg-[#272727] hover:bg-[#3a3a3a] text-white text-sm font-medium px-5 py-2.5 rounded-full transition-colors duration-200"
+            className="mt-6 flex items-center gap-2 bg-night-700 hover:bg-night-600 text-white text-sm font-medium px-5 py-2.5 rounded-full transition-colors duration-200 cursor-pointer"
           >
             <Home size={15} />
             Browse Videos
@@ -135,7 +135,7 @@ export function History() {
               <div
                 key={item._id}
                 onClick={() => navigate(`/watch/${video._id}`)}
-                className="bg-[#181818] rounded-xl overflow-hidden hover:bg-[#222] transition-all duration-200 cursor-pointer group"
+                className="bg-night-800 border border-white/5 rounded-2xl overflow-hidden hover:bg-night-700 hover:ring-1 hover:ring-ember/30 transition-all duration-200 cursor-pointer group animate-fade-up"
               >
                 {/* Thumbnail */}
                 <div className="relative aspect-video overflow-hidden">
@@ -155,7 +155,7 @@ export function History() {
                     <img
                       src={video.owner?.avatar}
                       alt={video.owner?.username}
-                      className="w-9 h-9 sm:w-10 sm:h-10 rounded-full object-cover shrink-0 mt-0.5"
+                      className="w-9 h-9 sm:w-10 sm:h-10 rounded-full object-cover shrink-0 mt-0.5 ring-1 ring-white/10"
                     />
                     <div className="flex-1 min-w-0">
                       <h2 className="text-sm font-semibold line-clamp-2 mb-1 leading-snug">

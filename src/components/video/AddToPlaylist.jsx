@@ -77,14 +77,14 @@ export function AddToPlaylist({ videoId, onClose }) {
   return (
     <>
       {/* Backdrop */}
-      <div className="fixed inset-0 bg-black/60 z-40" onClick={onClose} />
+      <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 animate-fade-in" onClick={onClose} />
 
       {/* Modal */}
       <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50
-                      bg-zinc-900 rounded-2xl shadow-xl w-96 max-h-[80vh] flex flex-col">
+                      bg-night-800 ring-1 ring-white/10 rounded-2xl shadow-2xl w-96 max-h-[80vh] flex flex-col animate-scale-in">
 
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-zinc-800">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-white/5">
           <h2 className="text-white font-semibold text-base">Add to Playlist</h2>
           <button type="button" onClick={onClose} className="cursor-pointer">
             <X className="h-5 w-5 text-zinc-400 hover:text-white transition" />
@@ -100,15 +100,15 @@ export function AddToPlaylist({ videoId, onClose }) {
               type="button"
               onClick={() => setShowCreateForm(true)}
               className="flex items-center gap-2 w-full px-4 py-3 rounded-xl border cursor-pointer
-                         border-dashed border-zinc-600 text-zinc-300 hover:text-white 
-                         hover:border-zinc-400 transition text-sm"
+                         border-dashed border-line text-zinc-300 hover:text-white 
+                         hover:border-ember-soft transition text-sm"
             >
               <Plus className="h-4 w-4" />
               Create new playlist
             </button>
           ) : (
             /* Create form */
-            <div className="flex flex-col gap-3 bg-zinc-800 rounded-xl p-4">
+            <div className="flex flex-col gap-3 bg-night-850 rounded-xl p-4">
               <h3 className="text-white text-sm font-semibold">New Playlist</h3>
 
               <input
@@ -117,18 +117,18 @@ export function AddToPlaylist({ videoId, onClose }) {
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Playlist name (required)"
                 maxLength={500}
-                className="bg-zinc-700 rounded-lg px-3 py-2 text-sm text-white
+                className="bg-night-700 rounded-lg px-3 py-2 text-sm text-white
                            placeholder:text-zinc-500 outline-none focus:ring-2
-                           focus:ring-zinc-500 transition"
+                           focus:ring-ember/40 transition"
               />
               <textarea
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="Description (optional)"
                 rows={2}
-                className="bg-zinc-700 rounded-lg px-3 py-2 text-sm text-white
+                className="bg-night-700 rounded-lg px-3 py-2 text-sm text-white
                            placeholder:text-zinc-500 outline-none focus:ring-2
-                           focus:ring-zinc-500 transition resize-none"
+                           focus:ring-ember/40 transition resize-none"
               />
               <div className="flex gap-2 justify-end">
                 <button
@@ -142,8 +142,8 @@ export function AddToPlaylist({ videoId, onClose }) {
                   type="button"
                   onClick={handleCreate}
                   disabled={creating}
-                  className="px-4 py-1.5 rounded-lg bg-white text-black text-sm
-                             font-semibold hover:bg-zinc-200 transition disabled:opacity-50"
+                  className="px-4 py-1.5 rounded-lg ember-gradient text-white text-sm
+                             font-semibold shadow-lg shadow-ember/25 hover:brightness-110 transition disabled:opacity-50"
                 >
                   {creating ? "Creating..." : "Create & Add"}
                 </button>
@@ -164,9 +164,9 @@ export function AddToPlaylist({ videoId, onClose }) {
                   type="button"
                   onClick={() => handleAddToExisting(playlist._id)}
                   className="flex items-center gap-3 w-full px-4 py-3 rounded-xl
-                             bg-zinc-800 hover:bg-zinc-700 transition text-left"
+                             bg-night-850 hover:bg-night-700 transition text-left"
                 >
-                  <ListVideo className="h-5 w-5 text-zinc-400 shrink-0" />
+                  <ListVideo className="h-5 w-5 text-ember-soft shrink-0" />
                   <div className="overflow-hidden">
                     <p className="text-white text-sm font-medium truncate">{playlist.name}</p>
                     {playlist.description && (

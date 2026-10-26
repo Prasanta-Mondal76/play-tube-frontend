@@ -30,8 +30,7 @@ export function DashNavbar() {
       className="
         fixed top-0 left-0 z-50
         h-16 w-full
-        border-b border-zinc-800
-        bg-black
+        glass-bar
       "
     >
       <div className="flex h-full items-center justify-between px-3 md:px-6">
@@ -45,7 +44,7 @@ export function DashNavbar() {
               setIsProfileOpen(false)
               setIsDashSidebarOpen(!isDashSidebarOpen)
             }}
-            className="rounded-full p-2 hover:bg-zinc-800 transition cursor-pointer"
+            className="rounded-full p-2 hover:bg-night-700 transition cursor-pointer"
           >
             <Menu className="h-6 w-6 text-white " />
           </button>
@@ -57,16 +56,15 @@ export function DashNavbar() {
             <div className="flex h-10 w-10 items-center justify-center">
               <img src={logo} alt="Logo" className="rounded-full" />
             </div>
-            <h1 className="hidden sm:block text-2xl font-bold text-white">
-              PlayTube
+            <h1 className="hidden sm:block text-2xl font-black tracking-tight text-white">
+              Play<span className="ember-text">Tube</span>
             </h1>
           </div>
         </div>
 
         {/* PAGE TITLE */}
         <div className="absolute left-1/2 -translate-x-1/2 ">
-          <h1 className="md:text-2xl font-bold shadow-2xl 
-          ">
+          <h1 className="md:text-2xl font-extrabold tracking-tight">
             {pageTitle}
           </h1>
         </div>
@@ -82,7 +80,7 @@ export function DashNavbar() {
            NOTIFICATION 
           <button className="relative rounded-full p-2 hover:bg-zinc-800 cursor-pointer">
             <Bell className="h-5 w-5 text-white " />
-            <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-violet-500" />
+            <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-ember" />
           </button> */}
 
           {/* PROFILE */}
@@ -94,12 +92,12 @@ export function DashNavbar() {
           >
             {
               isLogIn ?
-                <div className="flex h-10 w-10 items-center justify-center rounded-full to-blue-500 shrink-0">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full ring-2 ring-ember/60 shrink-0">
                   <img src={user?.avatar} alt="Profile Image" className="rounded-full w-10 h-10 object-cover" />
                 </div>
                 :
                 <UserCircle2Icon
-                  className="h-10 w-10 rounded-full text-blue-300 object-cover "
+                  className="h-10 w-10 rounded-full text-ember-soft object-cover "
                   strokeWidth={0.9}
                 />
             }

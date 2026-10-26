@@ -19,13 +19,28 @@ export function SearchResults() {
       .finally(() => setLoading(false));
   }, [query]);
 
-  if (loading) return <p className="text-white p-8">Searching...</p>;
+  if (loading) return (
+    <div className="p-6 bg-night-950 min-h-screen">
+      <div className="fixed top-14 left-0 right-0 z-40 h-[3px] overflow-hidden">
+        <div className="h-full w-full ember-gradient animate-topbar origin-left" />
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {[1, 2, 3, 4].map((i) => (
+          <div key={i} className="space-y-3">
+            <div className="aspect-video rounded-2xl skeleton-wave" />
+            <div className="h-4 w-3/4 rounded skeleton-wave" />
+            <div className="h-3 w-1/2 rounded skeleton-wave" />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
   if (error)   return <p className="text-red-400 p-8">{error}</p>;
-  if (!videos.length) return <p className="text-zinc-400 p-8">No results for "{query}"</p>;
+  if (!videos.length) return <p className="text-zinc-400 p-8 bg-night-950 min-h-screen">No results for "{query}"</p>;
 
   return (
-    <div className="p-6">
-      <h2 className="text-white text-xl mb-4">Results for "{query}"</h2>
+    <div className="p-6 bg-night-950 min-h-screen animate-fade-in">
+      <h2 className="text-white text-xl font-bold mb-4">Results for <span className="ember-text">"{query}"</span></h2>
       <VideoGrid videos={videos} />
     </div>
   );

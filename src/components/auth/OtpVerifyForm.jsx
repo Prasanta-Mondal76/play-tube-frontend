@@ -14,27 +14,29 @@ export function OtpVerifyForm({
 
 
   return (
-    <div className="bg-zinc-950 border border-zinc-800 rounded-2xl p-8 w-full max-w-sm mx-auto">
+    <div className="relative overflow-hidden bg-night-900 border border-white/5 rounded-3xl p-6 sm:p-8 w-full max-w-md mx-auto shadow-2xl shadow-black/60 animate-scale-in">
+      {/* Ambient ember glow */}
+      <div className="pointer-events-none absolute -top-20 left-1/2 h-44 w-80 -translate-x-1/2 rounded-full bg-ember/20 blur-3xl" />
 
-      {/* LOGO */}
-      <div className="flex items-center gap-3 mb-6">
-        <div className="h-9 w-9 flex items-center justify-center">
+      <div className="relative">
+      {/* LOGO + HEADING */}
+      <div className="flex flex-col items-center text-center mb-6 animate-fade-up">
+        <div className="h-14 w-14 flex items-center justify-center rounded-full ring-2 ring-ember/40 shadow-[0_0_28px_rgba(229,9,20,0.35)] mb-3">
           <img src={logo} alt="Logo" className="rounded-full"/>
         </div>
 
-        <span className="text-white font-bold text-lg">
-          PlayTube
+        <span className="text-white font-black tracking-tight text-xl">
+          Play<span className="ember-text">Tube</span>
         </span>
+
+        <h1 className="text-white text-2xl font-extrabold tracking-tight mt-4">
+          Verify OTP
+        </h1>
+
+        <p className="text-zinc-500 text-sm mt-1">
+          We sent a verification code to your email.
+        </p>
       </div>
-
-      {/* HEADING */}
-      <h1 className="text-white text-2xl font-bold mb-2">
-        Verify OTP
-      </h1>
-
-      <p className="text-zinc-400 text-sm mb-6">
-        We sent a verification code to your email.
-      </p>
 
       {/* OTP INPUT */}
       <div className="flex flex-col gap-4">
@@ -54,15 +56,18 @@ export function OtpVerifyForm({
             placeholder="Enter 6 digit OTP"
             className="
           w-full
-          bg-zinc-900
-          border border-zinc-700
+          bg-night-850
+          border border-line
           rounded-xl
-          px-4 py-2.5
-          text-sm text-white
-          placeholder:text-zinc-600
+          px-4 py-3
+          text-center
+          text-base font-bold tracking-[0.35em] text-white
+          placeholder:text-zinc-600 placeholder:font-normal placeholder:tracking-normal placeholder:text-sm
           outline-none
-          focus:border-blue-500
-          transition-colors
+          focus:border-ember
+          focus:ring-2
+          focus:ring-ember/20
+          transition
         "
           />
         </div>
@@ -73,15 +78,17 @@ export function OtpVerifyForm({
           disabled={loading}
           className="
         w-full
-        bg-blue-700 hover:bg-blue-600
+        ember-gradient
+        shadow-lg shadow-ember/30
+        hover:brightness-110
         disabled:opacity-60
         disabled:cursor-not-allowed
         text-white
         font-semibold
         text-sm
         py-2.5
-        rounded-xl
-        transition-colors
+        rounded-full
+        transition
         cursor-pointer
       "
         >
@@ -99,8 +106,8 @@ export function OtpVerifyForm({
           disabled={loading}
           className="
             text-sm
-            text-blue-400
-            hover:text-blue-300
+            text-ember-soft
+            hover:text-orange-300
             transition-colors
             cursor-pointer
             disabled:opacity-60
@@ -129,6 +136,7 @@ export function OtpVerifyForm({
         ← Back to Signup
       </button>
 
+      </div>
     </div>
   )
 }

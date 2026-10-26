@@ -24,6 +24,8 @@ export function VideoPlayer({
             overflow-hidden
             rounded-2xl
             bg-black
+            ring-1 ring-white/5
+            shadow-2xl shadow-black/60
          "
     >
 
@@ -32,8 +34,8 @@ export function VideoPlayer({
       {
         isLoading && (
 
-          <div className="fixed inset-0 flex items-center justify-center bg-zinc-900">
-            <div className="h-12 w-12 animate-spin rounded-full border-4 border-blue-500 border-t-transparent" />
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black">
+            <div className="h-12 w-12 animate-spin rounded-full border-4 border-ember/25 border-t-ember" />
           </div>
 
         )

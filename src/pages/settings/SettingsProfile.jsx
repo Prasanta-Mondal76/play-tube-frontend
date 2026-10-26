@@ -2,23 +2,24 @@ import { useState, useContext, useRef } from "react";
 import toast from "react-hot-toast";
 import { LoginContext } from "../../context/LoginContextProvider.jsx";
 import { updateAvatar, updateCoverImage, updateAbout } from "../../services/userApi.js";
+import { uploadToCloudinary } from "../../services/cloudinaryUpload.js";
 import { Camera, ImagePlus, Plus, X, Link2, Pencil } from "lucide-react";
 
 const inputCls = `
-  w-full bg-zinc-800 rounded-xl px-4 py-2.5 text-sm text-white
-  placeholder:text-zinc-500 outline-none focus:ring-2
-  focus:ring-violet-600/60 transition
+  w-full bg-night-850 border border-line rounded-xl px-4 py-2.5 text-sm text-white
+  placeholder:text-zinc-500 outline-none focus:border-ember focus:ring-2
+  focus:ring-ember/20 transition
 `;
 
 const btnCls = `
-  self-end px-6 py-2.5 rounded-xl bg-violet-600 text-white text-sm
-  font-semibold hover:bg-violet-500 transition disabled:opacity-50
+  self-end px-6 py-2.5 rounded-full ember-gradient shadow-lg shadow-ember/30 text-white text-sm
+  font-semibold hover:brightness-110 active:scale-[0.98] transition disabled:opacity-50
   disabled:cursor-not-allowed cursor-pointer
 `;
 
 function Card({ title, description, children }) {
   return (
-    <div className="bg-zinc-900 rounded-2xl p-6 flex flex-col gap-5">
+    <div className="bg-night-900 border border-white/5 rounded-3xl p-6 flex flex-col gap-5 animate-fade-up">
       <div>
         <h2 className="text-base font-semibold text-white">{title}</h2>
         {description && <p className="text-xs text-zinc-500 mt-1">{description}</p>}
@@ -46,12 +47,12 @@ export function SettingsProfile() {
 
   const handleAvatarUpload = async () => {
     if (!avatarFile) { toast.error("No image selected."); return; }
-    const formData = new FormData();
-    formData.append("avatar", avatarFile);
     setAvatarLoading(true);
     const tid = toast.loading("Uploading avatar...");
     try {
-      const res = await updateAvatar(formData);
+      // 1-stage: straight to Cloudinary, backend gets only the URL
+      const uploaded = await uploadToCloudinary(avatarFile, { resourceType: "image" });
+      const res = await updateAvatar(uploaded.secure_url);
       setUser(res.data.data);
       setAvatarPreview(null);
       setAvatarFile(null);
@@ -76,12 +77,12 @@ export function SettingsProfile() {
 
   const handleCoverUpload = async () => {
     if (!coverFile) { toast.error("No image selected."); return; }
-    const formData = new FormData();
-    formData.append("coverImage", coverFile);
     setCoverLoading(true);
     const tid = toast.loading("Uploading cover image...");
     try {
-      const res = await updateCoverImage(formData);
+      // 1-stage: straight to Cloudinary, backend gets only the URL
+      const uploaded = await uploadToCloudinary(coverFile, { resourceType: "image" });
+      const res = await updateCoverImage(uploaded.secure_url);
       setUser(res.data.data);
       setCoverPreview(null);
       setCoverFile(null);
@@ -113,7 +114,7 @@ export function SettingsProfile() {
     <div className="px-4 py-8 max-w-2xl mx-auto flex flex-col gap-6">
 
       <div>
-        <h1 className="text-2xl font-bold text-white">Profile</h1>
+        <h1 className="text-2xl font-extrabold tracking-tight text-white">Profile</h1>
         <p className="text-zinc-400 text-sm mt-1">
           Manage your public profile appearance.
         </p>
@@ -127,12 +128,12 @@ export function SettingsProfile() {
             <img
               src={avatarPreview || user?.avatar}
               alt="Avatar"
-              className="h-24 w-24 rounded-full object-cover border-2 border-zinc-700"
+              className="h-24 w-24 rounded-full object-cover ring-2 ring-ember/40"
             />
             <button
               onClick={() => avatarInputRef.current?.click()}
-              className="absolute bottom-0 right-0 h-8 w-8 rounded-full bg-violet-600
-                         flex items-center justify-center hover:bg-violet-500 transition cursor-pointer"
+              className="absolute bottom-0 right-0 h-8 w-8 rounded-full ember-gradient shadow-lg shadow-ember/30
+                         flex items-center justify-center hover:brightness-110 transition cursor-pointer"
             >
               <Camera className="h-4 w-4 text-white" />
             </button>
@@ -149,7 +150,7 @@ export function SettingsProfile() {
                 </button>
                 <button
                   onClick={() => { setAvatarPreview(null); setAvatarFile(null); }}
-                  className="px-4 py-2 rounded-xl bg-zinc-800 text-zinc-300 text-sm hover:bg-zinc-700 transition cursor-pointer"
+                  className="px-4 py-2 rounded-full bg-night-700 text-zinc-300 text-sm hover:bg-night-600 transition cursor-pointer"
                 >
                   Cancel
                 </button>
@@ -164,7 +165,7 @@ export function SettingsProfile() {
       <Card title="Cover Image" description="Banner image shown on your channel page.">
         {/* Cover preview */}
         <div
-          className="relative w-full h-36 rounded-xl overflow-hidden bg-zinc-800 cursor-pointer group"
+          className="relative w-full h-36 rounded-xl overflow-hidden bg-night-800 border border-white/5 cursor-pointer group"
           onClick={() => coverInputRef.current?.click()}
         >
           {(coverPreview || user?.coverImage) ? (
@@ -192,7 +193,7 @@ export function SettingsProfile() {
             </button>
             <button
               onClick={() => { setCoverPreview(null); setCoverFile(null); }}
-              className="px-4 py-2 rounded-xl bg-zinc-800 text-zinc-300 text-sm hover:bg-zinc-700 transition cursor-pointer"
+              className="px-4 py-2 rounded-full bg-night-700 text-zinc-300 text-sm hover:bg-night-600 transition cursor-pointer"
             >
               Cancel
             </button>
@@ -210,9 +211,9 @@ export function SettingsProfile() {
               onChange={(e) => { if (e.target.value.length <= aboutLimit) setAbout(e.target.value); }}
               placeholder="Tell viewers about yourself..."
               rows={4}
-              className="w-full bg-zinc-800 rounded-xl px-4 py-3 text-sm text-white
-                         placeholder:text-zinc-500 outline-none focus:ring-2
-                         focus:ring-violet-600/60 transition resize-none"
+              className="w-full bg-night-850 border border-line rounded-xl px-4 py-3 text-sm text-white
+                         placeholder:text-zinc-500 outline-none focus:border-ember focus:ring-2
+                         focus:ring-ember/20 transition resize-none"
             />
           </div>
           <div className="flex items-center justify-between">

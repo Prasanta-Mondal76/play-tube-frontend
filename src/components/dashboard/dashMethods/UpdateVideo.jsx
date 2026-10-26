@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { X, ImagePlus } from "lucide-react";
 import toast from "react-hot-toast";
 import { updateVideoDetails } from "../../../services/videoApi.js";
+import { uploadToCloudinary } from "../../../services/cloudinaryUpload.js";
 
 export function UpdateVideo({ video, onClose, setVideos }) {
   const [title, setTitle] = useState(video.title || "");
@@ -20,14 +21,13 @@ export function UpdateVideo({ video, onClose, setVideos }) {
   };
 
   const handleUpdate = async () => {
-    const formData = new FormData();
+    const data = {};
 
-    // Only append changed fields
-    if (title.trim() && title !== video.title) formData.append("title", title.trim());
-    if (description.trim() && description !== video.description) formData.append("description", description.trim());
-    if (thumbnailFile) formData.append("thumbnail", thumbnailFile); // field name must match multer
+    // Only send changed fields
+    if (title.trim() && title !== video.title) data.title = title.trim();
+    if (description.trim() && description !== video.description) data.description = description.trim();
 
-    if ([...formData.keys()].length === 0) {
+    if (!thumbnailFile && Object.keys(data).length === 0) {
       toast.error("No changes detected.");
       return;
     }
@@ -35,7 +35,14 @@ export function UpdateVideo({ video, onClose, setVideos }) {
     setLoading(true);
     const toastId = toast.loading("Updating video...");
     try {
-      const res = await updateVideoDetails(video._id, formData);
+      // New thumbnail? It goes straight to Cloudinary first (1-stage);
+      // the backend only receives the final URL.
+      if (thumbnailFile) {
+        const uploaded = await uploadToCloudinary(thumbnailFile, { resourceType: "image" });
+        data.thumbnailUrl = uploaded.secure_url;
+      }
+
+      const res = await updateVideoDetails(video._id, data);
       setVideos((prev) =>
         prev.map((v) => (v._id === video._id ? { ...v, ...res.data.data } : v))
       );
@@ -50,9 +57,9 @@ export function UpdateVideo({ video, onClose, setVideos }) {
 
   return (
     <>
-      <div className="fixed inset-0 bg-black/60 z-40" onClick={onClose} />
+      <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 animate-fade-in" onClick={onClose} />
       <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50
-                      bg-zinc-900 rounded-2xl shadow-xl w-[26rem] p-6 flex flex-col gap-5">
+                      bg-night-800 ring-1 ring-white/10 rounded-3xl shadow-2xl shadow-black/60 w-[min(26rem,92vw)] p-6 flex flex-col gap-5 animate-scale-in">
 
         {/* Header */}
         <div className="flex items-center justify-between">
@@ -65,7 +72,7 @@ export function UpdateVideo({ video, onClose, setVideos }) {
         {/* Thumbnail preview + click to change */}
         <div
           className="relative w-full aspect-video rounded-xl overflow-hidden border
-                     border-zinc-700 cursor-pointer group"
+                     border-white/10 cursor-pointer group"
           onClick={() => thumbnailInputRef.current.click()}
         >
           {thumbnailPreview ? (
@@ -75,7 +82,7 @@ export function UpdateVideo({ video, onClose, setVideos }) {
               className="w-full h-full object-cover"
             />
           ) : (
-            <div className="w-full h-full bg-zinc-800 flex items-center justify-center">
+            <div className="w-full h-full bg-night-850 flex items-center justify-center">
               <ImagePlus className="h-8 w-8 text-zinc-500" />
             </div>
           )}
@@ -106,9 +113,9 @@ export function UpdateVideo({ video, onClose, setVideos }) {
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="bg-zinc-800 rounded-xl px-4 py-2.5 text-sm text-white
-                       placeholder:text-zinc-500 outline-none focus:ring-2
-                       focus:ring-zinc-600 transition"
+            className="bg-night-850 border border-line rounded-xl px-4 py-2.5 text-sm text-white
+                       placeholder:text-zinc-500 outline-none focus:border-ember focus:ring-2
+                       focus:ring-ember/20 transition"
           />
         </div>
 
@@ -119,9 +126,9 @@ export function UpdateVideo({ video, onClose, setVideos }) {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             rows={3}
-            className="bg-zinc-800 rounded-xl px-4 py-2.5 text-sm text-white
-                       placeholder:text-zinc-500 outline-none focus:ring-2
-                       focus:ring-zinc-600 transition resize-none"
+            className="bg-night-850 border border-line rounded-xl px-4 py-2.5 text-sm text-white
+                       placeholder:text-zinc-500 outline-none focus:border-ember focus:ring-2
+                       focus:ring-ember/20 transition resize-none"
           />
         </div>
 
@@ -139,8 +146,8 @@ export function UpdateVideo({ video, onClose, setVideos }) {
             type="button"
             onClick={handleUpdate}
             disabled={loading}
-            className={`px-5 py-2 rounded-xl bg-blue-600 text-white text-sm cursor-pointer ${loading ? 'disabled:cursor-not-allowed': null}
-                       font-semibold hover:bg-blue-900 transition disabled:opacity-50 `}
+            className={`px-5 py-2 rounded-full ember-gradient shadow-lg shadow-ember/30 text-white text-sm cursor-pointer ${loading ? 'disabled:cursor-not-allowed': null}
+                       font-semibold hover:brightness-110 transition disabled:opacity-50 `}
           >
             {loading ? "Saving..." : "Save Changes"}
           </button>

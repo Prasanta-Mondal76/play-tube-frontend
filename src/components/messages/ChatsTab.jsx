@@ -114,7 +114,7 @@ export function ChatsTab() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />
+        <div className="w-8 h-8 border-4 border-ember/25 border-t-ember rounded-full animate-spin" />
       </div>
     );
   }
@@ -131,7 +131,7 @@ export function ChatsTab() {
 
   return (
     // On mobile: full height, single column. On md+: side-by-side.
-    <div className="flex h-[calc(100vh-220px)] min-h-100 md:h-150">
+    <div className="flex h-full min-h-0">
 
       {/* 
         Conversation list:
@@ -140,8 +140,8 @@ export function ChatsTab() {
       */}
       <div
         className={`
-          flex-col gap-2 overflow-y-auto
-          w-full md:w-72 md:shrink-0 md:pr-2 md:mr-2 md:border-r md:border-zinc-700
+          flex-col gap-2 overflow-y-auto min-h-0
+          w-full md:w-72 md:shrink-0 md:pr-2 md:mr-2 md:border-r md:border-white/5
           ${activeConversation ? "hidden md:flex" : "flex"}
         `}
       >
@@ -156,7 +156,7 @@ export function ChatsTab() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search chats..."
-            className="w-full bg-zinc-800 text-white rounded-lg pl-9 pr-9 py-2 text-sm outline-none focus:ring-1 focus:ring-zinc-400"
+            className="w-full bg-night-800 border border-line text-white rounded-full pl-9 pr-9 py-2 text-sm outline-none placeholder:text-zinc-500 focus:border-ember focus:ring-2 focus:ring-ember/20 transition"
           />
           {searchQuery && (
             <button
@@ -196,7 +196,7 @@ export function ChatsTab() {
       */}
       <div
         className={`
-          flex-col flex-1 bg-zinc-800 rounded-xl overflow-hidden
+          flex-col flex-1 min-w-0 min-h-0 bg-night-850 border border-white/5 rounded-2xl overflow-hidden
           ${activeConversation ? "flex" : "hidden md:flex"}
         `}
       >

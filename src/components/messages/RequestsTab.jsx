@@ -54,7 +54,7 @@ export function RequestsTab() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />
+        <div className="w-8 h-8 border-4 border-ember/25 border-t-ember rounded-full animate-spin" />
       </div>
     );
   }
@@ -73,13 +73,13 @@ export function RequestsTab() {
       {requests.map((request) => (
         <div
           key={request._id}
-          className="flex items-start gap-4 bg-zinc-800 rounded-xl p-4"
+          className="flex items-start gap-4 bg-night-800 border border-white/5 rounded-2xl p-4 animate-fade-up"
         >
           {/* Avatar */}
           <img
             src={request.sender.avatar}
             alt={request.sender.fullName}
-            className="w-12 h-12 rounded-full object-cover shrink-0"
+            className="w-12 h-12 rounded-full object-cover shrink-0 ring-1 ring-white/10"
           />
 
           {/* Info */}
@@ -92,7 +92,7 @@ export function RequestsTab() {
             </p>
 
             {request.reason && (
-              <div className="bg-zinc-700 rounded-lg px-3 py-2 text-sm text-gray-300">
+              <div className="bg-night-700/70 border border-white/5 rounded-lg px-3 py-2 text-sm text-gray-300">
                 <span className="text-gray-500 text-xs block mb-1">Reason</span>
                 {request.reason}
               </div>
@@ -109,7 +109,7 @@ export function RequestsTab() {
             <button
               onClick={() => handleAccept(request._id)}
               disabled={actionLoadingId === request._id}
-              className="flex items-center gap-1 bg-blue-600 hover:bg-blue-700 text-white text-sm px-3 py-1.5 rounded-lg transition-colors cursor-pointer disabled:opacity-50"
+              className="flex items-center gap-1 ember-gradient shadow-lg shadow-ember/25 hover:brightness-110 text-white text-sm px-3.5 py-1.5 rounded-full transition-all cursor-pointer disabled:opacity-50"
             >
               <Check size={14} />
               Accept
@@ -117,7 +117,7 @@ export function RequestsTab() {
             <button
               onClick={() => handleReject(request._id)}
               disabled={actionLoadingId === request._id}
-              className="flex items-center gap-1 bg-zinc-700 hover:bg-red-600 text-white text-sm px-3 py-1.5 rounded-lg transition-colors cursor-pointer disabled:opacity-50"
+              className="flex items-center gap-1 bg-night-700 hover:bg-red-600 text-white text-sm px-3.5 py-1.5 rounded-full transition-all cursor-pointer disabled:opacity-50"
             >
               <X size={14} />
               Reject

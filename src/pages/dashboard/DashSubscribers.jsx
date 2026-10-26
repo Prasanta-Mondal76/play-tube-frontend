@@ -54,24 +54,24 @@ function SubscriberCard({ subscriber }) {
   return (
     <div
       onClick={() => navigate(`/profile/${subscriber.username}`)}
-      className="group flex items-center gap-4 p-4 rounded-2xl bg-zinc-900 border border-zinc-800
-                 hover:border-violet-500/50 hover:bg-zinc-800/80 transition-all duration-200 cursor-pointer"
+      className="group flex items-center gap-4 p-4 rounded-2xl bg-night-900 border border-white/5
+                 hover:border-ember/50 hover:bg-night-800 transition-all duration-200 cursor-pointer animate-fade-up"
     >
       <div className="relative shrink-0">
         <img
           src={subscriber.avatar || "/default-avatar.png"}
           alt={subscriber.fullName}
-          className="h-12 w-12 rounded-full object-cover ring-2 ring-zinc-700 group-hover:ring-violet-500/50 transition-all"
+          className="h-12 w-12 rounded-full object-cover ring-2 ring-white/10 group-hover:ring-ember/60 transition-all"
         />
-        <div className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full bg-green-500 ring-2 ring-zinc-900" />
+        <div className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full bg-green-500 ring-2 ring-night-950" />
       </div>
       <div className="min-w-0 flex-1">
-        <p className="text-sm font-semibold text-white truncate group-hover:text-violet-300 transition-colors">
+        <p className="text-sm font-semibold text-white truncate group-hover:text-orange-200 transition-colors">
           {subscriber.fullName}
         </p>
         <p className="text-xs text-zinc-500 truncate mt-0.5">@{subscriber.username}</p>
       </div>
-      <ExternalLink className="h-4 w-4 text-zinc-600 group-hover:text-violet-400 shrink-0 transition-colors" />
+      <ExternalLink className="h-4 w-4 text-zinc-600 group-hover:text-ember-soft shrink-0 transition-colors" />
     </div>
   );
 }
@@ -79,11 +79,11 @@ function SubscriberCard({ subscriber }) {
 // ── Skeleton ───────────────────────────────────────────────────────────────────
 function SkeletonCard() {
   return (
-    <div className="flex items-center gap-4 p-4 rounded-2xl bg-zinc-900 border border-zinc-800 animate-pulse">
-      <div className="h-12 w-12 rounded-full bg-zinc-800 shrink-0" />
+    <div className="flex items-center gap-4 p-4 rounded-2xl bg-night-900 border border-white/5">
+      <div className="h-12 w-12 rounded-full skeleton-wave shrink-0" />
       <div className="flex-1 space-y-2">
-        <div className="h-3.5 w-32 rounded-full bg-zinc-800" />
-        <div className="h-3 w-20 rounded-full bg-zinc-800" />
+        <div className="h-3.5 w-32 rounded-full skeleton-wave" />
+        <div className="h-3 w-20 rounded-full skeleton-wave" />
       </div>
     </div>
   );
@@ -114,6 +114,7 @@ function PaymentModal({ onSuccess, onClose }) {
         name: "PlayTube — Demo",
         description: `[TEST] Subscriber access — ${planLabel}`,
         order_id: orderId,
+        image: "https://res.cloudinary.com/cloud-first/image/upload/v1793026081/PlayTube_Logo_Black_Background_c60jfh.png",
         handler: async function (response) {
           try {
             await verifyPayment({
@@ -128,7 +129,7 @@ function PaymentModal({ onSuccess, onClose }) {
           }
         },
         prefill: {},
-        theme: { color: "#7c3aed" },
+        theme: { color: "#E50914" },
         modal: { ondismiss: () => setPaying(false) },
       };
 
@@ -146,12 +147,12 @@ function PaymentModal({ onSuccess, onClose }) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
-      <div className="w-full max-w-md bg-zinc-950 border border-zinc-800 rounded-3xl shadow-2xl overflow-hidden">
+      <div className="w-full max-w-md bg-night-900 border border-white/10 rounded-3xl shadow-2xl shadow-black/60 overflow-hidden animate-scale-in">
 
         {/* Header */}
-        <div className="px-6 pt-7 pb-5 text-center border-b border-zinc-800/60">
-          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-violet-600/20 mb-4">
-            <Crown className="h-7 w-7 text-violet-400" />
+        <div className="px-6 pt-7 pb-5 text-center border-b border-white/5">
+          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-ember/15 ring-1 ring-ember/30 mb-4">
+            <Crown className="h-7 w-7 text-ember-soft" />
           </div>
           <h2 className="text-xl font-bold text-white">Unlock Subscriber Access</h2>
           <p className="text-sm text-zinc-400 mt-1">Choose a plan to view who subscribed to you</p>
@@ -163,7 +164,7 @@ function PaymentModal({ onSuccess, onClose }) {
         </div>
 
         {/* Test card hint */}
-        <div className="mx-5 mt-3 flex items-start gap-2 px-3 py-2.5 rounded-lg bg-zinc-900 border border-zinc-800">
+        <div className="mx-5 mt-3 flex items-start gap-2 px-3 py-2.5 rounded-lg bg-night-800 border border-white/5">
           <Info className="h-3.5 w-3.5 text-zinc-500 shrink-0 mt-0.5" />
           <p className="text-xs text-zinc-400">
             In the Razorpay popup, use test card{" "}
@@ -182,12 +183,12 @@ function PaymentModal({ onSuccess, onClose }) {
                 onClick={() => setSelectedPlan(plan)}
                 className={`relative text-left p-4 rounded-2xl border-2 transition-all duration-200 cursor-pointer
                   ${isSelected
-                    ? "border-violet-500 bg-violet-600/10 shadow-lg shadow-violet-500/10"
-                    : "border-zinc-800 bg-zinc-900/80 hover:border-zinc-700 hover:bg-zinc-800/60"
+                    ? "border-ember bg-ember/10 shadow-lg shadow-ember/20"
+                    : "border-white/10 bg-night-800/80 hover:border-white/20 hover:bg-night-700/60"
                   }`}
               >
                 {plan.highlight && (
-                  <span className="absolute -top-2.5 left-3 text-[10px] font-bold px-2 py-0.5 rounded-full bg-violet-600 text-white tracking-wide">
+                  <span className="absolute -top-2.5 left-3 text-[10px] font-bold px-2 py-0.5 rounded-full ember-gradient text-white tracking-wide">
                     POPULAR
                   </span>
                 )}
@@ -196,7 +197,7 @@ function PaymentModal({ onSuccess, onClose }) {
                 <p className="text-xs text-zinc-500 mt-1">{plan.description}</p>
                 {isSelected && (
                   <div className="absolute top-3 right-3">
-                    <CheckCircle2 className="h-4 w-4 text-violet-400" />
+                    <CheckCircle2 className="h-4 w-4 text-ember-soft" />
                   </div>
                 )}
               </button>
@@ -216,17 +217,17 @@ function PaymentModal({ onSuccess, onClose }) {
         <div className="px-5 pb-6 flex gap-3">
           <button
             onClick={onClose}
-            className="flex-1 py-3 rounded-xl border border-zinc-700 text-sm text-zinc-400 hover:bg-zinc-800 hover:text-white transition cursor-pointer font-medium"
+            className="flex-1 py-3 rounded-full border border-line text-sm text-zinc-400 hover:bg-night-700 hover:text-white transition cursor-pointer font-medium"
           >
             Cancel
           </button>
           <button
             onClick={handlePay}
             disabled={!selectedPlan || paying}
-            className="flex-1 py-3 rounded-xl bg-violet-600 hover:bg-violet-500 active:bg-violet-700
+            className="flex-1 py-3 rounded-full ember-gradient hover:brightness-110 active:scale-[0.98]
                        disabled:opacity-40 disabled:cursor-not-allowed text-sm font-bold text-white
                        transition cursor-pointer flex items-center justify-center gap-2
-                       shadow-lg shadow-violet-600/30"
+                       shadow-lg shadow-ember/30"
           >
             {paying ? (
               <><Loader2 className="h-4 w-4 animate-spin" /> Processing…</>
@@ -297,7 +298,7 @@ export function DashSubscribers() {
   if (!payStatus) {
     return (
       <div className="flex items-center justify-center h-64">
-        <Loader2 className="h-6 w-6 animate-spin text-violet-400" />
+        <Loader2 className="h-6 w-6 animate-spin text-ember" />
       </div>
     );
   }
@@ -310,8 +311,8 @@ export function DashSubscribers() {
 
           {/* Icon */}
           <div className="relative mb-6">
-            <div className="w-24 h-24 rounded-3xl bg-violet-600/10 border border-violet-500/20 flex items-center justify-center">
-              <Users className="h-12 w-12 text-violet-400" />
+            <div className="w-24 h-24 rounded-3xl bg-ember/10 border border-ember/25 flex items-center justify-center animate-fade-up">
+              <Users className="h-12 w-12 text-ember-soft" />
             </div>
             <div className="absolute -top-2 -right-2 w-8 h-8 rounded-xl bg-yellow-500/20 border border-yellow-500/30 flex items-center justify-center">
               <Crown className="h-4 w-4 text-yellow-400" />
@@ -331,7 +332,7 @@ export function DashSubscribers() {
           {/* Pricing preview */}
           <div className="flex gap-2 mb-8 flex-wrap justify-center">
             {PLANS.map((p) => (
-              <span key={p.id} className="text-xs px-3 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-400">
+              <span key={p.id} className="text-xs px-3 py-1.5 rounded-full bg-night-800 border border-white/5 text-zinc-400">
                 {p.price} · {p.duration}
               </span>
             ))}
@@ -339,9 +340,9 @@ export function DashSubscribers() {
 
           <button
             onClick={() => setShowModal(true)}
-            className="px-8 py-3.5 rounded-2xl bg-violet-600 hover:bg-violet-500 active:bg-violet-700
+            className="px-8 py-3.5 rounded-full ember-gradient hover:brightness-110 active:scale-[0.98]
                        text-white font-bold text-sm transition cursor-pointer flex items-center gap-2
-                       shadow-xl shadow-violet-600/30"
+                       shadow-xl shadow-ember/30"
           >
             <FlaskConical className="h-4 w-4" />
             Try Demo Access
@@ -406,7 +407,7 @@ export function DashSubscribers() {
       {/* Empty state */}
       {!loadingSubscribers && subscribers.length === 0 && (
         <div className="flex flex-col items-center justify-center py-20 text-center">
-          <div className="w-16 h-16 rounded-2xl bg-zinc-900 border border-zinc-800 flex items-center justify-center mb-4">
+          <div className="w-16 h-16 rounded-2xl bg-night-900 border border-white/5 flex items-center justify-center mb-4">
             <Users className="h-8 w-8 text-zinc-700" />
           </div>
           <p className="text-zinc-400 font-medium">No subscribers yet</p>
@@ -429,8 +430,8 @@ export function DashSubscribers() {
           <button
             onClick={() => loadSubscribers(nextCursor)}
             disabled={loadingSubscribers}
-            className="flex items-center gap-2 px-6 py-2.5 rounded-xl border border-zinc-700
-                       text-sm text-zinc-300 hover:bg-zinc-800 hover:text-white hover:border-zinc-600
+            className="flex items-center gap-2 px-6 py-2.5 rounded-full border border-line
+                       text-sm text-zinc-300 hover:bg-night-700 hover:text-white hover:border-ember/40
                        transition disabled:opacity-50 cursor-pointer font-medium"
           >
             {loadingSubscribers

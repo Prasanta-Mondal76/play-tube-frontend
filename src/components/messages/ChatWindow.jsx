@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useContext } from "react";
-import { MoreVertical, ShieldOff, Trash2, EyeOffIcon, EyeIcon, ArrowLeft } from "lucide-react";
+import { MoreVertical, ShieldOff, Trash2, ArrowLeft, Check, CheckCheck } from "lucide-react";
 import { LoginContext } from "../../context/LoginContextProvider.jsx";
 import {
   getConversationMessages,
@@ -140,28 +140,28 @@ export function ChatWindow({ conversation, onNewMessage, onBlocked, onSeen, onCh
   if (loading) {
     return (
       <div className="flex items-center justify-center h-full">
-        <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />
+        <div className="w-8 h-8 border-4 border-ember/25 border-t-ember rounded-full animate-spin" />
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full min-h-0">
 
       {/* Header */}
-      <div className="flex items-center gap-2 px-3 py-3 border-b border-zinc-700 shrink-0">
+      <div className="flex items-center gap-2.5 px-4 py-3 border-b border-white/5 shrink-0 bg-night-900/70 backdrop-blur-md">
 
         {/* Back button — only visible on mobile */}
         <button
           onClick={onBack}
-          className="md:hidden p-1.5 rounded-lg hover:bg-zinc-700 text-gray-400 hover:text-white transition-colors cursor-pointer shrink-0"
+          className="md:hidden p-1.5 rounded-lg hover:bg-night-700 text-gray-400 hover:text-white transition-colors cursor-pointer shrink-0"
         >
           <ArrowLeft size={18} />
         </button>
 
         <img
           src={other.avatar}
-          className="w-9 h-9 rounded-full object-cover shrink-0"
+          className="w-10 h-10 rounded-full object-cover shrink-0 ring-2 ring-ember/40"
         />
         <div className="flex-1 min-w-0">
           <p className="font-semibold text-white text-sm truncate">{other.fullName}</p>
@@ -172,24 +172,24 @@ export function ChatWindow({ conversation, onNewMessage, onBlocked, onSeen, onCh
         <div className="relative shrink-0" ref={menuRef}>
           <button
             onClick={() => setMenuOpen((prev) => !prev)}
-            className="p-2 rounded-lg hover:bg-zinc-700 text-gray-400 hover:text-white transition-colors cursor-pointer"
+            className="p-2 rounded-lg hover:bg-night-700 text-gray-400 hover:text-white transition-colors cursor-pointer"
           >
             <MoreVertical size={18} />
           </button>
 
           {menuOpen && (
-            <div className="absolute right-0 top-10 bg-zinc-800 border border-zinc-700 rounded-xl shadow-xl w-48 z-10 overflow-hidden">
+            <div className="absolute right-0 top-10 bg-night-850 border border-white/10 rounded-xl shadow-xl w-48 z-10 overflow-hidden animate-scale-in">
               <button
                 onClick={() => { setMenuOpen(false); setShowClearConfirm(true); }}
-                className="flex items-center gap-2 w-full px-4 py-3 text-sm text-gray-300 hover:bg-zinc-700 transition-colors cursor-pointer"
+                className="flex items-center gap-2 w-full px-4 py-3 text-sm text-gray-300 hover:bg-night-700 transition-colors cursor-pointer"
               >
                 <Trash2 size={15} />
                 Clear chat
               </button>
-              <div className="border-t border-zinc-700" />
+              <div className="border-t border-white/5" />
               <button
                 onClick={() => { setMenuOpen(false); setShowBlockConfirm(true); }}
-                className="flex items-center gap-2 w-full px-4 py-3 text-sm text-red-400 hover:bg-zinc-700 transition-colors cursor-pointer"
+                className="flex items-center gap-2 w-full px-4 py-3 text-sm text-red-400 hover:bg-night-700 transition-colors cursor-pointer"
               >
                 <ShieldOff size={15} />
                 Block {other.fullName}
@@ -200,7 +200,7 @@ export function ChatWindow({ conversation, onNewMessage, onBlocked, onSeen, onCh
       </div>
 
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto px-3 py-3 flex flex-col gap-2">
+      <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain px-3 sm:px-4 py-4 flex flex-col gap-2.5">
         {messages.length === 0 ? (
           <div className="flex items-center justify-center h-full text-gray-500 text-sm">
             No messages yet. Say hello!
@@ -213,29 +213,29 @@ export function ChatWindow({ conversation, onNewMessage, onBlocked, onSeen, onCh
             return (
               <div
                 key={msg._id}
-                className={`flex ${isMine ? "justify-end" : "justify-start"}`}
+                className={`flex flex-col ${isMine ? "items-end" : "items-start"} animate-fade-up`}
               >
                 <div
-                  className={`max-w-[80%] sm:max-w-[70%] px-3 py-2 rounded-2xl text-sm ${
+                  className={`max-w-[80%] sm:max-w-[70%] px-3.5 py-2.5 text-sm leading-relaxed break-words ${
                     isMine
-                      ? "bg-blue-600 text-white rounded-br-sm"
-                      : "bg-zinc-700 text-gray-100 rounded-bl-sm"
+                      ? "ember-gradient shadow-lg shadow-ember/25 text-white rounded-[1.15rem] rounded-br-md"
+                      : "bg-night-700 border border-white/5 text-zinc-100 rounded-[1.15rem] rounded-bl-md"
                   }`}
                 >
                   {msg.text}
-                  <div className={`flex items-center gap-1 mt-1 ${isMine ? "justify-end" : "justify-start"}`}>
-                    <span className={`text-xs ${isMine ? "text-blue-200" : "text-gray-500"}`}>
-                      {new Date(msg.createdAt).toLocaleTimeString([], {
-                        hour: "2-digit",
-                        minute: "2-digit",
-                      })}
-                    </span>
-                    {isMine && isLastSent && (
-                      msg.isSeen
-                        ? <EyeIcon size={13} className="text-green-400" />
-                        : <EyeOffIcon size={13} className="text-red-400 opacity-80" />
-                    )}
-                  </div>
+                </div>
+                <div className="mt-1 px-1 flex items-center gap-1.5 text-[10px] text-zinc-500">
+                  <span>
+                    {new Date(msg.createdAt).toLocaleTimeString([], {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                  </span>
+                  {isMine && isLastSent && (
+                    msg.isSeen
+                      ? <span className="flex items-center gap-1 font-semibold text-ember-soft"><CheckCheck size={13} /> Seen</span>
+                      : <span className="flex items-center gap-1"><Check size={13} /> Sent</span>
+                  )}
                 </div>
               </div>
             );
@@ -254,10 +254,10 @@ export function ChatWindow({ conversation, onNewMessage, onBlocked, onSeen, onCh
           onClick={() => setShowClearConfirm(false)}
         >
           <div
-            className="bg-zinc-900 rounded-2xl p-6 w-full max-w-sm"
+            className="bg-night-800 border border-white/10 rounded-3xl p-6 w-full max-w-sm animate-scale-in"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-center w-12 h-12 rounded-full bg-zinc-800 mb-4 mx-auto">
+            <div className="flex items-center justify-center w-12 h-12 rounded-full bg-night-700 mb-4 mx-auto">
               <Trash2 size={22} className="text-gray-300" />
             </div>
             <p className="text-white font-semibold text-center mb-1">Clear this chat?</p>
@@ -268,14 +268,14 @@ export function ChatWindow({ conversation, onNewMessage, onBlocked, onSeen, onCh
             <div className="flex gap-3">
               <button
                 onClick={() => setShowClearConfirm(false)}
-                className="flex-1 py-2 rounded-xl bg-zinc-700 hover:bg-zinc-600 text-white text-sm cursor-pointer transition-colors"
+                className="flex-1 py-2 rounded-full bg-night-700 hover:bg-night-600 text-white text-sm cursor-pointer transition-colors"
               >
                 Cancel
               </button>
               <button
                 onClick={handleClearChat}
                 disabled={clearing}
-                className="flex-1 py-2 rounded-xl bg-zinc-600 hover:bg-zinc-500 text-white text-sm cursor-pointer transition-colors disabled:opacity-50"
+                className="flex-1 py-2 rounded-full bg-red-600 hover:bg-red-500 text-white text-sm cursor-pointer transition-colors disabled:opacity-50"
               >
                 {clearing ? "Clearing..." : "Clear chat"}
               </button>
@@ -291,7 +291,7 @@ export function ChatWindow({ conversation, onNewMessage, onBlocked, onSeen, onCh
           onClick={() => setShowBlockConfirm(false)}
         >
           <div
-            className="bg-zinc-900 rounded-2xl p-6 w-full max-w-sm"
+            className="bg-night-800 border border-white/10 rounded-3xl p-6 w-full max-w-sm animate-scale-in"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center gap-3 mb-4">
@@ -308,14 +308,14 @@ export function ChatWindow({ conversation, onNewMessage, onBlocked, onSeen, onCh
             <div className="flex gap-3">
               <button
                 onClick={() => setShowBlockConfirm(false)}
-                className="flex-1 py-2 rounded-xl bg-zinc-700 hover:bg-zinc-600 text-white text-sm cursor-pointer transition-colors"
+                className="flex-1 py-2 rounded-full bg-night-700 hover:bg-night-600 text-white text-sm cursor-pointer transition-colors"
               >
                 Cancel
               </button>
               <button
                 onClick={handleBlock}
                 disabled={blocking}
-                className="flex-1 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-white text-sm cursor-pointer transition-colors disabled:opacity-50"
+                className="flex-1 py-2 rounded-full bg-red-600 hover:bg-red-500 text-white text-sm cursor-pointer transition-colors disabled:opacity-50"
               >
                 {blocking ? "Blocking..." : "Block"}
               </button>

@@ -67,7 +67,7 @@ export function ChannelVideoSection({ isOwner = true }) {
   return (
     <>
       <div
-        className="w-full rounded-2xl p-4 sm:p-6 bg-[#0f0f10] border border-zinc-800"
+        className="w-full rounded-2xl p-4 sm:p-6 bg-night-900 border border-white/5 animate-fade-up"
         onClick={() => setOpenMenu(null)}
       >
         {/* Filters */}
@@ -80,8 +80,8 @@ export function ChannelVideoSection({ isOwner = true }) {
               className={`px-4 py-1.5 rounded-full text-sm font-semibold tracking-wide
                 transition-all duration-200 cursor-pointer
                 ${activeFilter === filter
-                  ? "bg-blue-600 text-white border border-zinc-500 shadow-lg"
-                  : "bg-[#18181b] text-zinc-300 border border-zinc-700 hover:bg-zinc-800"
+                  ? "ember-gradient text-white border border-transparent shadow-lg shadow-ember/30"
+                  : "bg-night-800 text-zinc-300 border border-line hover:bg-night-700"
                 }`}
             >
               {filter}
@@ -101,11 +101,11 @@ export function ChannelVideoSection({ isOwner = true }) {
             <div
               key={video._id}
               className="flex items-center gap-3 sm:gap-4 rounded-xl px-3 py-2.5 relative
-                bg-[#1a1a1d] border border-zinc-700 hover:border-zinc-500
-                hover:bg-[#232326] transition-all duration-150"
+                bg-night-800 border border-white/5 hover:border-ember/40
+                hover:bg-night-700 transition-all duration-150"
             >
               {/* Thumbnail */}
-              <div className="flex-shrink-0 rounded-lg overflow-hidden w-[clamp(72px,14vw,120px)] aspect-video border border-zinc-600">
+              <div className="flex-shrink-0 rounded-lg overflow-hidden w-[clamp(72px,14vw,120px)] aspect-video border border-white/10">
                 <img
                   src={video.thumbnail}
                   alt={video.title}
@@ -121,8 +121,8 @@ export function ChannelVideoSection({ isOwner = true }) {
                 <div className="flex items-center gap-2 mt-1 flex-wrap">
                   <span className={`text-xs px-2 py-0.5 rounded-full font-semibold
                     ${video.isPublished
-                      ? "bg-[#30306a] text-white border border-zinc-600"
-                      : "bg-[#623333] text-red-300 border border-red-900"
+                      ? "bg-ember/15 text-orange-200 border border-ember/30"
+                      : "bg-red-950/50 text-red-300 border border-red-900/50"
                     }`}
                   >
                     {video.isPublished ? "Published" : "Unpublished"}
@@ -140,32 +140,32 @@ export function ChannelVideoSection({ isOwner = true }) {
                     type="button"
                     onClick={() => setOpenMenu(openMenu === video._id ? null : video._id)}
                     className="w-8 h-8 flex items-center justify-center rounded-lg
-                      border border-zinc-700 text-zinc-300 hover:bg-zinc-900
-                      hover:border-zinc-500 cursor-pointer transition-all"
+                      border border-line text-zinc-300 hover:bg-night-700
+                      hover:border-ember/40 cursor-pointer transition-all"
                   >
                     <MoreVertical size={16} />
                   </button>
 
                   {openMenu === video._id && (
                     <div className="absolute right-0 top-10 z-50 min-w-[150px] rounded-xl
-                      overflow-hidden flex flex-col bg-[#18181b] border border-zinc-700 shadow-2xl">
+                      overflow-hidden flex flex-col bg-night-850 border border-white/10 shadow-2xl animate-scale-in">
 
                       <button
                         type="button"
                         onClick={() => { setUpdateVideo(video); setOpenMenu(null); }}
                         className="flex gap-2.5 items-center px-4 py-2.5 text-sm
-                          text-emerald-200 hover:bg-zinc-800 cursor-pointer transition"
+                          text-zinc-200 hover:bg-night-700 cursor-pointer transition"
                       >
                         <Pencil size={14} /> Update
                       </button>
 
-                      <div className="h-px bg-zinc-800" />
+                      <div className="h-px bg-white/5" />
 
                       <button
                         type="button"
                         onClick={() => handleTogglePublish(video)}
                         className="flex gap-2.5 items-center px-4 py-2.5 text-sm
-                          text-blue-300 hover:bg-zinc-800 cursor-pointer transition"
+                          text-ember-soft hover:bg-night-700 cursor-pointer transition"
                       >
                         {video.isPublished
                           ? <><EyeOff size={14} /> Unpublish</>
@@ -173,13 +173,13 @@ export function ChannelVideoSection({ isOwner = true }) {
                         }
                       </button>
 
-                      <div className="h-px bg-zinc-800" />
+                      <div className="h-px bg-white/5" />
 
                       <button
                         type="button"
                         onClick={() => { setDeleteVideo(video); setOpenMenu(null); }}
                         className="flex gap-2.5 items-center px-4 py-2.5 text-sm
-                          text-red-300 hover:bg-zinc-800 cursor-pointer transition"
+                          text-red-300 hover:bg-night-700 cursor-pointer transition"
                       >
                         <Trash2 size={14} /> Delete
                       </button>

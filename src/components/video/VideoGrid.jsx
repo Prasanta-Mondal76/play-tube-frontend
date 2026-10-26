@@ -98,12 +98,35 @@ export function VideoGrid({ videos: propVideos }) {
   }, [hasMore, propVideos, loadMore]);
 
   if (loading) {
-    return <div className="p-5 text-zinc-400 text-2xl font-bold text-center pt-10">Loading...</div>
+    return (
+      <div className="relative min-h-screen bg-night-950 p-4">
+        {/* Top loading bar (YouTube style, ember gradient) */}
+        <div className="fixed left-0 right-0 top-16 z-40 h-[3px] overflow-hidden bg-white/5">
+          <div className="ember-gradient animate-topbar absolute top-0 h-full" />
+        </div>
+
+        {/* Wave skeleton cards */}
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {Array.from({ length: 8 }).map((_, i) => (
+            <div key={i}>
+              <div className="skeleton-wave aspect-video w-full rounded-2xl bg-night-800" />
+              <div className="mt-3 flex gap-3">
+                <div className="skeleton-wave h-10 w-10 shrink-0 rounded-full bg-night-800" />
+                <div className="flex-1">
+                  <div className="skeleton-wave h-3.5 w-11/12 rounded bg-night-800" />
+                  <div className="skeleton-wave mt-2 h-3 w-3/5 rounded bg-night-800" />
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
   }
 
   return (
 
-    <div className="bg-black min-h-screen p-4">
+    <div className="bg-night-950 min-h-screen p-4">
 
       <div
         className="
@@ -138,7 +161,10 @@ export function VideoGrid({ videos: propVideos }) {
       )}
 
       {loadingMore && (
-        <div className="text-zinc-400 text-center py-4">Loading more...</div>
+        <div className="flex items-center justify-center gap-3 py-5 text-sm text-zinc-400">
+          <span className="h-5 w-5 animate-spin rounded-full border-2 border-white/15 border-t-ember" />
+          Loading more...
+        </div>
       )}
 
     </div>

@@ -25,26 +25,17 @@ export const getChannelVideos = async (channelId, params = {}) => {
 };
 
 
-export const publishVideo = async (formData) => {
-
-  const response = await api.post(
-    "/api/v1/videos/publish-video",
-    formData,
-    {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    }
-  );
-
+// 1-stage flow: the video + thumbnail are already on Cloudinary
+// (uploaded directly by the browser) — this only sends their URLs
+// and details as JSON for saving in the database.
+export const publishVideo = async (data) => {
+  const response = await api.post("/api/v1/videos/publish-video", data);
   return response.data;
 };
 
 
-export const updateVideoDetails = async (videoId, formData) => {
-  return await api.patch(`/api/v1/videos/update-video-details/${videoId}`, formData, {
-    headers: { "Content-Type": "multipart/form-data" },
-  });
+export const updateVideoDetails = async (videoId, data) => {
+  return await api.patch(`/api/v1/videos/update-video-details/${videoId}`, data);
 };
 
 export const deleteVideo = async (videoId) => {

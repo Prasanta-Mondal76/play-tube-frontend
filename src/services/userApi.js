@@ -15,17 +15,14 @@ export const getChannelDetails = async (username) => {
 
 
 // Update avatar
-export const updateAvatar = async (formData) => {
-  return await api.patch("/api/v1/users/update-avatar", formData, {
-    headers: { "Content-Type": "multipart/form-data" },
-  });
+// 1-stage flow: the image is already on Cloudinary — only its URL is sent.
+export const updateAvatar = async (avatarUrl) => {
+  return await api.patch("/api/v1/users/update-avatar", { avatarUrl });
 };
 
 // Update cover image
-export const updateCoverImage = async (formData) => {
-  return await api.patch("/api/v1/users/update-coverImage", formData, {
-    headers: { "Content-Type": "multipart/form-data" },
-  });
+export const updateCoverImage = async (coverUrl) => {
+  return await api.patch("/api/v1/users/update-coverImage", { coverUrl });
 };
 
 // Update fullName and/or username

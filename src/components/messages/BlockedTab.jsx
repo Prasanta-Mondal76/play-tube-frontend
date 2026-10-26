@@ -40,7 +40,7 @@ export function BlockedTab() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />
+        <div className="w-8 h-8 border-4 border-ember/25 border-t-ember rounded-full animate-spin" />
       </div>
     );
   }
@@ -59,7 +59,7 @@ export function BlockedTab() {
       {blockedUsers.map((block) => (
         <div
           key={block._id}
-          className="flex items-center gap-4 bg-zinc-800 rounded-xl p-4"
+          className="flex items-center gap-4 bg-night-800 border border-white/5 rounded-2xl p-4 animate-fade-up"
         >
           {/* Avatar */}
           <img
@@ -85,7 +85,7 @@ export function BlockedTab() {
           <button
             onClick={() => handleUnblock(block.blocked._id)}
             disabled={actionLoadingId === block.blocked._id}
-            className="flex items-center gap-1.5 text-sm px-3 py-1.5 rounded-lg cursor-pointer transition-colors bg-zinc-700 hover:bg-green-600 text-white disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex items-center gap-1.5 text-sm px-3.5 py-1.5 rounded-full cursor-pointer transition-all bg-night-700 hover:bg-green-600 text-white disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <ShieldOff size={14} />
             {actionLoadingId === block.blocked._id ? "Unblocking..." : "Unblock"}

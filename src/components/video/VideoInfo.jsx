@@ -149,7 +149,8 @@ export function VideoInfo({
         className="
           text-xl
           sm:text-2xl
-          font-bold
+          font-extrabold
+          tracking-tight
           text-white
         "
       >
@@ -186,8 +187,10 @@ export function VideoInfo({
             className="
               h-12
               w-12
+              shrink-0
               rounded-full
               object-cover
+              ring-2 ring-ember/50
             "
           />
 
@@ -251,14 +254,16 @@ export function VideoInfo({
 
                   ${video.isSubscribed
                     ? `
-                        bg-zinc-700
+                        bg-night-700
                         text-white
-                        hover:bg-zinc-600
+                        ring-1 ring-white/10
+                        hover:bg-night-600
                       `
                     : `
-                        bg-white
-                        text-black
-                        hover:bg-zinc-200
+                        ember-gradient
+                        text-white
+                        shadow-lg shadow-ember/30
+                        hover:brightness-110
                       `
                   }
                 `}
@@ -299,13 +304,13 @@ export function VideoInfo({
 
               disabled:opacity-50
               disabled:cursor-not-allowed
-              bg-zinc-900
+              bg-night-700
               p-3
-              hover:bg-zinc-800
+              hover:bg-night-600
             `}
           >
             <ThumbsUp
-              className={`h-5 w-5 text-white ${video.isLiked ? "fill-white" : ""}`}
+              className={`h-5 w-5 ${video.isLiked ? "fill-ember text-ember" : "text-white"}`}
             />
             <span className="text-white">
               {video.likes || 0}
@@ -319,8 +324,8 @@ export function VideoInfo({
               if (!isLogIn) { setIsLoginBoxOpen(true); return; }
               setShowPlaylistBox(true);
             }}
-            className="flex items-center gap-2 rounded-full bg-zinc-900 px-5 py-2
-             text-white hover:bg-zinc-800 transition cursor-pointer"
+            className="flex items-center gap-2 rounded-full bg-night-700 px-5 py-2
+             text-white hover:bg-night-600 transition cursor-pointer"
           >
             <PlusCircle className="h-5 w-5" />
             Add
@@ -330,9 +335,9 @@ export function VideoInfo({
           <button
             className="
               rounded-full
-              bg-zinc-900
+              bg-night-700
               p-3
-              hover:bg-zinc-800
+              hover:bg-night-600
               transition
               cursor-pointer
             "
@@ -354,8 +359,10 @@ export function VideoInfo({
         className="
           mt-5
           rounded-2xl
-          bg-zinc-900
+          bg-night-800
           p-4
+          transition
+          hover:bg-night-700/70
         "
       >
         {/* VIEWS */}

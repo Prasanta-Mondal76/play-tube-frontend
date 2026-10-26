@@ -33,7 +33,7 @@ export function MainLayout() {
       {/* AUTH MODAL */}
       {
         isLoginBoxOpen && (
-          <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center px-4"
+          <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center px-4 animate-fade-in"
             onClick={() => setIsLoginBoxOpen(false)}
           >
             <div onClick={(e) => e.stopPropagation()}>

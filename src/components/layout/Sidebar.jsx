@@ -35,7 +35,7 @@ export function Sidebar() {
       {/* Backdrop */}
       {isSidebarOpen && (
         <div
-          className="fixed inset-0 z-30 bg-black/60 backdrop-blur-sm"
+          className="fixed inset-0 z-30 bg-black/60 backdrop-blur-sm animate-fade-in"
           onClick={() => setIsSidebarOpen(false)}
         />
       )}
@@ -45,25 +45,25 @@ export function Sidebar() {
         className={`
           fixed top-0 left-0 z-40
           h-full w-72
-          bg-zinc-950
-          border-r border-zinc-800
+          bg-night-900
+          border-r border-white/5
           flex flex-col
           transform transition-transform duration-300 ease-in-out
           ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
         `}
       >
         {/* Sidebar Header */}
-        <div className="flex items-center justify-between px-4 h-16 border-b border-zinc-800 shrink-0">
+        <div className="flex items-center justify-between px-4 h-16 border-b border-white/5 shrink-0">
           <div className="flex items-center gap-3">
             <div className="flex h-9 w-9 items-center justify-center ">
               <img src={logo} alt="Logo" className="rounded-full" />
             </div>
-            <h1 className="text-xl font-bold text-white">PlayTube</h1>
+            <h1 className="text-xl font-black tracking-tight text-white">Play<span className="ember-text">Tube</span></h1>
           </div>
 
           <button
             onClick={() => setIsSidebarOpen(false)}
-            className="rounded-full p-2 hover:bg-zinc-800 transition"
+            className="rounded-full p-2 hover:bg-night-700 transition"
           >
             <X className="h-5 w-5 text-zinc-400" />
           </button>
@@ -81,12 +81,12 @@ export function Sidebar() {
                 key={label}
                 className={` flex items-center gap-4 w-full px-4 py-3 rounded-xl
                     text-sm font-medium transition-all duration-200 cursor-pointer
-                    ${isActive ? "bg-violet-600/20 text-white border-l-4 border-violet-500 pl-3"
-                    : "text-zinc-400 hover:bg-zinc-800 hover:text-white" }
+                    ${isActive ? "bg-gradient-to-r from-ember/25 to-ember-orange/10 text-white border-l-4 border-ember pl-3 shadow-[inset_0_0_24px_rgba(229,9,20,0.08)]"
+                    : "text-zinc-400 hover:bg-night-700 hover:text-white" }
                 `}
                 onClick={() => handleNavClick(isProtected, path)}
               >
-                <Icon className={`h-5 w-5 shrink-0 ${isActive ? "text-violet-400" : ""}`} />
+                <Icon className={`h-5 w-5 shrink-0 ${isActive ? "text-ember-soft" : ""}`} />
                 {label}
               </button>
             );
@@ -97,15 +97,15 @@ export function Sidebar() {
 
         {/* Premium Access Card */}
         <div className="m-3 mt-0 shrink-0">
-          <div className="rounded-2xl bg-zinc-900 border border-zinc-800 p-4">
+          <div className="rounded-2xl bg-night-800 border border-white/5 p-4">
             <div className="flex items-center gap-2 mb-1">
-              <Zap className="h-4 w-4 text-violet-400" />
+              <Zap className="h-4 w-4 text-ember-soft" />
               <p className="text-sm font-semibold text-white">Premium Access</p>
             </div>
             <p className="text-xs text-zinc-400 mb-3">
               Unlock offline viewing and more perks.
             </p>
-            <button className="w-full rounded-xl bg-white text-black text-sm font-semibold py-2 hover:bg-zinc-200 transition">
+            <button className="w-full rounded-xl ember-gradient text-white text-sm font-semibold py-2 shadow-lg shadow-ember/30 hover:brightness-110 transition">
               Upgrade Now
             </button>
           </div>

@@ -6,23 +6,23 @@ import { User, Mail, AtSign, Calendar } from "lucide-react";
 
 // ── Reusable input style ──────────────────────────────────────
 const inputCls = `
-  w-full bg-zinc-800 rounded-xl px-4 py-2.5 text-sm text-white
-  placeholder:text-zinc-500 outline-none focus:ring-2
-  focus:ring-violet-600/60 transition
+  w-full bg-night-850 border border-line rounded-xl px-4 py-2.5 text-sm text-white
+  placeholder:text-zinc-500 outline-none focus:border-ember focus:ring-2
+  focus:ring-ember/20 transition
 `;
 
 const btnCls = `
-  self-end px-6 py-2.5 rounded-xl bg-violet-600 text-white text-sm
-  font-semibold hover:bg-violet-500 transition disabled:opacity-50
+  self-end px-6 py-2.5 rounded-full ember-gradient shadow-lg shadow-ember/30 text-white text-sm
+  font-semibold hover:brightness-110 active:scale-[0.98] transition disabled:opacity-50
   disabled:cursor-not-allowed cursor-pointer
 `;
 
 // ── Info row (read-only display) ──────────────────────────────
 function InfoRow({ icon: Icon, label, value }) {
   return (
-    <div className="flex items-center gap-4 py-3 border-b border-zinc-800/60 last:border-0">
-      <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-zinc-800 shrink-0">
-        <Icon className="h-4 w-4 text-violet-400" />
+    <div className="flex items-center gap-4 py-3 border-b border-white/5 last:border-0">
+      <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-night-800 shrink-0">
+        <Icon className="h-4 w-4 text-ember-soft" />
       </div>
       <div className="flex flex-col min-w-0">
         <span className="text-xs text-zinc-500 font-medium">{label}</span>
@@ -35,7 +35,7 @@ function InfoRow({ icon: Icon, label, value }) {
 // ── Section card ──────────────────────────────────────────────
 function Card({ title, description, children }) {
   return (
-    <div className="bg-zinc-900 rounded-2xl p-6 flex flex-col gap-5">
+    <div className="bg-night-900 border border-white/5 rounded-3xl p-6 flex flex-col gap-5 animate-fade-up">
       <div>
         <h2 className="text-base font-semibold text-white">{title}</h2>
         {description && (
@@ -127,7 +127,7 @@ export function SettingsAccount() {
 
       {/* Page header */}
       <div>
-        <h1 className="text-2xl font-bold text-white">Account</h1>
+        <h1 className="text-2xl font-extrabold tracking-tight text-white">Account</h1>
         <p className="text-zinc-400 text-sm mt-1">
           View and manage your account information.
         </p>
@@ -159,7 +159,7 @@ export function SettingsAccount() {
 
         <div className="flex flex-col gap-1">
           <label className="text-sm text-zinc-400">Username</label>
-          <div className="flex items-center bg-zinc-800 rounded-xl px-4 py-2.5 focus-within:ring-2 focus-within:ring-violet-600/60 transition">
+          <div className="flex items-center bg-night-850 border border-line rounded-xl px-4 py-2.5 focus-within:border-ember focus-within:ring-2 focus-within:ring-ember/20 transition">
             <span className="text-zinc-500 text-sm mr-1">@</span>
             <input
               type="text"

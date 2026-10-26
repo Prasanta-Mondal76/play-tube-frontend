@@ -86,8 +86,8 @@ export function ProfileBox() {
         className={`
           fixed top-16 right-4 z-50
           w-72
-          bg-zinc-950
-          border-2 border-blue-300
+          bg-night-900
+          border border-white/10 ring-1 ring-ember/20
           rounded-2xl
           shadow-xl shadow-black/50
           flex flex-col overflow-hidden
@@ -103,8 +103,8 @@ export function ProfileBox() {
           /* ── LOGGED IN STATE ── */
           <>
             {/* User Info Header */}
-            <div className="flex items-center gap-3 px-4 py-4 border-b border-zinc-800 cursor-pointer">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full to-blue-500 shrink-0">
+            <div className="flex items-center gap-3 px-4 py-4 border-b border-white/5 cursor-pointer">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full ring-2 ring-ember/60 shrink-0">
                 <img src={user.avatar} alt="Profile Image" className="rounded-full w-10 h-10 object-cover" />
               </div>
               <div className="flex flex-col min-w-0">
@@ -119,31 +119,31 @@ export function ProfileBox() {
 
             {/* Menu Items */}
             <div className="flex flex-col py-2 px-2 gap-1">
-              <button className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-zinc-300 hover:bg-blue-400 hover:text-white transition-all duration-150 text-left cursor-pointer"
+              <button className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-zinc-300 hover:bg-night-700 hover:text-white transition-all duration-150 text-left cursor-pointer"
               onClick={ handelProfileClick}
               >
                 <User className="h-4 w-4 shrink-0 text-zinc-300 " />
                 View Profile
               </button>
-              <button className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-zinc-300 hover:bg-blue-400 hover:text-white transition-all duration-150 text-left cursor-pointer"
+              <button className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-zinc-300 hover:bg-night-700 hover:text-white transition-all duration-150 text-left cursor-pointer"
               onClick={ handelDashboard}
               >
                 <LayoutDashboardIcon className="h-4 w-4 shrink-0 text-zinc-300 " />
                 Dashboard
               </button>
-              <button className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-zinc-300 hover:bg-blue-400 hover:text-white transition-all duration-150 text-left cursor-pointer"
+              <button className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-zinc-300 hover:bg-night-700 hover:text-white transition-all duration-150 text-left cursor-pointer"
               onClick={ handelMessenger }
               >
                 <MessageCircleMore className="h-4 w-4 shrink-0 text-zinc-300 " />
                 Messenger
               </button>
-              <button className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-zinc-300 hover:bg-blue-400 hover:text-white transition-all duration-150 text-left cursor-pointer"
+              <button className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-zinc-300 hover:bg-night-700 hover:text-white transition-all duration-150 text-left cursor-pointer"
               onClick={ handelSettingsClick }
               >
                 <Settings className="h-4 w-4 shrink-0 text-zinc-300 " />
                 Settings
               </button>
-              <button className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-zinc-300 hover:bg-blue-400 hover:text-white transition-all duration-150 text-left cursor-pointer"
+              <button className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-zinc-300 hover:bg-night-700 hover:text-white transition-all duration-150 text-left cursor-pointer"
               onClick={ handelSupportClick }
               >
                 <HelpCircle className="h-4 w-4 shrink-0 text-zinc-300 " />
@@ -152,7 +152,7 @@ export function ProfileBox() {
             </div>
 
             {/* Logout */}
-            <div className="px-2 pb-2 border-t border-zinc-800 pt-2">
+            <div className="px-2 pb-2 border-t border-white/5 pt-2">
               <button className="flex items-center gap-3 w-full px-3 py-2.5 rounded-xl text-sm text-red-400 hover:bg-red-500/10 hover:text-red-300 transition-all duration-150 cursor-pointer"
                 onClick={handleLogout}
               >
@@ -165,14 +165,14 @@ export function ProfileBox() {
           /* ── LOGGED OUT STATE ── */
           <>
             <div className="flex flex-col items-center gap-3 px-5 py-6 text-center">
-              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-zinc-800">
+              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-night-800 ring-1 ring-white/10">
                 <User className="h-7 w-7 text-zinc-400" />
               </div>
               <div>
                 <p className="text-white font-semibold text-sm">Welcome to PlayTube</p>
                 <p className="text-zinc-400 text-xs mt-1">Sign in to access your profile, history, and playlists.</p>
               </div>
-              <button className="mt-1 w-full flex items-center justify-center gap-2 rounded-xl bg-blue-700 hover:bg-blue-500 text-white text-sm font-semibold py-2.5 transition-all duration-150 cursor-pointer"
+              <button className="mt-1 w-full flex items-center justify-center gap-2 rounded-full ember-gradient shadow-lg shadow-ember/30 hover:brightness-110 text-white text-sm font-semibold py-2.5 transition-all duration-150 cursor-pointer"
                 onClick={() => {
                   setIsProfileOpen(false)
                   openSignIn()

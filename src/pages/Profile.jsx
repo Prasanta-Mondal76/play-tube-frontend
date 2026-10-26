@@ -71,7 +71,6 @@ export function Profile() {
   const fetchChannel = async () => {
     try {
       setLoading(true);
-      toast.loading("Profile Loading...", {id: toastId})
 
       const response = await getChannelDetails(username);
       const channelData = response.data.data;
@@ -80,7 +79,6 @@ export function Profile() {
 
       // Fetch videos using channel's _id
       await fetchVideos(channelData._id);
-      toast.success("Profile Loaded", {id: toastId})
     } catch (error) {
       console.log(error);
       toast.error(error?.response?.data?.message || "Failed to load channel.", {id: toastId});
@@ -131,8 +129,31 @@ export function Profile() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-black p-6 text-white">
-        Loading...
+      <div className="min-h-screen bg-night-950 text-white">
+        {/* Ember top loading bar */}
+        <div className="fixed top-14 left-0 right-0 z-40 h-[3px] overflow-hidden">
+          <div className="h-full w-full ember-gradient animate-topbar origin-left" />
+        </div>
+        <div className="px-4 sm:px-6 lg:px-10 py-6 max-w-7xl mx-auto animate-fade-in">
+          <div className="w-full h-40 sm:h-52 md:h-64 rounded-2xl skeleton-wave" />
+          <div className="mt-4 flex items-center gap-4 px-1">
+            <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full skeleton-wave -mt-10 sm:-mt-12 shrink-0" />
+            <div className="space-y-2.5 pt-2">
+              <div className="h-5 w-44 rounded skeleton-wave" />
+              <div className="h-3.5 w-28 rounded skeleton-wave" />
+              <div className="h-3.5 w-32 rounded skeleton-wave" />
+            </div>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-10">
+            {[1, 2, 3, 4].map((i) => (
+              <div key={i} className="space-y-3">
+                <div className="aspect-video rounded-2xl skeleton-wave" />
+                <div className="h-4 w-3/4 rounded skeleton-wave" />
+                <div className="h-3 w-1/2 rounded skeleton-wave" />
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     );
   }
@@ -142,7 +163,7 @@ export function Profile() {
 
 
   return (
-    <div className="min-h-screen bg-black text-white px-4 sm:px-6 lg:px-10 py-6 max-w-7xl mx-auto">
+    <div className="min-h-screen bg-night-950 text-white px-4 sm:px-6 lg:px-10 py-6 max-w-7xl mx-auto animate-fade-in">
 
       {/* HEADER — Cover + Avatar + Info + Buttons */}
       <ProfileHeader channel={channel} setChannel={setChannel} />
@@ -161,9 +182,9 @@ export function Profile() {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {[1, 2, 3, 4].map((i) => (
                   <div key={i} className="space-y-3">
-                    <div className="aspect-video rounded-2xl bg-zinc-800 animate-pulse" />
-                    <div className="h-4 w-3/4 rounded bg-zinc-800 animate-pulse" />
-                    <div className="h-3 w-1/2 rounded bg-zinc-800 animate-pulse" />
+                    <div className="aspect-video rounded-2xl skeleton-wave" />
+                    <div className="h-4 w-3/4 rounded skeleton-wave" />
+                    <div className="h-3 w-1/2 rounded skeleton-wave" />
                   </div>
                 ))}
               </div>
@@ -192,14 +213,17 @@ export function Profile() {
             )}
 
             {loadingMore && (
-              <p className="text-zinc-500 text-sm text-center py-4">Loading more videos...</p>
+              <div className="flex items-center justify-center gap-2 py-4">
+                <div className="h-4 w-4 animate-spin rounded-full border-2 border-ember/25 border-t-ember" />
+                <p className="text-zinc-500 text-sm">Loading more videos...</p>
+              </div>
             )}
           </>
         )}
 
         {/* ── ABOUT TAB ── */}
         {activeTab === "About" && (
-          <div className="max-w-2xl space-y-5 rounded-2xl bg-zinc-900 p-6">
+          <div className="max-w-2xl space-y-5 rounded-2xl bg-night-800 border border-white/5 p-6 animate-fade-up">
 
             {/* DESCRIPTION */}
             {channel.description && (
@@ -249,7 +273,7 @@ export function Profile() {
                         href={url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-sm text-blue-400 hover:underline capitalize"
+                        className="text-sm text-ember-soft hover:underline capitalize"
                       >
                         {platform}: {url}
                       </a>

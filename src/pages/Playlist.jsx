@@ -121,7 +121,7 @@ export function Playlist() {
   // ── RENDER: Playlist detail view ──────────────────────────────────────────
   if (view === "detail") {
     return (
-      <div className="min-h-screen bg-zinc-950 text-white px-4 py-10">
+      <div className="min-h-screen bg-night-950 text-white px-4 py-10 animate-fade-in">
         <div className="max-w-2xl mx-auto">
 
           <button
@@ -136,7 +136,7 @@ export function Playlist() {
             <p className="text-zinc-500 text-center py-20">Loading...</p>
           ) : (
             <>
-              <h1 className="text-2xl font-bold">{activePlaylist?.name}</h1>
+              <h1 className="text-2xl font-extrabold tracking-tight">{activePlaylist?.name}</h1>
               {activePlaylist?.description && (
                 <p className="text-zinc-400 text-sm mt-1">{activePlaylist.description}</p>
               )}
@@ -148,7 +148,7 @@ export function Playlist() {
                   activePlaylist?.videos?.map((video) => (
                     <div
                       key={video._id}
-                      className="flex items-center gap-3 bg-zinc-900 rounded-xl p-3 relative"
+                      className="flex items-center gap-3 bg-night-800 border border-white/5 rounded-2xl p-3 relative animate-fade-up"
                     >
                       {/* Thumbnail */}
                       <img
@@ -176,19 +176,19 @@ export function Playlist() {
                               openMenuVideoId === video._id ? null : video._id
                             )
                           }
-                          className="p-2 rounded-full hover:bg-zinc-700 transition"
+                          className="p-2 rounded-full hover:bg-night-600 transition"
                         >
                           <MoreVertical className="h-4 w-4 text-zinc-400" />
                         </button>
 
                         {openMenuVideoId === video._id && (
-                          <div className="absolute right-0 top-8 bg-zinc-800 rounded-xl
-                                          shadow-lg z-10 overflow-hidden w-36">
+                          <div className="absolute right-0 top-8 bg-night-850 border border-white/10 rounded-xl
+                                          shadow-lg z-10 overflow-hidden w-36 animate-scale-in">
                             <button
                               type="button"
                               onClick={() => handleRemoveVideo(video._id)}
                               className="flex items-center gap-2 w-full px-4 py-3 text-sm
-                                         text-red-400 hover:bg-zinc-700 transition"
+                                         text-red-400 hover:bg-night-700 transition"
                             >
                               <X className="h-4 w-4" />
                               Remove
@@ -210,20 +210,20 @@ export function Playlist() {
   // ── RENDER: All playlists list ─────────────────────────────────────────────
   return (
     isLogIn ?
-      <div className="min-h-screen bg-zinc-950 text-white px-4 py-10">
+      <div className="min-h-screen bg-night-950 text-white px-4 py-10 animate-fade-in">
         <div className="max-w-2xl mx-auto">
 
           {/* Header */}
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h1 className="text-2xl font-bold">My Playlists</h1>
+              <h1 className="text-2xl font-extrabold tracking-tight">My Playlists</h1>
               <p className="text-zinc-400 text-sm mt-1">{playlists.length} playlists</p>
             </div>
             <button
               type="button"
               onClick={() => setShowCreateForm(true)}
-              className="flex items-center gap-2 px-5 py-2 rounded-full bg-blue-600 cursor-pointer
-                       text-white text-sm font-semibold hover:bg-blue-900 transition"
+              className="flex items-center gap-2 px-5 py-2 rounded-full ember-gradient shadow-lg shadow-ember/30 cursor-pointer
+                       text-white text-sm font-semibold hover:brightness-110 transition"
             >
               <Plus className="h-4 w-4" />
               New Playlist
@@ -233,9 +233,9 @@ export function Playlist() {
           {/* Create form modal */}
           {showCreateForm && (
             <>
-              <div className="fixed inset-0 bg-black/60 z-40" onClick={() => setShowCreateForm(false)} />
+              <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 animate-fade-in" onClick={() => setShowCreateForm(false)} />
               <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50
-                            bg-zinc-900 rounded-2xl shadow-xl w-96 p-6 flex flex-col gap-4">
+                            bg-night-800 ring-1 ring-white/10 rounded-3xl shadow-2xl shadow-black/60 w-[min(24rem,92vw)] p-6 flex flex-col gap-4 animate-scale-in">
                 <div className="flex items-center justify-between">
                   <h2 className="text-white font-semibold">New Playlist</h2>
                   <button type="button" className="cursor-pointer" onClick={() => setShowCreateForm(false)}>
@@ -249,9 +249,9 @@ export function Playlist() {
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Playlist name (required)"
                   maxLength={200}
-                  className="bg-zinc-800 rounded-xl px-4 py-2.5 text-sm text-white
-                           placeholder:text-zinc-500 outline-none focus:ring-2
-                           focus:ring-zinc-600 transition"
+                  className="bg-night-850 border border-line rounded-xl px-4 py-2.5 text-sm text-white
+                           placeholder:text-zinc-500 outline-none focus:border-ember focus:ring-2
+                           focus:ring-ember/20 transition"
                 />
                 <textarea
                   value={description}
@@ -259,9 +259,9 @@ export function Playlist() {
                   placeholder="Description (optional)"
                   rows={3}
                   maxLength={250}
-                  className="bg-zinc-800 rounded-xl px-4 py-2.5 text-sm text-white
-                           placeholder:text-zinc-500 outline-none focus:ring-2
-                           focus:ring-zinc-600 transition resize-none"
+                  className="bg-night-850 border border-line rounded-xl px-4 py-2.5 text-sm text-white
+                           placeholder:text-zinc-500 outline-none focus:border-ember focus:ring-2
+                           focus:ring-ember/20 transition resize-none"
                 />
                 <div className="flex justify-end gap-2">
                   <button
@@ -275,8 +275,8 @@ export function Playlist() {
                     type="button"
                     onClick={handleCreate}
                     disabled={creating}
-                    className="px-5 py-2 rounded-xl bg-blue-600 text-white text-sm cursor-pointer
-                             font-semibold hover:bg-blue-900 transition disabled:opacity-50"
+                    className="px-5 py-2 rounded-full ember-gradient shadow-lg shadow-ember/30 text-white text-sm cursor-pointer
+                             font-semibold hover:brightness-110 transition disabled:opacity-50"
                   >
                     {creating ? "Creating..." : "Create"}
                   </button>
@@ -295,11 +295,11 @@ export function Playlist() {
               {playlists.map((playlist) => (
                 <div
                   key={playlist._id}
-                  className="flex items-center gap-4 bg-zinc-900 rounded-xl p-4
-                           hover:bg-zinc-800 transition cursor-pointer"
+                  className="flex items-center gap-4 bg-night-800 border border-white/5 rounded-2xl p-4
+                           hover:bg-night-700 hover:border-ember/30 transition cursor-pointer animate-fade-up"
                   onClick={() => handleOpenPlaylist(playlist._id)}
                 >
-                  <ListVideo className="h-8 w-8 text-zinc-500 shrink-0" />
+                  <ListVideo className="h-8 w-8 text-ember-soft shrink-0" />
 
                   <div className="flex-1 overflow-hidden">
                     <p className="text-white font-medium truncate">{playlist.name}</p>
@@ -313,7 +313,7 @@ export function Playlist() {
                   <button
                     type="button"
                     onClick={(e) => { e.stopPropagation(); handleDeletePlaylist(playlist._id); }}
-                    className="p-2 rounded-full hover:bg-zinc-700 transition shrink-0"
+                    className="p-2 rounded-full hover:bg-night-600 transition shrink-0"
                   >
                     <Trash2 className="h-4 w-4 text-red-400" />
                   </button>
@@ -326,8 +326,8 @@ export function Playlist() {
 
       :
       
-      <div className="min-h-screen bg-[#0f0f0f] flex flex-col items-center justify-center gap-5 px-4 text-white">
-        <ListVideoIcon size={56} className="text-gray-500" />
+      <div className="min-h-screen bg-night-950 flex flex-col items-center justify-center gap-5 px-4 text-white">
+        <ListVideoIcon size={56} className="text-ember-soft" />
         <h2 className="text-2xl font-bold text-center">
           Sign in to view your playlists
         </h2>
@@ -336,7 +336,7 @@ export function Playlist() {
         </p>
         <button
           onClick={() => navigate("/")}
-          className="flex items-center gap-2 mt-2 bg-white text-black font-semibold px-6 py-2.5 rounded-full hover:bg-gray-200 transition-colors duration-200 cursor-pointer"
+          className="flex items-center gap-2 mt-2 ember-gradient shadow-lg shadow-ember/30 text-white font-semibold px-6 py-2.5 rounded-full hover:brightness-110 transition-all duration-200 cursor-pointer cursor-pointer"
         >
           <Home size={16} />
           Back to Home

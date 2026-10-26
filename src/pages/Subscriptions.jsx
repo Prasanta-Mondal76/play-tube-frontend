@@ -55,15 +55,15 @@ export function Subscriptions() {
   // ── Not logged in ────────────────────────────────────────────────────────
   if (!isLogIn) {
     return (
-      <div className="min-h-screen bg-[#0f0f0f] flex flex-col items-center justify-center gap-5 px-4 text-white">
-        <Users size={56} className="text-gray-500" />
+      <div className="min-h-screen bg-night-950 flex flex-col items-center justify-center gap-5 px-4 text-white">
+        <Users size={56} className="text-ember-soft" />
         <h2 className="text-2xl font-bold text-center">Sign in to see your subscriptions</h2>
         <p className="text-gray-400 text-center text-sm max-w-xs">
           Channels you subscribe to will appear here.
         </p>
         <button
           onClick={() => navigate("/")}
-          className="flex items-center gap-2 bg-white text-black font-semibold px-6 py-2.5 rounded-full hover:bg-gray-200 transition-colors duration-200"
+          className="flex items-center gap-2 ember-gradient shadow-lg shadow-ember/30 text-white font-semibold px-6 py-2.5 rounded-full hover:brightness-110 transition-all duration-200 cursor-pointer"
         >
           <Home size={16} /> Back to Home
         </button>
@@ -78,7 +78,7 @@ export function Subscriptions() {
       <div className="flex items-center gap-3 mb-8">
         <Users size={28} className="shrink-0" />
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold leading-tight">Subscriptions</h1>
+          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight leading-tight">Subscriptions</h1>
           <p className="text-gray-400 text-sm mt-0.5">Channels you follow</p>
         </div>
       </div>
@@ -86,14 +86,14 @@ export function Subscriptions() {
       {/* Loader */}
       {loading && (
         <div className="flex justify-center py-24">
-          <Loader2 size={40} className="animate-spin text-gray-400" />
+          <Loader2 size={40} className="animate-spin text-ember" />
         </div>
       )}
 
       {/* Empty State */}
       {!loading && subscriptions.length === 0 && (
         <div className="flex flex-col items-center justify-center py-20 text-center px-4">
-          <div className="bg-[#1a1a1a] rounded-full p-6 mb-5">
+          <div className="bg-night-800 ring-1 ring-white/5 rounded-full p-6 mb-5">
             <Users size={48} className="text-gray-500" />
           </div>
           <h2 className="text-xl sm:text-2xl font-semibold mb-2">No subscriptions yet</h2>
@@ -102,7 +102,7 @@ export function Subscriptions() {
           </p>
           <button
             onClick={() => navigate("/")}
-            className="mt-6 flex items-center gap-2 bg-[#272727] hover:bg-[#3a3a3a] text-white text-sm font-medium px-5 py-2.5 rounded-full transition-colors duration-200"
+            className="mt-6 flex items-center gap-2 bg-night-700 hover:bg-night-600 text-white text-sm font-medium px-5 py-2.5 rounded-full transition-colors duration-200 cursor-pointer"
           >
             <Home size={15} /> Browse Videos
           </button>
@@ -125,14 +125,14 @@ export function Subscriptions() {
             return (
               <div
                 key={channel._id}
-                className="flex items-center gap-4 bg-[#181818] hover:bg-[#1f1f1f] transition-colors duration-200 rounded-2xl px-4 py-3.5 group"
+                className="flex items-center gap-4 bg-night-800 border border-white/5 hover:bg-night-700 transition-colors duration-200 rounded-2xl px-4 py-3.5 group animate-fade-up"
               >
                 {/* Avatar — clickable to profile */}
                 <img
                   src={channel.avatar}
                   alt={channel.username}
                   onClick={() => navigate(`/profile/${channel.username}`)}
-                  className="w-12 h-12 sm:w-14 sm:h-14 rounded-full object-cover shrink-0 cursor-pointer ring-2 ring-transparent group-hover:ring-violet-500/40 transition-all duration-200"
+                  className="w-12 h-12 sm:w-14 sm:h-14 rounded-full object-cover shrink-0 cursor-pointer ring-2 ring-transparent group-hover:ring-ember/50 transition-all duration-200"
                 />
 
                 {/* Info */}
@@ -161,7 +161,7 @@ export function Subscriptions() {
                     px-3 sm:px-4 py-2 rounded-full
                     border transition-all duration-200
                     disabled:opacity-50 disabled:cursor-not-allowed
-                    border-zinc-700 text-gray-300
+                    border-line text-gray-300
                     hover:border-red-500/60 hover:text-red-400 hover:bg-red-500/10
                   `}
                 >

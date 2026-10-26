@@ -68,7 +68,7 @@ export function ProfileHeader({ channel, setChannel }) {
     <div>
 
       {/* COVER IMAGE */}
-      <div className="w-full h-40 sm:h-52 md:h-64 rounded-2xl overflow-hidden bg-zinc-800">
+      <div className="w-full h-40 sm:h-52 md:h-64 rounded-2xl overflow-hidden bg-night-800 relative">
         {channel.coverImage ? (
           <img
             src={channel.coverImage}
@@ -76,7 +76,7 @@ export function ProfileHeader({ channel, setChannel }) {
             className="w-full h-full object-cover"
           />
         ) : (
-          <div className="w-full h-full bg-gradient-to-br from-zinc-800 to-zinc-700" />
+          <div className="w-full h-full bg-gradient-to-br from-[#2A0A0E] via-[#3D0A10] to-[#571B07]" />
         )}
       </div>
 
@@ -90,17 +90,17 @@ export function ProfileHeader({ channel, setChannel }) {
           <img
             src={channel.avatar}
             alt={channel.fullName}
-            className="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover border-4 border-black -mt-10 sm:-mt-12 flex-shrink-0"
+            className="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover border-4 border-night-950 ring-2 ring-ember/50 -mt-10 sm:-mt-12 flex-shrink-0 relative"
           />
 
           {/* TEXT */}
           <div>
-            <h1 className="text-xl font-bold text-white">
+            <h1 className="text-xl sm:text-2xl font-extrabold tracking-tight text-white">
               {channel.fullName}
             </h1>
             <p className="text-sm text-zinc-400">@{channel.username}</p>
             <p className="text-sm text-zinc-500 mt-0.5">
-              {channel.totalSubscribers || 0} subscribers
+              <span className="text-zinc-300 font-medium">{channel.totalSubscribers || 0}</span> subscribers
             </p>
           </div>
         </div>
@@ -115,8 +115,8 @@ export function ProfileHeader({ channel, setChannel }) {
               className={`
                 px-5 py-2 rounded-full font-semibold text-sm transition cursor-pointer
                 ${isSubscribed
-                  ? "bg-zinc-700 text-white hover:bg-zinc-600"
-                  : "bg-white text-black hover:bg-zinc-200"
+                  ? "bg-night-700 text-white hover:bg-night-600"
+                  : "ember-gradient shadow-lg shadow-ember/30 text-white hover:brightness-110"
                 }
               `}
             >
@@ -126,7 +126,7 @@ export function ProfileHeader({ channel, setChannel }) {
 
           {/* CUSTOMIZE — only if owner */}
           {isOwner && (
-            <button className="flex items-center gap-2 px-5 py-2 rounded-full bg-zinc-800 text-white text-sm font-semibold hover:bg-zinc-700 transition cursor-pointer"
+            <button className="flex items-center gap-2 px-5 py-2 rounded-full bg-night-700 text-white text-sm font-semibold hover:bg-night-600 transition cursor-pointer"
               onClick={() => navigate("/creator/dashboard/channel")}
             >
               <Settings className="h-4 w-4" />

@@ -83,7 +83,7 @@ export function CommentSection({ videoId }) {
   };
 
   return (
-    <section className="mt-6 border-t border-zinc-800 pt-6">
+    <section className="mt-6 border-t border-white/5 pt-6">
 
       {/* HEADER BUTTON */}
       <button
@@ -123,11 +123,11 @@ export function CommentSection({ videoId }) {
             <div className="space-y-4">
               {[1, 2, 3].map((i) => (
                 <div key={i} className="flex gap-3">
-                  <div className="w-9 h-9 rounded-full bg-zinc-800 animate-pulse flex shrink-0" />
+                  <div className="skeleton-wave w-9 h-9 rounded-full bg-night-800 flex shrink-0" />
                   <div className="flex-1 space-y-2">
-                    <div className="h-3 w-32 rounded bg-zinc-800 animate-pulse" />
-                    <div className="h-3 w-full rounded bg-zinc-800 animate-pulse" />
-                    <div className="h-3 w-2/3 rounded bg-zinc-800 animate-pulse" />
+                    <div className="skeleton-wave h-3 w-32 rounded bg-night-800" />
+                    <div className="skeleton-wave h-3 w-full rounded bg-night-800" />
+                    <div className="skeleton-wave h-3 w-2/3 rounded bg-night-800" />
                   </div>
                 </div>
               ))}

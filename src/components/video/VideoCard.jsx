@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { Play } from "lucide-react";
 
 export function VideoCard({
   videoId,
@@ -68,27 +69,31 @@ export function VideoCard({
   views = formatViews(views)
 
   return (
-    <div className="w-full cursor-pointer  
-    border-transparent
+    <div className="group w-full cursor-pointer rounded-2xl p-1.5
     transition-all duration-300
-    hover:bg-blue-800/20
-    hover:border-blue-900 
-    hover:rounded-xl
-    p-1"
+    hover:bg-night-800/70
+    animate-fade-up"
 
     onClick={() => navigate(`/watch/${videoId}`)}
     >
 
       {/* Thumbnail */}
-      <div className="relative w-full aspect-video overflow-hidden rounded-2xl bg-zinc-800">
+      <div className="relative w-full aspect-video overflow-hidden rounded-2xl bg-night-800 transition-all duration-300 group-hover:ember-glow">
         <img
           src={thumbnail}
           alt={title}
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
         />
 
+        {/* Hover play overlay */}
+        <div className="absolute inset-0 flex items-center justify-center bg-black/35 opacity-0 transition duration-300 group-hover:opacity-100">
+          <span className="flex h-12 w-12 items-center justify-center rounded-full ember-gradient shadow-lg shadow-ember/40">
+            <Play className="h-5 w-5 fill-white text-white" />
+          </span>
+        </div>
+
         {/* Duration */}
-        <span className="absolute bottom-2 right-2 rounded bg-black/80 px-1.5 py-0.5 text-xs font-medium text-white">
+        <span className="absolute bottom-2 right-2 rounded-md bg-black/85 px-1.5 py-0.5 text-xs font-semibold text-white">
           {duration}
         </span>
       </div>
@@ -100,14 +105,14 @@ export function VideoCard({
         <img
           src={owner.avatar}
           alt={owner.username}
-          className="h-10 w-10 rounded-full object-cover"
+          className="h-10 w-10 shrink-0 rounded-full object-cover ring-1 ring-white/10"
         />
 
         {/* Text Content */}
         <div className="flex-1">
 
           {/* Title */}
-          <h3 className="line-clamp-2 text-sm font-semibold text-white">
+          <h3 className="line-clamp-2 text-sm font-bold leading-snug text-white">
             {title}
           </h3>
 

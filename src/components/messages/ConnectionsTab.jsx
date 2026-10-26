@@ -107,7 +107,7 @@ export function ConnectionsTab() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />
+        <div className="w-8 h-8 border-4 border-ember/25 border-t-ember rounded-full animate-spin" />
       </div>
     );
   }
@@ -132,13 +132,13 @@ export function ConnectionsTab() {
           return (
             <div
               key={channel._id}
-              className="flex items-center gap-4 bg-zinc-800 rounded-xl p-4"
+              className="flex items-center gap-4 bg-night-800 border border-white/5 rounded-2xl p-4 animate-fade-up"
             >
               {/* Avatar */}
               <img
                 src={channel.avatar}
                 alt={channel.fullName}
-                className="w-11 h-11 rounded-full object-cover shrink-0"
+                className="w-11 h-11 rounded-full object-cover shrink-0 ring-1 ring-white/10"
               />
 
               {/* Info */}
@@ -155,8 +155,8 @@ export function ConnectionsTab() {
                 <button
                   onClick={() => openModal(channel)}
                   disabled={isPending}
-                  className="flex items-center gap-1.5 text-sm px-3 py-1.5 rounded-lg cursor-pointer transition-colors disabled:opacity-50 disabled:cursor-not-allowed
-                    bg-blue-600 hover:bg-blue-700 text-white"
+                  className="flex items-center gap-1.5 text-sm px-3.5 py-1.5 rounded-full cursor-pointer transition-all disabled:opacity-50 disabled:cursor-not-allowed
+                    ember-gradient shadow-lg shadow-ember/25 hover:brightness-110 text-white"
                 >
                   <Send size={14} />
                   {isPending ? "Requested" : status === "rejected" ? "Re-send" : "Send Request"}
@@ -174,13 +174,13 @@ export function ConnectionsTab() {
           onClick={closeModal}
         >
           <div
-            className="bg-zinc-900 rounded-2xl p-6 w-full max-w-md"
+            className="bg-night-800 border border-white/10 rounded-3xl p-6 w-full max-w-md animate-scale-in"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center gap-3 mb-5">
               <img
                 src={selectedChannel.avatar}
-                className="w-10 h-10 rounded-full object-cover"
+                className="w-10 h-10 rounded-full object-cover ring-1 ring-white/10"
               />
               <div>
                 <p className="font-semibold text-white">
@@ -201,7 +201,7 @@ export function ConnectionsTab() {
               maxLength={500}
               rows={4}
               placeholder="Write a reason..."
-              className="w-full bg-zinc-800 text-white rounded-xl px-4 py-3 text-sm resize-none outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full bg-night-850 border border-line text-white rounded-xl px-4 py-3 text-sm resize-none outline-none placeholder:text-zinc-500 focus:border-ember focus:ring-2 focus:ring-ember/20 transition"
             />
             <div className="text-right text-xs text-gray-500 mt-1">
               {reason.length}/500
@@ -214,14 +214,14 @@ export function ConnectionsTab() {
             <div className="flex gap-3 mt-4">
               <button
                 onClick={closeModal}
-                className="flex-1 py-2 rounded-xl bg-zinc-700 hover:bg-zinc-600 text-white text-sm cursor-pointer transition-colors"
+                className="flex-1 py-2 rounded-full bg-night-700 hover:bg-night-600 text-white text-sm cursor-pointer transition-colors"
               >
                 Cancel
               </button>
               <button
                 onClick={handleSendRequest}
                 disabled={sending}
-                className="flex-1 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm cursor-pointer transition-colors disabled:opacity-50"
+                className="flex-1 py-2 rounded-full ember-gradient shadow-lg shadow-ember/30 hover:brightness-110 text-white text-sm cursor-pointer transition-all disabled:opacity-50"
               >
                 {sending ? "Sending..." : "Send Request"}
               </button>

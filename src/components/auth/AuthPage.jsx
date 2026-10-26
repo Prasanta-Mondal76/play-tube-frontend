@@ -7,14 +7,14 @@ export function AuthPage({ onClose }) {
   const [view, setView] = useState("login") // "login" | "signup"
 
   return (
-    <div className="relative h-auto flex items-center justify-center px-4">
+    <div className="relative h-auto w-full flex items-center justify-center">
       {/* CLOSE BUTTON */}
       <button
         onClick={onClose}
         className="
         absolute top-5 right-5
         rounded-full p-2
-        bg-zinc-900 hover:bg-zinc-800
+        bg-night-700 hover:ember-gradient
         transition cursor-pointer
       "
       >

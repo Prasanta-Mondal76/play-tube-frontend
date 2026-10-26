@@ -48,7 +48,7 @@ export function CommentCard({ comment }) {
       <img
         src={comment.owner?.avatar}
         alt={comment.owner?.fullName}
-        className="w-9 h-9 rounded-full object-cover flex-shrink-0"
+        className="w-9 h-9 rounded-full object-cover flex-shrink-0 ring-1 ring-white/10"
       />
 
       {/* RIGHT SIDE */}
@@ -78,10 +78,10 @@ export function CommentCard({ comment }) {
             text-sm transition
             disabled:opacity-50 disabled:cursor-not-allowed
             cursor-pointer
-            ${isLiked ? "text-white" : "text-zinc-500 hover:text-zinc-300"}
+            ${isLiked ? "text-ember-soft" : "text-zinc-500 hover:text-zinc-300"}
           `}
         >
-          <ThumbsUp className={`h-4 w-4 ${isLiked ? "fill-white" : ""}`} />
+          <ThumbsUp className={`h-4 w-4 ${isLiked ? "fill-ember text-ember" : ""}`} />
           <span>{likes}</span>
         </button>
 

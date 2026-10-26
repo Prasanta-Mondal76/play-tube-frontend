@@ -56,10 +56,12 @@ export function CommentForm({ videoId, onCommentAdd }) {
         disabled={loading}
         className="
           w-full min-h-24
-          rounded-xl
-          bg-zinc-800
-          border border-zinc-700
-          focus:border-zinc-500
+          rounded-2xl
+          bg-night-850
+          border border-line
+          focus:border-ember
+          focus:ring-2
+          focus:ring-ember/20
           p-3 outline-none resize-none
           text-sm text-white
           placeholder:text-zinc-500
@@ -75,9 +77,10 @@ export function CommentForm({ videoId, onCommentAdd }) {
           className="
             px-5 py-2
             rounded-full
-            bg-white text-black
+            ember-gradient text-white
             text-sm font-semibold
-            hover:bg-zinc-200
+            shadow-lg shadow-ember/25
+            hover:brightness-110
             transition
             disabled:opacity-40
             cursor-pointer

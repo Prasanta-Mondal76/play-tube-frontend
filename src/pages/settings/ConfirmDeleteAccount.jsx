@@ -29,8 +29,8 @@ export function ConfirmDeleteAccount() {
   }, [token]);
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-white flex items-center justify-center px-4">
-      <div className="bg-zinc-900 rounded-2xl p-8 max-w-md w-full text-center flex flex-col gap-4">
+    <div className="min-h-screen bg-night-950 text-white flex items-center justify-center px-4">
+      <div className="bg-night-900 border border-white/5 rounded-3xl p-8 max-w-md w-full text-center flex flex-col gap-4 animate-scale-in">
         {status === "loading" && <p className="text-zinc-400">Processing...</p>}
         {status === "success" && (
           <>
@@ -39,7 +39,7 @@ export function ConfirmDeleteAccount() {
               Your account and all associated data have been permanently deleted.
             </p>
             <button onClick={() => navigate("/")}
-              className="mt-2 px-6 py-2.5 rounded-xl bg-white text-black text-sm font-semibold hover:bg-zinc-200 transition cursor-pointer">
+              className="mt-2 px-6 py-2.5 rounded-full ember-gradient shadow-lg shadow-ember/30 text-white text-sm font-semibold hover:brightness-110 transition cursor-pointer">
               Go to Home
             </button>
           </>
@@ -49,7 +49,7 @@ export function ConfirmDeleteAccount() {
             <h1 className="text-2xl font-bold text-yellow-400">Link Invalid</h1>
             <p className="text-zinc-400 text-sm">{message}</p>
             <button onClick={() => navigate("/")}
-              className="mt-2 px-6 py-2.5 rounded-xl bg-white text-black text-sm font-semibold hover:bg-zinc-200 transition cursor-pointer">
+              className="mt-2 px-6 py-2.5 rounded-full ember-gradient shadow-lg shadow-ember/30 text-white text-sm font-semibold hover:brightness-110 transition cursor-pointer">
               Go to Home
             </button>
           </>
